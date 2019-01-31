@@ -6,30 +6,61 @@ using UnityEngine.AI;
 public class CharacterMovement : MonoBehaviour
 {
     NavMeshAgent agent;
-    private Vector2 mouseOver;
+    private Vector3 targetPosition;
+
+    private Vector3 lookAtTarget;
+    Quaternion playerRot;
+    bool moving = false;
+
+    public float rotSpeed;
+    public float speed;
+   
 
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+ 
     }
 
     void Update()
     {
-        if(!Camera.main)
-        {
-            Debug.Log("No Main camera");
-            return;
-        }
 
         if (Input.GetMouseButtonDown(1))
         {
-            RaycastHit hit;
-            Debug.Log(Input.mousePosition);
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, LayerMask.GetMask("Field")))
-            {
-                agent.destination = hit.point;
-            }
+            SetTargetPosition();
+        }
+        if(moving)
+        {
+            Move();
+        }
+
+
+
+    }
+
+    void SetTargetPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1000))
+        {
+            targetPosition = hit.point;
+            lookAtTarget = new Vector3(targetPosition.x - transform.position.x, transform.position.y, targetPosition.z - transform.position.z);
+            playerRot = Quaternion.LookRotation(lookAtTarget);
+            moving = true;
+        }
+    }
+
+    void Move()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, playerRot, rotSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+        if(transform.position == targetPosition)
+        {
+            moving = false;
         }
     }
 }
