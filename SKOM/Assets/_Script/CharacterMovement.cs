@@ -6,14 +6,17 @@ using UnityEngine.AI;
 public class CharacterMovement : MonoBehaviour
 {
     NavMeshAgent agent;
-    private Vector3 targetPosition;
 
+    private Vector3 targetPosition;
     private Vector3 lookAtTarget;
     Quaternion playerRot;
     bool moving = false;
 
+    public Animator animator;
     public float rotSpeed;
     public float speed;
+    public float movement = 0;
+    
    
 
 
@@ -33,6 +36,10 @@ public class CharacterMovement : MonoBehaviour
         if(moving)
         {
             Move();
+            animator.SetFloat("Speed", 1);
+        } else
+        {
+            animator.SetFloat("Speed", 0);
         }
 
 

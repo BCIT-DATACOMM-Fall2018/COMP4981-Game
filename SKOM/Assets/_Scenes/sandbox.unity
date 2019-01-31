@@ -130,11 +130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54859b738c9c7fa43b8a87e2fd6b5677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 862737739}
   rotSpeed: 5
   speed: 5
---- !u!4 &862737740 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4966332044745484, guid: 0717d70c0de52434486d20a500d4f6c4,
+  movement: 0
+--- !u!95 &862737739 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95439465833848182, guid: 0717d70c0de52434486d20a500d4f6c4,
     type: 3}
   m_PrefabInstance: {fileID: 1898220967}
   m_PrefabAsset: {fileID: 0}
@@ -305,13 +307,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561649206}
-  m_LocalRotation: {x: 0.29332453, y: -0, z: -0, w: 0.9560129}
-  m_LocalPosition: {x: 0.15, y: 10.54, z: -10.33}
+  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
+  m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 862737740}
+  m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 34.114002, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
 --- !u!114 &1561649210
 MonoBehaviour:
   m_ObjectHideFlags: 0
