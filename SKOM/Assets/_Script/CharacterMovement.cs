@@ -14,11 +14,8 @@ public class CharacterMovement : MonoBehaviour
 
     public Animator animator;
     public float rotSpeed;
-    public float speed;
-    public float movement = 0;
-    
-   
 
+    RaycastHit hit;
 
     void Start()
     {
@@ -42,14 +39,11 @@ public class CharacterMovement : MonoBehaviour
             animator.SetFloat("Speed", 0);
         }
 
-
-
     }
 
     void SetTargetPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 1000))
         {
@@ -63,10 +57,12 @@ public class CharacterMovement : MonoBehaviour
     void Move()
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, playerRot, rotSpeed * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-        if(transform.position == targetPosition)
+        agent.SetDestination(targetPosition);
+
+        if (transform.position.x == targetPosition.x)
         {
+            
             moving = false;
         }
     }
