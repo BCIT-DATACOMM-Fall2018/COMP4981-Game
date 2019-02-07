@@ -31,7 +31,13 @@ public class Character : MonoBehaviour
         status.hp = 60;
     }
 
-    private void subtractHP(float damage)
+    public void addHP(float heal)
+    {
+        // TODO: should call client wrapper?
+        status.hp += heal;
+    }
+
+    public void subtractHP(float damage)
     {
         // TODO: should call client wrapper?
         status.hp -= damage;
