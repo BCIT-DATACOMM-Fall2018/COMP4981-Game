@@ -2082,7 +2082,7 @@ MonoBehaviour:
     type: 3}
   bottomCreep: {fileID: 2331305754292465772, guid: 87f7dbb023db537449988967fb7a2ace,
     type: 3}
-  spawnTime: 30
+  spawnTime: 60
   spawnPoint: {fileID: 1874033239}
 --- !u!4 &1887768051
 Transform:
@@ -2282,16 +2282,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tower-Top-1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7818655753596694070, guid: 990a2e1a6f3a2904d8435335aae409ed,
-        type: 3}
-      propertyPath: m_TagString
-      value: Tower-Top-1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7818655753596694070, guid: 990a2e1a6f3a2904d8435335aae409ed,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7828180870729636580, guid: 990a2e1a6f3a2904d8435335aae409ed,
         type: 3}

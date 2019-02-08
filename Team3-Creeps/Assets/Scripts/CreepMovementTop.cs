@@ -5,9 +5,8 @@ using UnityEngine.AI;
 
 public class CreepMovementTop : MonoBehaviour
 {
-    //For pathfinding
-    Transform towerTop1;
-    Transform towerTop2;
+    GameObject towerTop1;
+    GameObject towerTop2;
 
     Transform enemyBase;
     NavMeshAgent nav;
@@ -21,10 +20,10 @@ public class CreepMovementTop : MonoBehaviour
     void Awake()
     {
         if (GameObject.FindWithTag(towerTop1Tag) != null)
-            towerTop1 = GameObject.FindGameObjectWithTag(towerTop1Tag).transform;
+            towerTop1 = GameObject.FindGameObjectWithTag(towerTop1Tag);
 
         if (GameObject.FindWithTag(towerTop2Tag) != null)
-            towerTop2 = GameObject.FindGameObjectWithTag(towerTop2Tag).transform;
+            towerTop2 = GameObject.FindGameObjectWithTag(towerTop2Tag);
 
         enemyBase = GameObject.FindGameObjectWithTag(enemyBaseTag).transform;
         
@@ -34,9 +33,9 @@ public class CreepMovementTop : MonoBehaviour
     void Update()
     {
         if (GameObject.FindWithTag(towerTop1Tag) != null)
-            nav.SetDestination(towerTop1.position);
+            nav.SetDestination(towerTop1.transform.position);
         else if (GameObject.FindWithTag(towerTop2Tag) != null)
-            nav.SetDestination(towerTop2.position);
+            nav.SetDestination(towerTop2.transform.position);
         else
             nav.SetDestination(enemyBase.position);
     }
@@ -47,7 +46,10 @@ public class CreepMovementTop : MonoBehaviour
         if (other.CompareTag(enemyBaseTag)) //If reach the enemy base, destroy self
             Destroy(this.gameObject);
         else
-            other.gameObject.SetActive(false);
+        {
+            TowerManager towerManagerScript = other.GetComponent<TowerManager>();
+            towerManagerScript.health -= 5;
+        }
     }
 
 
