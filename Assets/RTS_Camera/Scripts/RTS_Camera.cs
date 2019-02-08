@@ -119,7 +119,7 @@ namespace RTS_Cam
 
         private float ScrollWheel
         {
-            get { return Input.GetAxis(zoomingAxis); }
+            get { return -Input.GetAxis(zoomingAxis); }
         }
 
         private Vector2 MouseAxis
