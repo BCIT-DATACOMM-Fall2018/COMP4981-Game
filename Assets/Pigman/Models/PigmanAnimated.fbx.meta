@@ -1,0 +1,2487 @@
+fileFormatVersion: 2
+guid: c6b644e8a94bba74e9224e50d333344a
+timeCreated: 1480618215
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: b_earl00
+    100002: b_earl01
+    100004: b_earr00
+    100006: b_earr01
+    100008: b_head
+    100010: b_l_calf
+    100012: b_l_clavicle
+    100014: b_l_foot
+    100016: b_l_forearm
+    100018: b_l_hand
+    100020: b_l_thigh
+    100022: b_l_toe0
+    100024: b_l_upperarm
+    100026: b_lf0_00
+    100028: b_lf0_01
+    100030: b_lf1_00
+    100032: b_lf1_01
+    100034: b_lf2_00
+    100036: b_lf2_01
+    100038: b_neck
+    100040: b_pelvis
+    100042: b_r_calf
+    100044: b_r_clavicle
+    100046: b_r_foot
+    100048: b_r_forearm
+    100050: b_r_hand
+    100052: b_r_thigh
+    100054: b_r_toe0
+    100056: b_r_upperarm
+    100058: b_rf0_00
+    100060: b_rf0_01
+    100062: b_rf1_00
+    100064: b_rf1_01
+    100066: b_rf2_00
+    100068: b_rf2_01
+    100070: b_spine
+    100072: b_spine1
+    100074: mesh
+    100076: //RootNode
+    100078: root_pigman
+    100080: weapon_point
+    400000: b_earl00
+    400002: b_earl01
+    400004: b_earr00
+    400006: b_earr01
+    400008: b_head
+    400010: b_l_calf
+    400012: b_l_clavicle
+    400014: b_l_foot
+    400016: b_l_forearm
+    400018: b_l_hand
+    400020: b_l_thigh
+    400022: b_l_toe0
+    400024: b_l_upperarm
+    400026: b_lf0_00
+    400028: b_lf0_01
+    400030: b_lf1_00
+    400032: b_lf1_01
+    400034: b_lf2_00
+    400036: b_lf2_01
+    400038: b_neck
+    400040: b_pelvis
+    400042: b_r_calf
+    400044: b_r_clavicle
+    400046: b_r_foot
+    400048: b_r_forearm
+    400050: b_r_hand
+    400052: b_r_thigh
+    400054: b_r_toe0
+    400056: b_r_upperarm
+    400058: b_rf0_00
+    400060: b_rf0_01
+    400062: b_rf1_00
+    400064: b_rf1_01
+    400066: b_rf2_00
+    400068: b_rf2_01
+    400070: b_spine
+    400072: b_spine1
+    400074: mesh
+    400076: //RootNode
+    400078: root_pigman
+    400080: weapon_point
+    4300000: mesh
+    7400000: run
+    7400002: idle_normal
+    7400004: idle_normal_to_agr
+    7400006: idle_agr
+    7400008: idle_agr_to_normal
+    7400010: walk_normal
+    7400012: walk_agr
+    7400014: turn_left
+    7400016: turn_right
+    7400018: turn_180
+    7400020: turn_180_place
+    7400022: attack_0
+    7400024: attack_1
+    7400026: attack_2
+    7400028: attack_3
+    7400030: death_0
+    7400032: death_1
+    7400034: death_2
+    7400036: death_3
+    7400038: hit_0
+    7400040: hit_1
+    9500000: //RootNode
+    13700000: mesh
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: root_pigman
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: run
+      takeName: run
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: idle_normal
+      takeName: idle_normal
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: idle_normal_to_agr
+      takeName: idle_normal_to_agr
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: idle_agr
+      takeName: idle_agr
+      firstFrame: 0
+      lastFrame: 64
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: idle_agr_to_normal
+      takeName: idle_agr_to_normal
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: walk_normal
+      takeName: walk_normal
+      firstFrame: 0
+      lastFrame: 42
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: walk_agr
+      takeName: walk_agr
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: turn_left
+      takeName: turn_left
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: turn_right
+      takeName: turn_right
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: turn_180
+      takeName: turn_180
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: turn_180_place
+      takeName: turn_180_place
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack_0
+      takeName: attack_0
+      firstFrame: 0
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack_1
+      takeName: attack_1
+      firstFrame: 0
+      lastFrame: 34
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack_2
+      takeName: attack_2
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack_3
+      takeName: attack_3
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: death_0
+      takeName: death_0
+      firstFrame: 0
+      lastFrame: 101
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: death_1
+      takeName: death_1
+      firstFrame: 0
+      lastFrame: 56
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: death_2
+      takeName: death_2
+      firstFrame: 0
+      lastFrame: 31
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: death_3
+      takeName: death_3
+      firstFrame: 0
+      lastFrame: 54
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hit_0
+      takeName: hit_0
+      firstFrame: 0
+      lastFrame: 18
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hit_1
+      takeName: hit_1
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: mesh
+        weight: 1
+      - path: root_pigman
+        weight: 1
+      - path: root_pigman/b_pelvis
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_l_thigh/b_l_calf/b_l_foot/b_l_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot
+        weight: 1
+      - path: root_pigman/b_pelvis/b_r_thigh/b_r_calf/b_r_foot/b_r_toe0
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf0_00/b_lf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf1_00/b_lf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_l_clavicle/b_l_upperarm/b_l_forearm/b_l_hand/b_lf2_00/b_lf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earl00/b_earl01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_neck/b_head/b_earr00/b_earr01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf0_00/b_rf0_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf1_00/b_rf1_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/b_rf2_00/b_rf2_01
+        weight: 1
+      - path: root_pigman/b_pelvis/b_spine/b_spine1/b_r_clavicle/b_r_upperarm/b_r_forearm/b_r_hand/weapon_point
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: root_pigman
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
