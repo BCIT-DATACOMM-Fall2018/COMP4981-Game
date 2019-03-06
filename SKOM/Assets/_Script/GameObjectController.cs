@@ -23,6 +23,7 @@ public class GameObjectController : MonoBehaviour
         {
             case GameObjectType.Player:
                 GameActors.Add(actorID, Instantiate(player, location, Quaternion.identity));
+                GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorID];
                 break;
             default:
                 break;

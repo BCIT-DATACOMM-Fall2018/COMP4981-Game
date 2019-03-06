@@ -29,7 +29,6 @@ public class GameStateController : MonoBehaviour
         while(elementQueue.TryDequeue(out updateElement)){
             updateElement.UpdateState(stateBridge);
             Debug.Log("processed update element");
-
         }
     }
 }
