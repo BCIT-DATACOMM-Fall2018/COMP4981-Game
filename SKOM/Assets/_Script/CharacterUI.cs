@@ -31,7 +31,8 @@ public class CharacterUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hpBar = GameObject.Find("HPBar").GetComponent<Slider>();
+        hpBar = gameObject.transform.Find("HPBarObject/Canvas/HPBar").GetComponent<Slider>();
+
     }
 
     // Update is called once per frame
@@ -39,7 +40,7 @@ public class CharacterUI : MonoBehaviour
     {
 
     }
-    public void updateCharacterUI(Status status)
+    public void UpdateCharacterUI(Status status)
     {
         hpBar.value = status.hp;
     }
