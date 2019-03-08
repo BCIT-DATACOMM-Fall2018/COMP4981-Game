@@ -13,22 +13,18 @@ public class GameStateController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        elementQueue = new ConcurrentQueue<UpdateElement>();
+        elementQueue = ConnectionManager.Instance.MessageQueue;
         objectController = GetComponent<GameObjectController>();
         stateBridge = new ClientStateMessageBridge(objectController);
-        Debug.Log("got game controller");
         objectController.InstantiateObject(GameObjectType.Player, new Vector3(), 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        elementQueue.Enqueue(new HealthElement(1, 1));
-
         UpdateElement updateElement;
         while(elementQueue.TryDequeue(out updateElement)){
             updateElement.UpdateState(stateBridge);
-            Debug.Log("processed update element");
         }
     }
 }
