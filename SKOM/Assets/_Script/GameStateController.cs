@@ -16,6 +16,7 @@ public class GameStateController : MonoBehaviour
         elementQueue = ConnectionManager.Instance.MessageQueue;
         objectController = GetComponent<GameObjectController>();
         stateBridge = new ClientStateMessageBridge(objectController);
+        
         objectController.InstantiateObject(GameObjectType.Player, new Vector3(), 1);
     }
 

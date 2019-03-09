@@ -14,15 +14,22 @@ public class ConnectionManager
     private UDPSocket socket;
     private ReliableUDPConnection connection;
     public ConcurrentQueue<UpdateElement> MessageQueue {get; private set;}
+    private ConcurrentQueue<UpdateElement> ReliableElementQueue {get; set;}
+
     private readonly ElementId[] unreliableElementIds = {ElementId.HealthElement};
     private int clientId = -1;
 
     private ConnectionManager()
     {
         MessageQueue = new ConcurrentQueue<UpdateElement>();
+        ReliableElementQueue = new ConcurrentQueue<UpdateElement>();
         CreateSocketUDP();
         ConnectReliableUDP();
         InitializeConnection("127.0.0.1");
+    }
+
+    public void QueueReliableElement(UpdateElement element){
+        ReliableElementQueue.Enqueue(element);
     }
 
     public static ConnectionManager Instance
@@ -44,7 +51,6 @@ public class ConnectionManager
         internal static readonly ConnectionManager instance = new ConnectionManager();
     }
 
-    /*** Public functions ***/
     private void CreateSocketUDP()
     {
         socket = new UDPSocket();
@@ -56,24 +62,16 @@ public class ConnectionManager
         connection = new ReliableUDPConnection(0);
     }
 
-    public void SendPacket(Packet packet)
-    {
+    public void SendStatePacket(List<UpdateElement> gameState){
+    List<UpdateElement> reliableElements = new List<UpdateElement>();
+
+        UpdateElement temp = null;
+        while(ReliableElementQueue.TryDequeue(out temp)){
+            reliableElements.Add(temp);
+        }
+        Packet packet = connection.CreatePacket(gameState, reliableElements);
         socket.Send(packet, destination);
-    }
 
-    public Packet ReceivePacket()
-    {
-        return socket.Receive();
-    }
-
-    public Packet Packetize(List<UpdateElement> reliableElements, List<UpdateElement> unreliableElements)
-    {
-        return connection.CreatePacket(reliableElements, unreliableElements);
-    }
-
-    public UnpackedPacket UnPack(Packet packet, ElementId[] expectedUnreliableIds)
-    {
-        return connection.ProcessPacket(packet, expectedUnreliableIds);
     }
 
     private void StartBackgroundNetworking(String stringIp){

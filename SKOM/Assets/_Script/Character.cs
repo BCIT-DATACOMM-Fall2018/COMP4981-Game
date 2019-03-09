@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct Status
 {
-    public int hp;
+    public int HP {get; set;}
 }
 
 /// ---------------------------------------------- 
@@ -31,7 +31,7 @@ public struct Status
 public class Character : MonoBehaviour
 {
     private CharacterUI cUI;
-    private Status status;
+    public Status Status;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +43,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cUI.UpdateCharacterUI(status);
+        cUI.UpdateCharacterUI(Status);
 
         // TODO: Remove this test code after actual hp control was implmented
     }
@@ -51,19 +51,19 @@ public class Character : MonoBehaviour
     private void InitStatus()
     {
         // TODO: call client wrapper to init hp
-        status.hp = 100;
+        Status.HP = 12;
     }
 
     public void AddHP(int heal)
     {
         // TODO: call client wrapper
-        status.hp += heal;
+        Status.HP += heal;
     }
 
     public void SubtractHP(int damage)
     {
         // TODO: call client wrapper
-        status.hp -= damage;
+        Status.HP -= damage;
     }
 
 }
