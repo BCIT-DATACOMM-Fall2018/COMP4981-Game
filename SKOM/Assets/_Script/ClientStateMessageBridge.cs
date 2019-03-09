@@ -17,7 +17,19 @@ public class ClientStateMessageBridge : IStateMessageBridge
 		objectController.GameActors[actorId].GetComponent<Character>().SubtractHP(newHealth);
 	}
 
-	public void UseActorAbility (int actorId, int abilityId, int targetId, int x, int y){
+	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId){
+
+	}
+
+	public void UseAreaAbility (int actorId, AbilityType abilityId, int x, int y){
+
+	}
+
+	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId){
+
+	}
+
+	public void SpawnActor(ActorType actorType, int ActorId, int x, int y){
 
 	}
 

@@ -51,7 +51,7 @@ public class Character : MonoBehaviour
     private void InitStatus()
     {
         // TODO: call client wrapper to init hp
-        Status.HP = 12;
+        Status.HP = 1000;
     }
 
     public void AddHP(int heal)

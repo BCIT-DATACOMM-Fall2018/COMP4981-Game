@@ -42,6 +42,6 @@ public class CharacterUI : MonoBehaviour
     }
     public void UpdateCharacterUI(Status status)
     {
-        hpBar.value = status.HP;
+        hpBar.value = status.HP/10;
     }
 }
