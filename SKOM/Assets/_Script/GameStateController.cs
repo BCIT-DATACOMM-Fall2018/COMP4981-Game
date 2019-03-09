@@ -16,8 +16,8 @@ public class GameStateController : MonoBehaviour
         elementQueue = ConnectionManager.Instance.MessageQueue;
         objectController = GetComponent<GameObjectController>();
         stateBridge = new ClientStateMessageBridge(objectController);
-        
-        objectController.InstantiateObject(GameObjectType.Player, new Vector3(), 1);
+
+        objectController.InstantiateObject(ActorType.Player, new Vector3(), 1);
     }
 
     // Update is called once per frame

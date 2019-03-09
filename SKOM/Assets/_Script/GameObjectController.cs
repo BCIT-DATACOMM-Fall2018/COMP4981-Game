@@ -18,10 +18,10 @@ public class GameObjectController : MonoBehaviour
     {
     }
 
-    public void InstantiateObject(GameObjectType type, Vector3 location, int actorID){
+    public void InstantiateObject(ActorType type, Vector3 location, int actorID){
         switch (type)
         {
-            case GameObjectType.Player:
+            case ActorType.Player:
                 GameActors.Add(actorID, Instantiate(player, location, Quaternion.identity));
                 GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorID];
                 break;
