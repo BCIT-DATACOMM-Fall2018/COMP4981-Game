@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NetworkLibrary;
@@ -20,8 +21,14 @@ public class GameStateReporter : MonoBehaviour
     void Update()
     {
         List<UpdateElement> gameState = new List<UpdateElement>();
-        Debug.Log(objectController.GameActors[1].GetComponent<Character>().Status.HP);
-        gameState.Add(new HealthElement(1,objectController.GameActors[1].GetComponent<Character>().Status.HP));
+        try{
+            Debug.Log(objectController.GameActors[1].GetComponent<Character>().Status.HP);
+            gameState.Add(new HealthElement(1,objectController.GameActors[1].GetComponent<Character>().Status.HP));
+        } catch(Exception e){
+            gameState.Add(new HealthElement(0,0));
+        }
+        ConnectionManager.Instance.QueueReliableElement(new HealthElement(0,1));
         ConnectionManager.Instance.SendStatePacket(gameState);
+        Debug.Log("Sent packet to server");
     }
 }

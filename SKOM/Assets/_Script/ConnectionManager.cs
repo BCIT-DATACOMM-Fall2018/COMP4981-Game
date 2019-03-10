@@ -16,6 +16,7 @@ public class ConnectionManager
     public ConcurrentQueue<UpdateElement> MessageQueue {get; private set;}
     private ConcurrentQueue<UpdateElement> ReliableElementQueue {get; set;}
 
+    private Boolean connected;
     private readonly ElementId[] unreliableElementIds = {ElementId.HealthElement};
     private int clientId = -1;
 
@@ -63,15 +64,21 @@ public class ConnectionManager
     }
 
     public void SendStatePacket(List<UpdateElement> gameState){
-    List<UpdateElement> reliableElements = new List<UpdateElement>();
-
-        UpdateElement temp = null;
-        while(ReliableElementQueue.TryDequeue(out temp)){
-            reliableElements.Add(temp);
+        if(connected){
+            List<UpdateElement> reliableElements = new List<UpdateElement>();
+            Debug.Log("ReliableElements in queue " + ReliableElementQueue.Count);
+            UpdateElement temp = null;
+            while(ReliableElementQueue.TryDequeue(out temp)){
+                reliableElements.Add(temp);
+                Debug.Log("Removed reliable element from queue");
+            }
+            Debug.Log("ReliableElements:  " + reliableElements.Count);
+            Packet packet = connection.CreatePacket(gameState, reliableElements);
+            socket.Send(packet, destination);
+            ReliableUDPConnection conn = new ReliableUDPConnection(2);
+            UnpackedPacket unpacked = conn.ProcessPacket(packet, new ElementId[] {ElementId.HealthElement});
+            Debug.Log("Reliable Elements" + unpacked.ReliableElements.Count);
         }
-        Packet packet = connection.CreatePacket(gameState, reliableElements);
-        socket.Send(packet, destination);
-
     }
 
     private void StartBackgroundNetworking(String stringIp){
@@ -86,14 +93,24 @@ public class ConnectionManager
         socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
         Packet confirmationPacket = socket.Receive();
         clientId = ReliableUDPConnection.GetPlayerID(confirmationPacket);
+        connected = true;
+        Debug.Log("Connected");
         while(true){
-            Debug.Log("Waiting for packet");
-            Packet packet = socket.Receive();
-            Debug.Log("ReceivedPacket");
-            UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
-            unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
-            unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
+            try{
+                Debug.Log("Waiting for packet");
+                    
+                Packet packet = socket.Receive();
+                Debug.Log("ReceivedPacket");
+                UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
+                
+                unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
+                unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
+            } catch(TimeoutException e){
+                connected = false;
+                return;
+            }
         }
+           
     }
 
 }

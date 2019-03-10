@@ -1,5 +1,6 @@
 using System;
 using NetworkLibrary;
+using UnityEngine;
 
 public class ClientStateMessageBridge : IStateMessageBridge
 {
@@ -14,7 +15,12 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	}
 
 	public void UpdateActorHealth (int actorId, int newHealth){
-		objectController.GameActors[actorId].GetComponent<Character>().SubtractHP(newHealth);
+		try{
+			objectController.GameActors[actorId].GetComponent<Character>().SubtractHP(newHealth);
+		} catch	(Exception e){
+
+		}
+		Debug.Log("Update health of actor" + actorId + " by " +newHealth);
 	}
 
 	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId){
@@ -30,7 +36,8 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	}
 
 	public void SpawnActor(ActorType actorType, int ActorId, int x, int y){
-
+		Debug.Log("Spawn actor");
+		objectController.InstantiateObject(actorType, new Vector3(x, y), ActorId);
 	}
 
 }

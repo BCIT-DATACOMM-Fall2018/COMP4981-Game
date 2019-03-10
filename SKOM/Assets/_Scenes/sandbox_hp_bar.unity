@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8fb7e436243d01489ad0a289af7be67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1144410987}
   yZoom: 1
   zZoom: 1
 --- !u!1 &1589181032

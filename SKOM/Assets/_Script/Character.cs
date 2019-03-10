@@ -33,11 +33,15 @@ public class Character : MonoBehaviour
     private CharacterUI cUI;
     public Status Status;
 
+    public Character(){
+        InitStatus();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         cUI = GetComponent<CharacterUI>();
-        InitStatus();
+
     }
 
     // Update is called once per frame
