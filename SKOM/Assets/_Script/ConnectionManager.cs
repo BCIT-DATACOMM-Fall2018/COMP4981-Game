@@ -17,7 +17,7 @@ public class ConnectionManager
     private ConcurrentQueue<UpdateElement> ReliableElementQueue {get; set;}
 
     private Boolean connected;
-    private readonly ElementId[] unreliableElementIds = {ElementId.HealthElement};
+    private readonly ElementId[] unreliableElementIds = {ElementId.HealthElement, ElementId.PositionElement};
     private int clientId = -1;
 
     private ConnectionManager()
@@ -66,18 +66,12 @@ public class ConnectionManager
     public void SendStatePacket(List<UpdateElement> gameState){
         if(connected){
             List<UpdateElement> reliableElements = new List<UpdateElement>();
-            Debug.Log("ReliableElements in queue " + ReliableElementQueue.Count);
             UpdateElement temp = null;
             while(ReliableElementQueue.TryDequeue(out temp)){
                 reliableElements.Add(temp);
-                Debug.Log("Removed reliable element from queue");
             }
-            Debug.Log("ReliableElements:  " + reliableElements.Count);
             Packet packet = connection.CreatePacket(gameState, reliableElements);
             socket.Send(packet, destination);
-            ReliableUDPConnection conn = new ReliableUDPConnection(2);
-            UnpackedPacket unpacked = conn.ProcessPacket(packet, new ElementId[] {ElementId.HealthElement});
-            Debug.Log("Reliable Elements" + unpacked.ReliableElements.Count);
         }
     }
 

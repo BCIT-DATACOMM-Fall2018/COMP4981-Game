@@ -467,7 +467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ad15527a932a72a58fd562d86d42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 862737736, guid: 0df6f46d0109d45d0b93a6ece30ab226, type: 3}
+  Player: {fileID: 862737736, guid: 0df6f46d0109d45d0b93a6ece30ab226, type: 3}
+  AlliedPlayer: {fileID: 862737736, guid: acee4ac7edcfb46e9965a895c70ab266, type: 3}
 --- !u!1 &1278441887
 GameObject:
   m_ObjectHideFlags: 0

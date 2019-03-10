@@ -5,7 +5,8 @@ using NetworkLibrary;
 
 public class GameObjectController : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject Player;
+    public GameObject AlliedPlayer;
     public Dictionary<int, GameObject> GameActors { get; private set; } = new Dictionary<int, GameObject>();  
 
 
@@ -23,8 +24,11 @@ public class GameObjectController : MonoBehaviour
         switch (type)
         {
             case ActorType.Player:
-                GameActors.Add(actorID, Instantiate(player, location, Quaternion.identity));
+                GameActors.Add(actorID, Instantiate(Player, location, Quaternion.identity));
                 GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorID];
+                break;
+            case ActorType.AlliedPlayer:
+                GameActors.Add(actorID, Instantiate(AlliedPlayer, location, Quaternion.identity));
                 break;
             default:
                 break;
