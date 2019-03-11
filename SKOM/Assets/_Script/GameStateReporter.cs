@@ -18,7 +18,7 @@ public class GameStateReporter : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         List<UpdateElement> gameState = new List<UpdateElement>();
         try{

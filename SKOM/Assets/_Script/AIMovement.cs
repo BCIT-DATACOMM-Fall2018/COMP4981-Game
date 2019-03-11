@@ -9,7 +9,7 @@ public class AIMovement : MonoBehaviour
 
     public Vector3 targetPosition;
     private Vector3 lookAtTarget;
-    Quaternion rot;
+    public Quaternion rot;
 
     public Animator animator;
     public float rotSpeed;
@@ -28,8 +28,8 @@ public class AIMovement : MonoBehaviour
     {
         if(Moving)
         {
-            //Move();
-            animator.SetFloat("Speed", 0.4F);
+            Move();
+            animator.SetFloat("Speed", 0.1F);
         } else
         {
             animator.SetFloat("Speed", 0);
@@ -38,6 +38,9 @@ public class AIMovement : MonoBehaviour
 
     public void SetTargetPosition(Vector3 target)
     {
+        if(target.x == transform.position.x && target.z == transform.position.z){
+            return;
+        }
         targetPosition = target;
         lookAtTarget = new Vector3(targetPosition.x - transform.position.x, transform.position.y, targetPosition.z - transform.position.z);
         rot = Quaternion.LookRotation(lookAtTarget);

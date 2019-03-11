@@ -13,19 +13,9 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	}
 	public void UpdateActorPosition (int actorId, float x, float z){
 		try{
-			
 			GameObject actor = objectController.GameActors[actorId];
-			/*
-			Debug.Log("Abs diff " + Math.Abs(actor.transform.position.x - x)+ " " + Math.Abs(actor.transform.position.z - z));
-			if(Math.Abs(actor.transform.position.x - x) > 0.1F || Math.Abs(actor.transform.position.z - z) > 0.1F){
-				actor.transform.position = new Vector3(x,0,z);
-				Debug.Log("Update position of actor " + actorId + " to " + x + "," + z);
-				actor.GetComponent<AIMovement>().Moving = true;
-			}
-			actor.GetComponent<AIMovement>().Moving = false;
-			*/
-
-			actor.GetComponent<AIMovement>().SetTargetPosition(new Vector3(x, 0, z));
+			Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
+			actor.transform.position = targetPosition;
 		} catch	(KeyNotFoundException e){
 
 		}
@@ -56,6 +46,20 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	public void SpawnActor(ActorType actorType, int ActorId, float x, float z){
 		Debug.Log("Spawn actor " + ActorId + " " + actorType);
 		objectController.InstantiateObject(actorType, new Vector3(x,0,z), ActorId);
+	}
+
+	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
+		Debug.Log("Setting actor movement");
+		try{	
+			GameObject actor = objectController.GameActors[actorId];
+			if(Math.Abs(actor.transform.position.x - x) > 1F || Math.Abs(actor.transform.position.z - z) > 1F){
+				Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
+				actor.transform.position = targetPosition;
+			}
+			actor.GetComponent<AIMovement>().SetTargetPosition(new Vector3(x, 0, z));
+		} catch	(KeyNotFoundException e){
+
+		}
 	}
 
 }

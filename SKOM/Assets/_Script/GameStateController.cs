@@ -21,7 +21,7 @@ public class GameStateController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdateElement updateElement;
         while(elementQueue.TryDequeue(out updateElement)){

@@ -17,7 +17,7 @@ public class ConnectionManager
     private ConcurrentQueue<UpdateElement> ReliableElementQueue {get; set;}
 
     private Boolean connected;
-    private readonly ElementId[] unreliableElementIds = {ElementId.HealthElement, ElementId.PositionElement};
+    private readonly ElementId[] unreliableElementIds = {ElementId.HealthElement, ElementId.MovementElement};
     private int clientId = -1;
 
     private ConnectionManager()

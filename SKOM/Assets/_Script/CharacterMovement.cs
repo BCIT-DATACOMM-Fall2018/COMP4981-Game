@@ -25,6 +25,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Player current pos: " + transform.position.x + " " + transform.position.z);
 
         if (Input.GetMouseButtonDown(1))
         {
