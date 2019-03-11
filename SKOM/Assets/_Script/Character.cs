@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using NetworkLibrary.IStateMessageBridge;
+
 public struct Status
 {
     public float hp;
@@ -51,20 +53,29 @@ public class Character : MonoBehaviour
     
     private void initStatus()
     {
-        // TODO: call client wrapper to init hp
         status.hp = 100;
+
+        UpdateActorHealth(1, status.hp);
     }
 
     private void addHP(float heal)
     {
-        // TODO: call client wrapper
         status.hp += heal;
+
+        UpdateActorHealth(1, status.hp);
     }
 
     private void subtractHP(float damage)
     {
-        // TODO: call client wrapper
         status.hp -= damage;
+
+        UpdateActorHealth(1, status.hp);
     }
+
+    // Dasha Notes:
+    //
+    // Is this file going to hold all local information about the character?
+    // Where will the id of the character be initialized?
+    // I think the ClientWrapper C# is not needed anymore..
 
 }
