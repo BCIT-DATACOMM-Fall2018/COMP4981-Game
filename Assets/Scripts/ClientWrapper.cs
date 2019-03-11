@@ -26,6 +26,7 @@ public class ClientWrapper
 {
     private int _Id;
     private int _Health;
+    //temp
     
     /// ---------------------------------------------- 
     /// FUNCTION:    Set Id of character
