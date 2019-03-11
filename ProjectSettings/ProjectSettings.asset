@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: eb041f6cddf366847b5a0d8f11f34701
+  productGUID: 8f93d85bd6adc7a46a207d78327687e1
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: SKOM
+  productName: COMP4981-Game
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -611,10 +611,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 0ab5f0e8-9c8c-472c-a888-669e45993769
+  cloudProjectId: 1c27372a-cf63-4e92-bed4-ae3eba2e2bcb
   framebufferDepthMemorylessMode: 0
-  projectName: SKOM
-  organizationId: choyjef
+  projectName: COMP4981-Game (3)
+  organizationId: jmkim2392
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
