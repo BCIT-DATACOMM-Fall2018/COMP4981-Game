@@ -23,8 +23,8 @@ public class ClientStateMessageBridge : IStateMessageBridge
 
 	public void UpdateActorHealth (int actorId, int newHealth){
 		try{
-			objectController.GameActors[actorId].GetComponent<Character>().SubtractHP(newHealth);
-			Debug.Log("Update health of actor " + actorId + " by " +newHealth);
+			objectController.GameActors[actorId].GetComponent<Character>().Status.HP = newHealth;
+			Debug.Log("Update health of actor " + actorId + " to " +newHealth);
 
 		} catch	(KeyNotFoundException e){
 
@@ -45,21 +45,47 @@ public class ClientStateMessageBridge : IStateMessageBridge
 
 	public void SpawnActor(ActorType actorType, int ActorId, float x, float z){
 		Debug.Log("Spawn actor " + ActorId + " " + actorType);
-		objectController.InstantiateObject(actorType, new Vector3(x,0,z), ActorId);
+		if(actorType == ActorType.AlliedPlayer && ActorId == ConnectionManager.Instance.ClientId){
+			objectController.InstantiateObject(ActorType.Player, new Vector3(x,0,z), ActorId);
+		} else {
+			objectController.InstantiateObject(actorType, new Vector3(x,0,z), ActorId);
+		}
 	}
 
 	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
 		Debug.Log("Setting actor movement");
-		try{	
-			GameObject actor = objectController.GameActors[actorId];
-			if(Math.Abs(actor.transform.position.x - x) > 1F || Math.Abs(actor.transform.position.z - z) > 1F){
-				Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
-				actor.transform.position = targetPosition;
-			}
-			actor.GetComponent<AIMovement>().SetTargetPosition(new Vector3(x, 0, z));
-		} catch	(KeyNotFoundException e){
 
+		if(actorId == ConnectionManager.Instance.ClientId){
+			try {	
+				GameObject actor = objectController.GameActors[actorId];
+				if(Math.Abs(actor.transform.position.x - x) > 1F || Math.Abs(actor.transform.position.z - z) > 1F){
+					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
+					actor.transform.position = targetPosition;
+				}
+			} catch	(KeyNotFoundException e){
+				//TODO Error handling
+			}
+		} else {
+			try {	
+				GameObject actor = objectController.GameActors[actorId];
+				if(Math.Abs(actor.transform.position.x - x) > 1F || Math.Abs(actor.transform.position.z - z) > 1F){
+					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
+					actor.transform.position = targetPosition;
+				}
+				actor.GetComponent<AIMovement>().SetTargetPosition(new Vector3(x, 0, z));
+			} catch	(KeyNotFoundException e){
+				//TODO Error handling
+			}
 		}
+		
+	}
+
+	public void SetReady(int clientId, bool ready){
+
+	}
+
+	public void StartGame(int playerNum){
+		Debug.Log("StartGame");
 	}
 
 }

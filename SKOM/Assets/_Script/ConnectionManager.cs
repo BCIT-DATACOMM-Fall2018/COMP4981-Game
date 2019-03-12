@@ -18,7 +18,7 @@ public class ConnectionManager
 
     private Boolean connected;
     private readonly ElementId[] unreliableElementIds = {ElementId.HealthElement, ElementId.MovementElement};
-    private int clientId = -1;
+    public int ClientId {get;private set;} = -1;
 
     private ConnectionManager()
     {
@@ -86,9 +86,39 @@ public class ConnectionManager
         destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
         socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
         Packet confirmationPacket = socket.Receive();
-        clientId = ReliableUDPConnection.GetPlayerID(confirmationPacket);
+        ClientId = ReliableUDPConnection.GetPlayerID(confirmationPacket);
         connected = true;
         Debug.Log("Connected");
+
+        List<UpdateElement> readyList = new List<UpdateElement>();
+        readyList.Add(new ReadyElement(true, ClientId));
+        Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
+        socket.Send(readyPacket, destination);
+
+        Packet startPacket = socket.Receive();
+        connection.ProcessPacket(startPacket, new ElementId[] {});
+
+        //Lobby State
+        /*
+        while(true){
+            try{
+                Debug.Log("Waiting for packet in lobby");
+                    
+                Packet packet = socket.Receive();
+                Debug.Log("ReceivedPacket");
+                UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
+                
+                unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
+                unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
+            } catch(TimeoutException e){
+                connected = false;
+                return;
+            }
+        }
+        */
+        
+
+        //Game State
         while(true){
             try{
                 Debug.Log("Waiting for packet");
