@@ -17,15 +17,29 @@ public class ConnectionManager
     private ConcurrentQueue<UpdateElement> ReliableElementQueue {get; set;}
 
     private Boolean connected;
-    private readonly ElementId[] unreliableElementIds = {ElementId.HealthElement, ElementId.MovementElement};
+    private Boolean inLobby;
+    private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
+    private int playerNum;
+    public int PlayerNum {get{return playerNum;} set { 
+        unreliableElementIds = new ElementId[value*2];
+        for (int i = 0; i < value*2; i++)
+        {
+            if(i % 2 == 0){
+                unreliableElementIds[i] = ElementId.HealthElement;
+            } else{
+                unreliableElementIds[i] = ElementId.MovementElement;
+            }
+        }
+        playerNum = value;
+    }}
 
     private ConnectionManager()
     {
+        PlayerNum = 1;
         MessageQueue = new ConcurrentQueue<UpdateElement>();
         ReliableElementQueue = new ConcurrentQueue<UpdateElement>();
         CreateSocketUDP();
-        ConnectReliableUDP();
         InitializeConnection("127.0.0.1");
     }
 
@@ -60,7 +74,7 @@ public class ConnectionManager
 
     private void ConnectReliableUDP()
     {
-        connection = new ReliableUDPConnection(0);
+        connection = new ReliableUDPConnection(ClientId);
     }
 
     public void SendStatePacket(List<UpdateElement> gameState){
@@ -86,7 +100,9 @@ public class ConnectionManager
         destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
         socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
         Packet confirmationPacket = socket.Receive();
-        ClientId = ReliableUDPConnection.GetPlayerID(confirmationPacket);
+        ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
+        ConnectReliableUDP();
+
         connected = true;
         Debug.Log("Connected");
 
@@ -96,7 +112,10 @@ public class ConnectionManager
         socket.Send(readyPacket, destination);
 
         Packet startPacket = socket.Receive();
-        connection.ProcessPacket(startPacket, new ElementId[] {});
+        UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {});
+        unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
+        unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
+
 
         //Lobby State
         /*
@@ -124,6 +143,11 @@ public class ConnectionManager
                 Debug.Log("Waiting for packet");
 
                 Packet packet = socket.Receive();
+
+                if(ReliableUDPConnection.GetPacketType(packet) != PacketType.GameplayPacket){
+                    continue;
+                }
+
                 Debug.Log("ReceivedPacket");
                 UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
 

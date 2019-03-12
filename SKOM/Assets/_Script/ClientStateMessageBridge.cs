@@ -53,12 +53,12 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	}
 
 	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
-		Debug.Log("Setting actor movement");
+		Debug.Log("Setting actor movement of " + actorId + " position + "+ x+","+z +" target"+targetX+","+targetZ);
 
 		if(actorId == ConnectionManager.Instance.ClientId){
 			try {	
 				GameObject actor = objectController.GameActors[actorId];
-				if(Math.Abs(actor.transform.position.x - x) > 1F || Math.Abs(actor.transform.position.z - z) > 1F){
+				if(Math.Abs(actor.transform.position.x - x) > 2F || Math.Abs(actor.transform.position.z - z) > 2F){
 					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
 					actor.transform.position = targetPosition;
 				}
@@ -68,7 +68,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
 		} else {
 			try {	
 				GameObject actor = objectController.GameActors[actorId];
-				if(Math.Abs(actor.transform.position.x - x) > 1F || Math.Abs(actor.transform.position.z - z) > 1F){
+				if(Math.Abs(actor.transform.position.x - x) > 2F || Math.Abs(actor.transform.position.z - z) > 2F){
 					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
 					actor.transform.position = targetPosition;
 				}
@@ -86,6 +86,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
 
 	public void StartGame(int playerNum){
 		Debug.Log("StartGame");
+		ConnectionManager.Instance.PlayerNum = playerNum;
 	}
 
 }

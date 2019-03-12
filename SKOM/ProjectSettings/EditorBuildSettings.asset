@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_Scenes/sandbox_hp_bar.unity
+    guid: 43b217307974341b5b3e09c63ba03f85
   m_configObjects: {}
