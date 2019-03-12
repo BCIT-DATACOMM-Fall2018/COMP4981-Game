@@ -42,7 +42,7 @@ public class ConnectionManager
     }
 
     public void InitializeConnection(String stringIp){
-        
+
         StartBackgroundNetworking(stringIp);
     }
 
@@ -103,11 +103,11 @@ public class ConnectionManager
         while(true){
             try{
                 Debug.Log("Waiting for packet in lobby");
-                    
+
                 Packet packet = socket.Receive();
                 Debug.Log("ReceivedPacket");
                 UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
-                
+
                 unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
                 unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
             } catch(TimeoutException e){
@@ -116,17 +116,17 @@ public class ConnectionManager
             }
         }
         */
-        
+
 
         //Game State
         while(true){
             try{
                 Debug.Log("Waiting for packet");
-                    
+
                 Packet packet = socket.Receive();
                 Debug.Log("ReceivedPacket");
                 UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
-                
+
                 unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
                 unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
             } catch(TimeoutException e){
@@ -134,7 +134,7 @@ public class ConnectionManager
                 return;
             }
         }
-           
+
     }
 
 }

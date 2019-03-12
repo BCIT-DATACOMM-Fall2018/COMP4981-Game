@@ -22,16 +22,17 @@ public class GameStateReporter : MonoBehaviour
     {
         List<UpdateElement> gameState = new List<UpdateElement>();
         try{
-            //Debug.Log(objectController.GameActors[1].GetComponent<Character>().Status.HP);
-            //gameState.Add(new HealthElement(1,objectController.GameActors[1].GetComponent<Character>().Status.HP));
+            GameObject player = objectController.GameActors[ConnectionManager.Instance.ClientId];
+            Vector3 playerTargetPosition = player.GetComponent<CharacterMovement>().TargetPosition;
+            gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, playerTargetPosition.x, playerTargetPosition.z));
+            ConnectionManager.Instance.QueueReliableElement(new HealthElement(0,1));
+            ConnectionManager.Instance.SendStatePacket(gameState);
+            Debug.Log("Sent packet to server");
+
         } catch(Exception e){
-            //gameState.Add(new HealthElement(0,0));
+            gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, 0, 0));
+            ConnectionManager.Instance.SendStatePacket(gameState);
+            Debug.Log("Sent  emptypacket to server");
         }
-        GameObject player = objectController.GameActors[ConnectionManager.Instance.ClientId];
-        Vector3 playerTargetPosition = player.GetComponent<CharacterMovement>().TargetPosition;
-        gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, playerTargetPosition.x, playerTargetPosition.z));
-        ConnectionManager.Instance.QueueReliableElement(new HealthElement(0,1));
-        ConnectionManager.Instance.SendStatePacket(gameState);
-        Debug.Log("Sent packet to server");
     }
 }
