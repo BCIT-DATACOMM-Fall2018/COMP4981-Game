@@ -9,4 +9,10 @@ public class EnemyTop : Enemy
         target = WavePointTop.waypoint;
         health = startHealth;
     }
+
+    void OnCollisionEnter(Collision other)
+    {
+        target = WavePoint.waypoint;
+        Debug.Log(gameObject.name + "has collided ")
+    }
 }
