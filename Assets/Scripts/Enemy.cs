@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     //[HideInInspector]
     public float speed = 20f;
     public float startHealth = 100;
-    private float health;
+    protected float health;
 
     public Transform target;
 
@@ -39,5 +39,6 @@ public class Enemy : MonoBehaviour
     {
         Vector3 dir = target.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+ 
     }
 }
