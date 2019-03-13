@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct Status
 {
-    public float hp;
+    public int HP {get; set;}
 }
 
 /// ---------------------------------------------- 
@@ -31,40 +31,43 @@ public struct Status
 public class Character : MonoBehaviour
 {
     private CharacterUI cUI;
-    private Status status;
+    public Status Status;
+
+    public Character(){
+        InitStatus();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         cUI = GetComponent<CharacterUI>();
-        initStatus();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        cUI.updateCharacterUI(status);
+        cUI.UpdateCharacterUI(Status);
 
         // TODO: Remove this test code after actual hp control was implmented
-        subtractHP(0.5f);
     }
     
-    private void initStatus()
+    private void InitStatus()
     {
         // TODO: call client wrapper to init hp
-        status.hp = 100;
+        Status.HP = 1000;
     }
 
-    private void addHP(float heal)
+    public void AddHP(int heal)
     {
         // TODO: call client wrapper
-        status.hp += heal;
+        Status.HP += heal;
     }
 
-    private void subtractHP(float damage)
+    public void SubtractHP(int damage)
     {
         // TODO: call client wrapper
-        status.hp -= damage;
+        Status.HP -= damage;
     }
 
 }

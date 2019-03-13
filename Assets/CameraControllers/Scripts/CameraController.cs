@@ -1,45 +1,35 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float panSpeed = 20f;
-    public float panBorderThickness = 10f;
-    public Vector2 panLimit;
 
-    public float scrollSpeed = 20f;
-    public float minY;
-    public float maxY;
+    public GameObject player;
+    public float yZoom;
+    public float zZoom;
+    private Vector3 offset;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        offset = transform.position - player.transform.position;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 pos = transform.position;
+        transform.position = player.transform.position + offset;
 
-
-        if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            pos.z += panSpeed * Time.deltaTime;
+            GetComponent<Transform>().position = new Vector3(transform.position.x, transform.position.y - yZoom, transform.position.z + zZoom);
+            offset = transform.position - player.transform.position;
         }
-        if (Input.GetKey("s") || Input.mousePosition.y <= panBorderThickness)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            pos.z -= panSpeed * Time.deltaTime;
+            GetComponent<Transform>().position = new Vector3(transform.position.x, transform.position.y + yZoom, transform.position.z - zZoom);
+            offset = transform.position - player.transform.position;
         }
-        if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panBorderThickness)
-        {
-            pos.x += panSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThickness)
-        {
-            pos.x -= panSpeed * Time.deltaTime;
-        }
-
-        
-
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        pos.y -= scroll * scrollSpeed * 100f * Time.deltaTime;
-        pos.x = Mathf.Clamp(pos.x, -panLimit.x, panLimit.x);
-        pos.z = Mathf.Clamp(pos.z, -panLimit.y, panLimit.y);
-        pos.y = Mathf.Clamp(pos.y, minY, maxY);
-        transform.position = pos;
     }
 }

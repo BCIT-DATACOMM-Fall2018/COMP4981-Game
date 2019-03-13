@@ -7,7 +7,7 @@ public class CharacterMovement : MonoBehaviour
 {
     NavMeshAgent agent;
 
-    private Vector3 targetPosition;
+    public Vector3 TargetPosition {get; private set;}
     private Vector3 lookAtTarget;
     Quaternion playerRot;
     bool moving = false;
@@ -25,6 +25,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Player current pos: " + transform.position.x + " " + transform.position.z);
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -47,8 +48,8 @@ public class CharacterMovement : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1000))
         {
-            targetPosition = hit.point;
-            lookAtTarget = new Vector3(targetPosition.x - transform.position.x, transform.position.y, targetPosition.z - transform.position.z);
+            TargetPosition = hit.point;
+            lookAtTarget = new Vector3(TargetPosition.x - transform.position.x, transform.position.y, TargetPosition.z - transform.position.z);
             playerRot = Quaternion.LookRotation(lookAtTarget);
             moving = true;
         }
@@ -58,9 +59,9 @@ public class CharacterMovement : MonoBehaviour
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, playerRot, rotSpeed * Time.deltaTime);
 
-        agent.SetDestination(targetPosition);
+        agent.SetDestination(TargetPosition);
 
-        if (transform.position.x == targetPosition.x)
+        if (transform.position.x == TargetPosition.x)
         {
             
             moving = false;
