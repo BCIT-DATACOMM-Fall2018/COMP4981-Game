@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class ClientStateMessageBridge : IStateMessageBridge
 {
 	private GameObjectController objectController;
-
+	private const float POSITION_TOLERANCE = 8f;
 	public ClientStateMessageBridge (GameObjectController objectController)
 	{
 		this.objectController = objectController;
@@ -58,7 +58,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
 		if(actorId == ConnectionManager.Instance.ClientId){
 			try {	
 				GameObject actor = objectController.GameActors[actorId];
-				if(Math.Abs(actor.transform.position.x - x) > 2F || Math.Abs(actor.transform.position.z - z) > 2F){
+				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
 					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
 					actor.transform.position = targetPosition;
 				}
@@ -68,7 +68,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
 		} else {
 			try {	
 				GameObject actor = objectController.GameActors[actorId];
-				if(Math.Abs(actor.transform.position.x - x) > 2F || Math.Abs(actor.transform.position.z - z) > 2F){
+				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
 					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
 					actor.transform.position = targetPosition;
 				}
@@ -87,6 +87,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	public void StartGame(int playerNum){
 		Debug.Log("StartGame");
 		ConnectionManager.Instance.PlayerNum = playerNum;
+		ConnectionManager.Instance.gameStarted = true;
 	}
 
 }
