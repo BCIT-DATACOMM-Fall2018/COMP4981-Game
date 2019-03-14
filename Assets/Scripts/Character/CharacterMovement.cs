@@ -7,14 +7,14 @@ public class CharacterMovement : MonoBehaviour
 {
     NavMeshAgent agent;
 
-    public Vector3 TargetPosition {get; private set;}
+    public Vector3 TargetPosition;
     private Vector3 lookAtTarget;
     Quaternion playerRot;
     bool moving = false;
 
     public Animator animator;
     public float rotSpeed;
-
+    public GameObject terrain;
     RaycastHit hit;
 
     void Start()
@@ -25,34 +25,42 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Player current pos: " + transform.position.x + " " + transform.position.z);
+        //Debug.Log("Player current pos: " + transform.position.x + " " + transform.position.z);
 
         if (Input.GetMouseButtonDown(1))
         {
+            Debug.Log("Right Click");
             SetTargetPosition();
         }
         if(moving)
         {
             Move();
-            animator.SetFloat("Speed", 1);
+            animator.SetFloat("inputV", 1);
         } else
         {
-            animator.SetFloat("Speed", 0);
+            animator.SetFloat("inputV", 0);
         }
 
     }
 
     void SetTargetPosition()
     {
+        RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit, 1000))
-        {
+        if (terrain.GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
             TargetPosition = hit.point;
             lookAtTarget = new Vector3(TargetPosition.x - transform.position.x, transform.position.y, TargetPosition.z - transform.position.z);
             playerRot = Quaternion.LookRotation(lookAtTarget);
             moving = true;
         }
+        // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // if (Physics.Raycast(ray, out hit, 1000))
+        // {
+        //    TargetPosition = hit.point;
+        //    lookAtTarget = new Vector3(TargetPosition.x - transform.position.x, transform.position.y, TargetPosition.z - transform.position.z);
+        //    playerRot = Quaternion.LookRotation(lookAtTarget);
+        //    moving = true;
+        // }
     }
 
     void Move()
