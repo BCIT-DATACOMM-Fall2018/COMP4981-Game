@@ -53,14 +53,6 @@ public class CharacterMovement : MonoBehaviour
             playerRot = Quaternion.LookRotation(lookAtTarget);
             moving = true;
         }
-        // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        // if (Physics.Raycast(ray, out hit, 1000))
-        // {
-        //    TargetPosition = hit.point;
-        //    lookAtTarget = new Vector3(TargetPosition.x - transform.position.x, transform.position.y, TargetPosition.z - transform.position.z);
-        //    playerRot = Quaternion.LookRotation(lookAtTarget);
-        //    moving = true;
-        // }
     }
 
     void Move()
