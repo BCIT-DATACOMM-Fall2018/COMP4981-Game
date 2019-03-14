@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using NetworkLibrary;
+using NetworkLibrary.MessageElements;
 
 /// ---------------------------------------------- 
 /// Class:        Character
@@ -43,13 +44,22 @@ public class CharacterAbility : MonoBehaviour
             Debug.Log("Bang!" + transform.position.x);
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (GameObject.Find("Terrain").GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
-                var projectile = Instantiate(Projectile, transform.position + new Vector3(0,10,0), Quaternion.identity);
-                Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
-                projectile.GetComponent<Rigidbody>().velocity = (hit.point-transform.position).normalized;
-                projectile.GetComponent<Shot>().creatorId = gameObject.GetComponent<Character>().actorId;
 
+            int actorId = gameObject.GetComponent<Character>().actorId;
+
+            if (GameObject.Find("Terrain").GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
+                ConnectionManager.Instance.QueueReliableElement(new AreaAbilityElement(actorId, AbilityType.Placeholder, hit.point.x, hit.point.z));
             }
         }
     }
+
+    public void UseAbility(AbilityType abilityId, float x, float z)
+    {
+        var projectile = Instantiate(Projectile, transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+        Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
+        Vector3 targetLocation = new Vector3(x, 10, z);
+        projectile.GetComponent<Rigidbody>().velocity = (targetLocation - transform.position).normalized;
+        projectile.GetComponent<Shot>().creatorId = gameObject.GetComponent<Character>().actorId;
+    }
+
 }

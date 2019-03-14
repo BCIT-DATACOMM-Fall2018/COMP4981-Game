@@ -36,8 +36,8 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	}
 
 	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z){
-
-	}
+        objectController.GameActors[actorId].GetComponent<CharacterAbility>().UseAbility(abilityId, x, z);
+    }
 
 	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId){
 
