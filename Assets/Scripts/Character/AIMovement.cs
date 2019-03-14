@@ -29,10 +29,10 @@ public class AIMovement : MonoBehaviour
         if(Moving)
         {
             Move();
-            animator.SetFloat("Speed", 0.1F);
+            animator.SetFloat("inputV", 1);
         } else
         {
-            animator.SetFloat("Speed", 0);
+            animator.SetFloat("inputV", 0);
         }
     }
 

@@ -45,9 +45,9 @@ public class CharacterAbility : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (GameObject.Find("Terrain").GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
                 var projectile = Instantiate(Projectile, transform.position + new Vector3(0,10,0), Quaternion.identity);
-                projectile.GetComponent<Rigidbody>().velocity = (hit.point-transform.position).normalized;
-                projectile.creatorId = gameObject.GetComponent("Character").actorId;
                 Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
+                projectile.GetComponent<Rigidbody>().velocity = (hit.point-transform.position).normalized;
+                projectile.GetComponent<Shot>().creatorId = gameObject.GetComponent<Character>().actorId;
 
             }
         }

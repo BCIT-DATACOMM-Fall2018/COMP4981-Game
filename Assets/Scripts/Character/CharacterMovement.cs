@@ -19,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        terrain = GameObject.Find("Terrain");
  
     }
 

@@ -18,6 +18,7 @@ public class ConnectionManager
 
     private Boolean connected;
     private Boolean inLobby;
+    public Boolean gameStarted;
     private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
     private int playerNum;
@@ -116,29 +117,14 @@ public class ConnectionManager
         unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
         unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
 
-
-        //Lobby State
-        /*
-        while(true){
-            try{
-                Debug.Log("Waiting for packet in lobby");
-
-                Packet packet = socket.Receive();
-                Debug.Log("ReceivedPacket");
-                UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
-
-                unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
-                unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
-            } catch(TimeoutException e){
-                connected = false;
-                return;
-            }
-        }
-        */
-
-
         //Game State
         while(true){
+            // THIS LINE EXISTS TO PREVENT A RACE CONDITION CAUSED BY PROCESSING A PACKET BEFORE THE START GAME
+            // BRIDGE FUNCTION IS CALLED. THE IMPLEMENTATION OF A PROPER LOBBY STATE SHOULD FIX THE ISSUE AFTER
+            // WHICH THIS CHECK CAN BE REMOVED.
+            if(!gameStarted){
+                continue;
+            }
             try{
                 Debug.Log("Waiting for packet");
 
