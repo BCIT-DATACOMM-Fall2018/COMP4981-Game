@@ -32,6 +32,7 @@ public class Character : MonoBehaviour
 {
     private CharacterUI cUI;
     public Status Status;
+    public int actorId;
 
     public Character(){
         InitStatus();

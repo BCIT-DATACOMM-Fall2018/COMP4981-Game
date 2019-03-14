@@ -15,8 +15,7 @@ public class CharacterMovement : MonoBehaviour
     public Animator animator;
     public float rotSpeed;
     public GameObject terrain;
-    RaycastHit hit;
-
+    
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
