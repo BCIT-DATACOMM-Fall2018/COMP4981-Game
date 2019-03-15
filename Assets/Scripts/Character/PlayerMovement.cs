@@ -1,33 +1,33 @@
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NetworkLibrary;
-using NetworkLibrary.MessageElements;
+using UnityEngine.AI;
 
 /// ----------------------------------------------
-/// Class: 	PlayerAbilityController - A script to provide the logic for player
-///                                   initiated abilities.
+/// Class: 	PlayerMovement - A script to provide the logic move actors not controlled
+///                      by the player
 /// 
 /// PROGRAM: SKOM
 ///
 /// FUNCTIONS:	void Start()
-///				void Update()
-/// 
+///				void Awake()
+///             public void SetTargetPosition()
+///             void Move()
+///
 /// DATE: 		March 14th, 2019
 ///
 /// REVISIONS: 
 ///
-/// DESIGNER: 	Simon Wu, Cameron Roberts
+/// DESIGNER: 	Phat Le, Cameron Roberts
 ///
-/// PROGRAMMER: Simon Wu, Cameron Roberts
+/// PROGRAMMER: Phat Le, Cameron Roberts
 ///
 /// NOTES:		
 /// ----------------------------------------------
-public class PlayerAbilityController : AbilityController
+public class PlayerMovement : ActorMovement
 {
-
-
+    private GameObject terrain;
+    
     /// ----------------------------------------------
     /// FUNCTION:	Start
     /// 
@@ -35,9 +35,9 @@ public class PlayerAbilityController : AbilityController
     /// 
     /// REVISIONS:	
     /// 
-    /// DESIGNER:	Cameron Roberts
+    /// DESIGNER:	Phat Le, Cameron Roberts
     /// 
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Phat Le, Cameron Roberts
     /// 
     /// INTERFACE: 	void Start()
     /// 
@@ -45,11 +45,11 @@ public class PlayerAbilityController : AbilityController
     /// 
     /// NOTES:		MonoBehaviour function.
     ///             Called before the first Update().
-    ///             Currently unused.
     /// ----------------------------------------------
     void Start()
     {
-
+        base.Start();
+        terrain = GameObject.Find("Terrain");
     }
 
     /// ----------------------------------------------
@@ -59,31 +59,30 @@ public class PlayerAbilityController : AbilityController
     /// 
     /// REVISIONS:	
     /// 
-    /// DESIGNER:	Cameron Roberts, Simon Wu
+    /// DESIGNER:	Phat Le, Cameron Roberts
     /// 
-    /// PROGRAMMER:	Cameron Roberts, Simon Wu
+    /// PROGRAMMER:	Phat Le, Cameron Roberts
     /// 
     /// INTERFACE: 	void Update()
     /// 
     /// RETURNS: 	void
     /// 
     /// NOTES:		MonoBehaviour function. Called every frame.
-    ///             Checks if a key is pressed and queues
-    ///             a reliable Update element based on the 
-    ///             ability used.
+    ///             Starts or stops the GameObjects animation based
+    ///             on if the object is currently moving. Checks if
+    ///             the player right clicks and calls SetTargetPosition.
     /// ----------------------------------------------
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q)){
-            Debug.Log("Bang!" + transform.position.x);
+        if (Input.GetMouseButtonDown(1))
+        {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            int actorId = gameObject.GetComponent<Actor>().ActorId;
-
-            if (GameObject.Find("Terrain").GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
-                ConnectionManager.Instance.QueueReliableElement(new AreaAbilityElement(actorId, AbilityType.Placeholder, hit.point.x, hit.point.z));
+            if (terrain.GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
+                SetTargetPosition(hit.point);
             }
+            
         }
+        base.Update();
     }
 }

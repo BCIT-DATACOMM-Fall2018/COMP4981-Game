@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// ----------------------------------------------
-/// Class: 	AIMovement - A script to provide the logic move actors not controlled
+/// Class: 	ActorMovement - A script to provide the logic move actors not controlled
 ///                      by the player
 /// 
 /// PROGRAM: SKOM
@@ -24,12 +24,12 @@ using UnityEngine.AI;
 ///
 /// NOTES:		
 /// ----------------------------------------------
-public class AIMovement : MonoBehaviour
+public class ActorMovement : MonoBehaviour
 {
-    NavMeshAgent agent;
-    public Vector3 targetPosition;
-    public Animator animator;
-    public bool Moving;
+    protected NavMeshAgent agent;
+    protected Vector3 targetPosition;
+    protected Animator animator;
+    protected bool moving;
 
 
     /// ----------------------------------------------
@@ -50,7 +50,7 @@ public class AIMovement : MonoBehaviour
     /// NOTES:		MonoBehaviour function.
     ///             Called before the first Update().
     /// ----------------------------------------------
-    void Start()
+    protected void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -77,9 +77,9 @@ public class AIMovement : MonoBehaviour
     ///             Starts or stops the GameObjects animation based
     ///             on if the object is currently moving.
     /// ----------------------------------------------
-    void Update()
+    protected void Update()
     {
-        if(Moving)
+        if(moving)
         {
             Move();
             animator.SetFloat("inputV", 1);
@@ -113,9 +113,8 @@ public class AIMovement : MonoBehaviour
         if(target.x == transform.position.x && target.z == transform.position.z){
             return;
         }
-        targetPosition = target;
-        Moving = true;
-        agent.SetDestination(targetPosition);
+        moving = true;
+        agent.SetDestination(target);
 
     }
 
@@ -137,7 +136,7 @@ public class AIMovement : MonoBehaviour
     /// NOTES:		Checks if the GameObject has reached its
     ///             destination and sets Moving to false if it has.
     /// ----------------------------------------------
-    void Move()
+    protected void Move()
     {
        if (!agent.pathPending)
         {
@@ -145,7 +144,7 @@ public class AIMovement : MonoBehaviour
             {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
-                    Moving = false;
+                    moving = false;
                 }
             }
         }

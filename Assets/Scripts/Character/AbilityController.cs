@@ -103,7 +103,7 @@ public class AbilityController : MonoBehaviour
         Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
         Vector3 targetLocation = new Vector3(x, 0, z);
         projectile.GetComponent<Rigidbody>().velocity = (targetLocation - transform.position).normalized;
-        projectile.GetComponent<Shot>().creatorId = gameObject.GetComponent<Character>().ActorId;
+        projectile.GetComponent<Shot>().creatorId = gameObject.GetComponent<Actor>().ActorId;
     }
 
 }

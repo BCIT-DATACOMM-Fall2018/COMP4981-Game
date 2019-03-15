@@ -3459,13 +3459,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1874078981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54859b738c9c7fa43b8a87e2fd6b5677, type: 3}
+  m_Script: {fileID: 11500000, guid: a80f7c1e1b31ea653886188cdcc1fe60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetPosition: {x: 0, y: 0, z: 0}
-  animator: {fileID: 1874078984}
-  rotSpeed: 10
-  terrain: {fileID: 0}
 --- !u!114 &1874078987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3475,7 +3471,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1874078981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f655e98441e8347cda5b6d1f64d3211f, type: 3}
+  m_Script: {fileID: 11500000, guid: 34032dc0b7a8118c6bd237af0f9f37d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1874078988
@@ -3487,9 +3483,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1874078981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e5926cffd2f4347b78946694ec9fba, type: 3}
+  m_Script: {fileID: 11500000, guid: 5308eb09b0288b4d7bb15c7b6c8cbe52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &6011251168559804037
 MonoBehaviour:
   m_ObjectHideFlags: 0

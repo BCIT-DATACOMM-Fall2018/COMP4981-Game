@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
+public struct Status
+{
+    public int HP {get; set;}
+}
 
 /// ---------------------------------------------- 
-/// Class:        CharacterUI
+/// Class:        Actor
 ///
 /// PROGRAM:      Some Kind Of MOBA
 ///
 /// FUNCTIONS:    public void Start()
 ///               public void Update()
-///               public updateCharacterUI
 /// 
 /// DATE:         February 7th, 2019
 ///
@@ -21,27 +24,23 @@ using UnityEngine.UI;
 /// PROGRAMMER:   Keishi Asai
 ///
 /// NOTES:
-/// Character UI class. Any instruction related to
-/// character UI is supposed to be done here.
+/// Character class.
 /// ---------------------------------------------- 
-public class CharacterUI : MonoBehaviour
+public class Actor : MonoBehaviour
 {
-    Slider hpBar;
+    private ActorUI cUI;
+    public Status Status;
+    public int ActorId {get;set;}
 
     // Start is called before the first frame update
     void Start()
     {
-        hpBar = gameObject.transform.Find("HPBarObject/Canvas/HPBar").GetComponent<Slider>();
-
+        cUI = GetComponent<ActorUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-    public void UpdateCharacterUI(Status status)
-    {
-        hpBar.value = status.HP/10;
+        cUI.UpdateCharacterUI(Status);
     }
 }

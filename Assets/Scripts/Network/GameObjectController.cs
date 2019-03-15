@@ -107,6 +107,6 @@ public class GameObjectController : MonoBehaviour
             default:
                 break;
         }
-        GameActors[actorId].GetComponent<Character>().ActorId = actorId;
+        GameActors[actorId].GetComponent<Actor>().ActorId = actorId;
     }
 }

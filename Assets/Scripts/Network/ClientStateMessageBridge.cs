@@ -98,7 +98,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// ----------------------------------------------
 	public void UpdateActorHealth (int actorId, int newHealth){
 		try{
-			objectController.GameActors[actorId].GetComponent<Character>().Status.HP = newHealth;
+			objectController.GameActors[actorId].GetComponent<Actor>().Status.HP = newHealth;
 			Debug.Log("Update health of actor " + actorId + " to " +newHealth);
 
 		} catch	(KeyNotFoundException e){
@@ -239,7 +239,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
 					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
 					actor.transform.position = targetPosition;
 				}
-				actor.GetComponent<AIMovement>().SetTargetPosition(new Vector3(x, 0, z));
+				actor.GetComponent<ActorMovement>().SetTargetPosition(new Vector3(x, 0, z));
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
 			}
