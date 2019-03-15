@@ -22,12 +22,10 @@ using UnityEngine;
 ///
 /// NOTES:		
 /// ----------------------------------------------
-public class Shot : MonoBehaviour
+public class Shot : Ability
 {
 
     public float speed = 10f;
-    public int creatorId;
-
     private Vector3 start;
 
     /// ----------------------------------------------
@@ -100,6 +98,8 @@ public class Shot : MonoBehaviour
     /// ----------------------------------------------
     void OnCollisionEnter (Collision col)
     {
+        SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
+        Destroy(gameObject);
         if(col.gameObject.name == "Rock1")
         {
             Destroy(col.gameObject);
