@@ -498,8 +498,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2052073799}
-  yZoom: 1
-  zZoom: 1
+  yZoom: 0
+  zZoom: 0
 --- !u!81 &799486294
 AudioListener:
   m_ObjectHideFlags: 0
