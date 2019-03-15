@@ -20,18 +20,19 @@ public class GameObjectController : MonoBehaviour
     {
     }
 
-    public void InstantiateObject(ActorType type, Vector3 location, int actorID){
+    public void InstantiateObject(ActorType type, Vector3 location, int actorId){
         switch (type)
         {
             case ActorType.Player:
-                GameActors.Add(actorID, Instantiate(Player, location, Quaternion.identity));
-                GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorID];
+                GameActors.Add(actorId, Instantiate(Player, location, Quaternion.identity));
+                GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorId];
                 break;
             case ActorType.AlliedPlayer:
-                GameActors.Add(actorID, Instantiate(AlliedPlayer, location, Quaternion.identity));
+                GameActors.Add(actorId, Instantiate(AlliedPlayer, location, Quaternion.identity));
                 break;
             default:
                 break;
         }
+        GameActors[actorId].GetComponent<Character>().ActorId = actorId;
     }
 }

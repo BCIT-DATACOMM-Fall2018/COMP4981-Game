@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
 {
     private CharacterUI cUI;
     public Status Status;
-    public int actorId;
+    public int ActorId {get;set;}
 
     public Character(){
         InitStatus();
