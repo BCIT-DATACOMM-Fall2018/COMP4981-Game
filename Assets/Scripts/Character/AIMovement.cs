@@ -22,6 +22,8 @@ public class AIMovement : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        agent.updateRotation = true;
+
     }
 
     void Update()
@@ -42,21 +44,22 @@ public class AIMovement : MonoBehaviour
             return;
         }
         targetPosition = target;
-        lookAtTarget = new Vector3(targetPosition.x - transform.position.x, transform.position.y, targetPosition.z - transform.position.z);
-        rot = Quaternion.LookRotation(lookAtTarget);
         Moving = true;
+        agent.SetDestination(targetPosition);
+
     }
 
     void Move()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, rot, rotSpeed * Time.deltaTime);
-
-        agent.SetDestination(targetPosition);
-
-        if (transform.position.x == targetPosition.x)
+       if (!agent.pathPending)
         {
-            
-            Moving = false;
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    Moving = false;
+                }
+            }
         }
     }
 }

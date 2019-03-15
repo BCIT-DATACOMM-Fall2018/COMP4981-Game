@@ -8,7 +8,7 @@ public class CharacterMovement : MonoBehaviour
     NavMeshAgent agent;
 
     public Vector3 TargetPosition;
-    private Vector3 lookAtTarget;
+    private Vector3 nextPosition;
     Quaternion playerRot;
     bool moving = false;
 
@@ -18,7 +18,11 @@ public class CharacterMovement : MonoBehaviour
     
     void Start()
     {
+
         agent = GetComponent<NavMeshAgent>();
+
+        agent.updateRotation = true;
+
         terrain = GameObject.Find("Terrain");
  
     }
@@ -45,26 +49,27 @@ public class CharacterMovement : MonoBehaviour
 
     void SetTargetPosition()
     {
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (terrain.GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
             TargetPosition = hit.point;
-            lookAtTarget = new Vector3(TargetPosition.x - transform.position.x, transform.position.y, TargetPosition.z - transform.position.z);
-            playerRot = Quaternion.LookRotation(lookAtTarget);
             moving = true;
+            agent.SetDestination(TargetPosition);
         }
     }
 
     void Move()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, playerRot, rotSpeed * Time.deltaTime);
-
-        agent.SetDestination(TargetPosition);
-
-        if (transform.position.x == TargetPosition.x)
+        if (!agent.pathPending)
         {
-            
-            moving = false;
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    moving = false;
+                }
+            }
         }
     }
 }

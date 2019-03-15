@@ -23,7 +23,7 @@ public class GameStateReporter : MonoBehaviour
         List<UpdateElement> gameState = new List<UpdateElement>();
         try{
             GameObject player = objectController.GameActors[ConnectionManager.Instance.ClientId];
-            Vector3 playerTargetPosition = player.GetComponent<CharacterMovement>().TargetPosition;
+            Vector3 playerTargetPosition = player.GetComponent<UnityEngine.AI.NavMeshAgent>().steeringTarget;
             gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, playerTargetPosition.x, playerTargetPosition.z));
             ConnectionManager.Instance.QueueReliableElement(new HealthElement(0,1));
             ConnectionManager.Instance.SendStatePacket(gameState);
