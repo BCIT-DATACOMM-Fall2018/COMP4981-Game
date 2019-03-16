@@ -125,7 +125,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// NOTES:		A function to instruct an actor to use an ability on another actor.
     /// ----------------------------------------------
 	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId){
-        objectController.GameActors[actorId].GetComponent<AbilityController>().UseTargetedAbility(abilityId, targetId);
+        objectController.GameActors[actorId].GetComponent<AbilityController>().UseTargetedAbility(abilityId, objectController.GameActors[targetId]);
 	}
 
 	/// ----------------------------------------------
@@ -220,7 +220,6 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	///				and target position. Behaviour differs if the actor is the player character.
     /// ----------------------------------------------
 	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
-		Debug.Log("Setting actor movement of " + actorId + " position + "+ x+","+z +" target"+targetX+","+targetZ);
 
 		if(actorId == ConnectionManager.Instance.ClientId){
 			try {	
