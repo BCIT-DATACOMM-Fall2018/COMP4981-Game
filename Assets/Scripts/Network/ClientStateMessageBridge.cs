@@ -125,7 +125,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// NOTES:		A function to instruct an actor to use an ability on another actor.
     /// ----------------------------------------------
 	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId){
-		//TODO Implement this function
+        objectController.GameActors[actorId].GetComponent<AbilityController>().UseTargetedAbility(abilityId, targetId);
 	}
 
 	/// ----------------------------------------------
@@ -148,7 +148,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// NOTES:		A function to instruct an actor to use an ability on a location.
     /// ----------------------------------------------
 	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z){
-        objectController.GameActors[actorId].GetComponent<AbilityController>().UseAbility(abilityId, x, z);
+        objectController.GameActors[actorId].GetComponent<AbilityController>().UseAreaAbility(abilityId, x, z);
     }
 
 	/// ----------------------------------------------

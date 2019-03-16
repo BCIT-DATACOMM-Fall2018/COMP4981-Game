@@ -25,8 +25,10 @@ using NetworkLibrary.MessageElements;
 /// ----------------------------------------------
 public abstract class Ability : MonoBehaviour
 {
-
+    [HideInInspector]
     public int creatorId;
+
+    [HideInInspector]
     public AbilityType abilityId;
 
     protected void SendCollision(int actorId){

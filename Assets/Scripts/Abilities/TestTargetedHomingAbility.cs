@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	TestProjectileAbility - A script to provide the logic to move
-///                a projectile shot by the player.
+/// Class: 	TestTargetedHomingAbility - A script to provide the logic to move
+///                a projectile shot by the player the homes in on a target.
 /// 
 /// PROGRAM: NetworkLibrary
 ///
@@ -22,11 +22,12 @@ using UnityEngine;
 ///
 /// NOTES:		
 /// ----------------------------------------------
-public class TestProjectileAbility : Ability
+public class TestTargetedHomingAbility : Ability
 {
 
-    public float speed = 50f;
-    private Vector3 start;
+    public float speed = 20f;
+    [HideInInspector]
+    public GameObject target;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -48,8 +49,7 @@ public class TestProjectileAbility : Ability
     /// ----------------------------------------------
     void Start ()
     {
-        GetComponent<Rigidbody>().velocity *= speed;
-        start = transform.position;
+
     }
 
     /// ----------------------------------------------
@@ -72,7 +72,10 @@ public class TestProjectileAbility : Ability
     ///             starting point and delete it if it has gone too far.
     /// ----------------------------------------------
     void Update(){
-        if(Vector3.Distance(start, transform.position) > 50){
+        if(target!= null){
+            Vector3 targetLocation = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetLocation, speed * Time.deltaTime);
+        } else{
             Destroy(gameObject);
         }
     }
@@ -96,7 +99,11 @@ public class TestProjectileAbility : Ability
     /// ----------------------------------------------
     void OnCollisionEnter (Collision col)
     {
-        SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
-        Destroy(gameObject);
+        if(col.gameObject != target){
+            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
+        } else{
+            Destroy(gameObject);
+            SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
+        }
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2619274567392263366}
   - component: {fileID: 5254617860672452935}
   m_Layer: 11
-  m_Name: AbilityBullet
+  m_Name: TestProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

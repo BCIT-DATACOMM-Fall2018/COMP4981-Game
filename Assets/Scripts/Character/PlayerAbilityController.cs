@@ -26,32 +26,7 @@ using NetworkLibrary.MessageElements;
 /// ----------------------------------------------
 public class PlayerAbilityController : AbilityController
 {
-    private struct AbilityInfo{
-        public bool IsArea;
-        public bool IsTargeted;
-        public bool IsSelf;
-        public bool AllyTargetAllowed;
-        public bool EnemyTargetAllowed;
-
-        public AbilityInfo(bool isArea = false, bool isTargeted = false, bool isSelf = false, bool allyTargetAllowed = false, bool enemyTargetAllowed = false){
-            IsArea = isArea;
-            IsTargeted = isTargeted;
-            IsSelf = isSelf;
-            AllyTargetAllowed = allyTargetAllowed;
-            EnemyTargetAllowed = enemyTargetAllowed;
-        }
-    }
-
-    private AbilityInfo[] abilityInfoArray = {
-        // TestProjectile
-        new AbilityInfo(isArea: true),
-        // TestTargeted
-        new AbilityInfo(isTargeted: true, allyTargetAllowed: true, enemyTargetAllowed: true),
-        // TestHomingTargeted
-        new AbilityInfo(isTargeted: true, enemyTargetAllowed:true),
-        // TestAreaOfEffect
-        new AbilityInfo(isArea: true)
-    };
+    
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -70,11 +45,10 @@ public class PlayerAbilityController : AbilityController
     /// 
     /// NOTES:		MonoBehaviour function.
     ///             Called before the first Update().
-    ///             Currently unused.
     /// ----------------------------------------------
-    void Start()
+    protected override void Start()
     {
-
+        base.Start();
     }
 
     /// ----------------------------------------------
@@ -112,7 +86,7 @@ public class PlayerAbilityController : AbilityController
 
     void InitiateAbilityUse(AbilityType abilityId){
         int actorId = gameObject.GetComponent<Actor>().ActorId;
-        AbilityInfo abilityInfo = abilityInfoArray[(int)abilityId];
+        AbilityInfo abilityInfo = AbilityInfo.InfoArray[(int)abilityId];
         if(abilityInfo.IsArea){
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
