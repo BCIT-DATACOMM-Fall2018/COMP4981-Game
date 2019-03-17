@@ -31,7 +31,11 @@ public abstract class Ability : MonoBehaviour
     [HideInInspector]
     public AbilityType abilityId;
 
+    [HideInInspector]
+    public int collisionId;
+
     protected void SendCollision(int actorId){
-        ConnectionManager.Instance.QueueReliableElement(new CollisionElement(abilityId, actorId, creatorId));
+        Debug.Log("Sending collision to the server. Info: AbilityId=" + abilityId + ", actorId=" + actorId + ", creatorId=" + creatorId + ", collisionId=" + collisionId);
+        ConnectionManager.Instance.QueueReliableElement(new CollisionElement(abilityId, actorId, creatorId, collisionId));
     }
 }

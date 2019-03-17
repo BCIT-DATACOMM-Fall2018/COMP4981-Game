@@ -79,15 +79,15 @@ public class AbilityController : MonoBehaviour
     /// NOTES:		Contains logic to use various abilities based on the abilityId passed to
     ///             the function.
     /// ----------------------------------------------
-    public void UseAreaAbility(AbilityType abilityId, float x, float z)
+    public void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
     {
         switch (abilityId)
         {
             case AbilityType.TestProjectile:
-                AbilityTestProjectile(x, z);
+                AbilityTestProjectile(x, z, collisionId);
                 break;
             case AbilityType.TestAreaOfEffect:
-                AbilityTestAreaOfEffect(x, z);
+                AbilityTestAreaOfEffect(x, z, collisionId);
                 break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
@@ -115,14 +115,14 @@ public class AbilityController : MonoBehaviour
     /// NOTES:		Contains logic to use various abilities based on the abilityId passed to
     ///             the function.
     /// ----------------------------------------------
-    public void UseTargetedAbility(AbilityType abilityId, GameObject target){
+    public void UseTargetedAbility(AbilityType abilityId, GameObject target, int collisionId){
         switch (abilityId)
         {
             case AbilityType.TestTargeted:
-                AbilityTestTargeted(target);
+                AbilityTestTargeted(target, collisionId);
                 break;
             case AbilityType.TestTargetedHoming:
-                AbilityTestTargetedHoming(target);
+                AbilityTestTargetedHoming(target, collisionId);
                 break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
@@ -130,7 +130,7 @@ public class AbilityController : MonoBehaviour
         }
     }
 
-    private void AbilityTestProjectile(float x, float z){
+    private void AbilityTestProjectile(float x, float z, int collisionId){
         // Instantiate projectile
         var projectile = Instantiate(testProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
         // Set it to ignore collisions with its creator
@@ -143,24 +143,27 @@ public class AbilityController : MonoBehaviour
         // Set its creator id and ability type which will be used later for collisions
         projectile.GetComponent<Ability>().creatorId = gameObject.GetComponent<Actor>().ActorId;
         projectile.GetComponent<Ability>().abilityId = AbilityType.TestProjectile;
+        projectile.GetComponent<Ability>().collisionId = collisionId;
+
 
     }
 
-    private void AbilityTestAreaOfEffect(float x, float z){
+    private void AbilityTestAreaOfEffect(float x, float z, int collisionId){
         // Instantiate projectile
-        var projectile = Instantiate(testAreaOfEffect, new Vector3(x, 0.01f, z), Quaternion.identity);
+        var area = Instantiate(testAreaOfEffect, new Vector3(x, 0.01f, z), Quaternion.identity);
         
         // Set its creator id and ability type which will be used later for collisions
-        projectile.GetComponent<Ability>().creatorId = gameObject.GetComponent<Actor>().ActorId;
-        projectile.GetComponent<Ability>().abilityId = AbilityType.TestAreaOfEffect;
+        area.GetComponent<Ability>().creatorId = gameObject.GetComponent<Actor>().ActorId;
+        area.GetComponent<Ability>().abilityId = AbilityType.TestAreaOfEffect;
+        area.GetComponent<Ability>().collisionId = collisionId;
     }
 
-    private void AbilityTestTargeted(GameObject target){
+    private void AbilityTestTargeted(GameObject target, int collisionId){
         // TODO Play some sort of animation. No collsion is needed as the
         // abilities effect is instantly applied by the server
     }
 
-    private void AbilityTestTargetedHoming(GameObject target){
+    private void AbilityTestTargetedHoming(GameObject target, int collisionId){
         // Instantiate projectile
         var projectile = Instantiate(testHomingProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
         // Set it to ignore collisions with its creator
@@ -172,6 +175,6 @@ public class AbilityController : MonoBehaviour
         // Set its creator id and ability type which will be used later for collisions
         projectile.GetComponent<Ability>().creatorId = gameObject.GetComponent<Actor>().ActorId;
         projectile.GetComponent<Ability>().abilityId = AbilityType.TestTargetedHoming;
-
+        projectile.GetComponent<Ability>().collisionId = collisionId;
     }
 }

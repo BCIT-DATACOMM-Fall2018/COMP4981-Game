@@ -124,8 +124,8 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// NOTES:		A function to instruct an actor to use an ability on another actor.
     /// ----------------------------------------------
-	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId){
-        objectController.GameActors[actorId].GetComponent<AbilityController>().UseTargetedAbility(abilityId, objectController.GameActors[targetId]);
+	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId, int collisionId){
+        objectController.GameActors[actorId].GetComponent<AbilityController>().UseTargetedAbility(abilityId, objectController.GameActors[targetId], collisionId);
 	}
 
 	/// ----------------------------------------------
@@ -147,8 +147,8 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// NOTES:		A function to instruct an actor to use an ability on a location.
     /// ----------------------------------------------
-	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z){
-        objectController.GameActors[actorId].GetComponent<AbilityController>().UseAreaAbility(abilityId, x, z);
+	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z, int collisionId){
+        objectController.GameActors[actorId].GetComponent<AbilityController>().UseAreaAbility(abilityId, x, z, collisionId);
     }
 
 	/// ----------------------------------------------
@@ -166,7 +166,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// NOTES:		Function not intended to be used on the client.
     /// ----------------------------------------------
-	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId){
+	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId, int collisionId){
 
 	}
 
