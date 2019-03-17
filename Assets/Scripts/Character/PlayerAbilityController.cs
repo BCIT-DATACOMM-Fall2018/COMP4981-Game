@@ -99,9 +99,11 @@ public class PlayerAbilityController : AbilityController
         {
             if(Input.GetButtonDown(buttonNames[i])) {
                 if(Cooldowns[i] != 0){
+                    Debug.Log("Ability on cooldown");
                     return;
                 }
                 if(InitiateAbilityUse(abilities[i])){
+                    Debug.Log("Used ability");
                     Cooldowns[i] = MaxCooldowns[i];
                 }
             }
