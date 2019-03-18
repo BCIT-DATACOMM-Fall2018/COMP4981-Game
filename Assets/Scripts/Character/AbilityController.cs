@@ -79,7 +79,7 @@ public class AbilityController : MonoBehaviour
     /// NOTES:		Contains logic to use various abilities based on the abilityId passed to
     ///             the function.
     /// ----------------------------------------------
-    public void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
+    public virtual void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
     {
         switch (abilityId)
         {
@@ -115,7 +115,7 @@ public class AbilityController : MonoBehaviour
     /// NOTES:		Contains logic to use various abilities based on the abilityId passed to
     ///             the function.
     /// ----------------------------------------------
-    public void UseTargetedAbility(AbilityType abilityId, GameObject target, int collisionId){
+    public virtual void UseTargetedAbility(AbilityType abilityId, GameObject target, int collisionId){
         switch (abilityId)
         {
             case AbilityType.TestTargeted:
@@ -133,15 +133,13 @@ public class AbilityController : MonoBehaviour
     private void AbilityTestProjectile(float x, float z, int collisionId){
         // Instantiate projectile
         var projectile = Instantiate(testProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
-        // Set it to ignore collisions with its creator
-        Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
         
         // Set the projectiles velocity the direction of the target location
         Vector3 targetLocation = new Vector3(x, 0, z);
         projectile.GetComponent<Rigidbody>().velocity = (targetLocation - transform.position).normalized;
         
         // Set its creator id and ability type which will be used later for collisions
-        projectile.GetComponent<Ability>().creatorId = gameObject.GetComponent<Actor>().ActorId;
+        projectile.GetComponent<Ability>().creator = gameObject;
         projectile.GetComponent<Ability>().abilityId = AbilityType.TestProjectile;
         projectile.GetComponent<Ability>().collisionId = collisionId;
 
@@ -153,7 +151,7 @@ public class AbilityController : MonoBehaviour
         var area = Instantiate(testAreaOfEffect, new Vector3(x, 0.01f, z), Quaternion.identity);
         
         // Set its creator id and ability type which will be used later for collisions
-        area.GetComponent<Ability>().creatorId = gameObject.GetComponent<Actor>().ActorId;
+        area.GetComponent<Ability>().creator = gameObject;;
         area.GetComponent<Ability>().abilityId = AbilityType.TestAreaOfEffect;
         area.GetComponent<Ability>().collisionId = collisionId;
     }
@@ -166,14 +164,12 @@ public class AbilityController : MonoBehaviour
     private void AbilityTestTargetedHoming(GameObject target, int collisionId){
         // Instantiate projectile
         var projectile = Instantiate(testHomingProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
-        // Set it to ignore collisions with its creator
-        Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
         
         // Set the projectiles target
         projectile.GetComponent<TestTargetedHomingAbility>().target = target;
         
         // Set its creator id and ability type which will be used later for collisions
-        projectile.GetComponent<Ability>().creatorId = gameObject.GetComponent<Actor>().ActorId;
+        projectile.GetComponent<Ability>().GetComponent<Ability>().creator = gameObject;
         projectile.GetComponent<Ability>().abilityId = AbilityType.TestTargetedHoming;
         projectile.GetComponent<Ability>().collisionId = collisionId;
     }

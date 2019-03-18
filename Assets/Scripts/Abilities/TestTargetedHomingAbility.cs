@@ -81,7 +81,7 @@ public class TestTargetedHomingAbility : Ability
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:	OnCollisionEnter
+    /// FUNCTION:	OnTriggerEnter
     /// 
     /// DATE:		March 14th, 2019
     /// 
@@ -91,19 +91,19 @@ public class TestTargetedHomingAbility : Ability
     /// 
     /// PROGRAMMER:	Cameron Roberts
     /// 
-    /// INTERFACE: 	void OnCollisionEnter(Collision col)
+    /// INTERFACE: 	void OnCollisionEnter(Collider col)
     /// 
     /// RETURNS: 	void
     /// 
     /// NOTES:		
     /// ----------------------------------------------
-    void OnCollisionEnter (Collision col)
+    void OnTriggerEnter (Collider col)
     {
         if(col.gameObject != target){
-            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
+            Physics.IgnoreCollision(GetComponent<Collider>(), col);
         } else{
-            Destroy(gameObject);
             SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
+            Destroy(gameObject);
         }
     }
 }

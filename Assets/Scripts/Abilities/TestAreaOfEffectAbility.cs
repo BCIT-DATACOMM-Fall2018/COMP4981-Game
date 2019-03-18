@@ -89,14 +89,18 @@ public class TestAreaOfEffectAbility : Ability
     /// 
     /// INTERFACE: 	void OnCollisionEnter(Collision col)
     /// 
-    /// RETURNS: 	void
+    /// RETURNS: 	void 
     /// 
     /// NOTES:		
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
         Debug.Log("Collision with area of effect");
-        SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
-        Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
+        if(col.gameObject.tag == creator.tag){
+            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
+        } else{
+            SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
+            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
+        }
     }
 }

@@ -78,7 +78,7 @@ public class TestProjectileAbility : Ability
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:	OnCollisionEnter
+    /// FUNCTION:	OnTriggerEnter
     /// 
     /// DATE:		March 14th, 2019
     /// 
@@ -88,15 +88,20 @@ public class TestProjectileAbility : Ability
     /// 
     /// PROGRAMMER:	Cameron Roberts
     /// 
-    /// INTERFACE: 	void OnCollisionEnter(Collision col)
+    /// INTERFACE: 	void OnCollisionEnter(Collider col)
     /// 
     /// RETURNS: 	void
     /// 
     /// NOTES:		
     /// ----------------------------------------------
-    void OnCollisionEnter (Collision col)
+    void OnTriggerEnter (Collider col)
     {
-        SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
-        Destroy(gameObject);
+        if(col.gameObject.tag == creator.tag){
+            Physics.IgnoreCollision(col, GetComponent<Collider>());
+
+        } else{
+            SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
+            Destroy(gameObject);
+        }
     }
 }

@@ -104,10 +104,34 @@ public class PlayerAbilityController : AbilityController
                 }
                 if(InitiateAbilityUse(abilities[i])){
                     Debug.Log("Used ability");
-                    Cooldowns[i] = MaxCooldowns[i];
+                } else {
+                    Debug.Log("Invalid ability use");
                 }
             }
         }
+    }
+    
+
+    public override void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
+    {
+        base.UseAreaAbility(abilityId, x, z, collisionId);
+        PutAbilityOnCooldown(abilityId);
+    }
+
+    public override void UseTargetedAbility(AbilityType abilityId, GameObject target, int collisionId){
+        base.UseTargetedAbility(abilityId, target, collisionId);
+        PutAbilityOnCooldown(abilityId);
+    }
+
+
+
+    bool PutAbilityOnCooldown(AbilityType abilityId){
+        int index = Array.IndexOf(abilities, abilityId);
+        if(index != -1){
+            Cooldowns[index] = MaxCooldowns[index];
+            return true;
+        }
+        return false;
     }
 
     bool InitiateAbilityUse(AbilityType abilityId){
@@ -127,8 +151,13 @@ public class PlayerAbilityController : AbilityController
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask: layerMask))
             {
                 GameObject hitTarget = hit.transform.gameObject;
+                if(hitTarget.tag == gameObject.tag && !abilityInfo.AllyTargetAllowed){
+                    return false;
+                }
+                if(hitTarget.tag != gameObject.tag && !abilityInfo.EnemyTargetAllowed){
+                    return false;
+                }
                 int hitActorId = hitTarget.GetComponent<Actor>().ActorId;
-                //TODO Check if the target is an ally or an enemy and if the ability is allowed to target them
                 ConnectionManager.Instance.QueueReliableElement(new TargetedAbilityElement(actorId, abilityId, hitActorId));
                 return true;
             }

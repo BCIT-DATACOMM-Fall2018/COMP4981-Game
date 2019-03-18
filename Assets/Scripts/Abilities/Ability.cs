@@ -26,7 +26,7 @@ using NetworkLibrary.MessageElements;
 public abstract class Ability : MonoBehaviour
 {
     [HideInInspector]
-    public int creatorId;
+    public GameObject creator;
 
     [HideInInspector]
     public AbilityType abilityId;
@@ -35,7 +35,7 @@ public abstract class Ability : MonoBehaviour
     public int collisionId;
 
     protected void SendCollision(int actorId){
-        Debug.Log("Sending collision to the server. Info: AbilityId=" + abilityId + ", actorId=" + actorId + ", creatorId=" + creatorId + ", collisionId=" + collisionId);
-        ConnectionManager.Instance.QueueReliableElement(new CollisionElement(abilityId, actorId, creatorId, collisionId));
+        Debug.Log("Sending collision to the server. Info: AbilityId=" + abilityId + ", actorId=" + actorId + ", creatorId=" + creator.GetComponent<Actor>().ActorId + ", collisionId=" + collisionId);
+        ConnectionManager.Instance.QueueReliableElement(new CollisionElement(abilityId, actorId, creator.GetComponent<Actor>().ActorId, collisionId));
     }
 }
