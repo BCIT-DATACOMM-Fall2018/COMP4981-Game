@@ -256,12 +256,12 @@ public class ConnectionManager
         Debug.Log("Connected");
 
         List<UpdateElement> readyList = new List<UpdateElement>();
-        readyList.Add(new ReadyElement(true, ClientId));
+        readyList.Add(new ReadyElement(true, ClientId, 1));
         Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
         socket.Send(readyPacket, destination);
 
         Packet startPacket = socket.Receive();
-        UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {});
+        UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {ElementId.LobbyStatusElement});
         unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
         unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
 

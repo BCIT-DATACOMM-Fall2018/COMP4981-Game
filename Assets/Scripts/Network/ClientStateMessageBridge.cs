@@ -1,5 +1,6 @@
 using System;
 using NetworkLibrary;
+using NetworkLibrary.MessageElements;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -181,16 +182,18 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// PROGRAMMER:	Cameron Roberts
     /// 
-    /// INTERFACE: 	public void SpawnActor(ActorType actorType, int ActorId, float x, float z)
+    /// INTERFACE: 	public void SpawnActor(ActorType actorType, int ActorId, int team, float x, float z)
 	///					ActorType actorType: The type of actor to spawn
 	///					int actorId: An id to assign the newly created actor
+    ///                 int team: The team the actor should be on
 	///					float x: The x position to spawn the actor in
 	///					float z: The z position to spawn the actor in
     /// 
     /// NOTES:		A function to spawn new actors
     /// ----------------------------------------------
-	public void SpawnActor(ActorType actorType, int ActorId, float x, float z){
+	public void SpawnActor(ActorType actorType, int ActorId, int team, float x, float z){
 		Debug.Log("Spawn actor " + ActorId + " " + actorType);
+        // TODO team stuff
 		if(actorType == ActorType.AlliedPlayer && ActorId == ConnectionManager.Instance.ClientId){
 			objectController.InstantiateObject(ActorType.Player, new Vector3(x,0,z), ActorId);
 		} else {
@@ -257,11 +260,11 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// PROGRAMMER:	
     /// 
-    /// INTERFACE: 	public void SetReady(int clientId, bool ready)
+    /// INTERFACE: 	public void SetReady(int clientId, bool ready, int team)
     /// 
     /// NOTES:		Function not intended to be used on the client.
     /// ----------------------------------------------
-	public void SetReady(int clientId, bool ready){
+	public void SetReady(int clientId, bool ready, int team){
 
 	}
 
@@ -288,6 +291,13 @@ public class ClientStateMessageBridge : IStateMessageBridge
 		ConnectionManager.Instance.gameStarted = true;
 	}
 
+    public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo){
+		Debug.Log("Lobby Status");
+        foreach (var item in playerInfo)
+        {
+            Debug.Log("Id " + item.Id + ", Name " + item.Name + ", Team " + item.Team + ", Ready " + item.ReadyStatus);
+        }
+    }
 }
 
 
