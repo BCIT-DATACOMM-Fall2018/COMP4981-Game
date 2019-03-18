@@ -41,6 +41,7 @@ public class ConnectionManager
     public Boolean gameStarted;
     private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
+    public int Team {get; set;} = 1;
     private int playerNum;
     public int PlayerNum {get{return playerNum;} set { 
         unreliableElementIds = new ElementId[value*2];
@@ -256,7 +257,7 @@ public class ConnectionManager
         Debug.Log("Connected");
 
         List<UpdateElement> readyList = new List<UpdateElement>();
-        readyList.Add(new ReadyElement(true, ClientId, 1));
+        readyList.Add(new ReadyElement(true, ClientId, Team));
         Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
         socket.Send(readyPacket, destination);
 

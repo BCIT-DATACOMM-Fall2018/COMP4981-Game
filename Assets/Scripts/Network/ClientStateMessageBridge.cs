@@ -191,14 +191,10 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// NOTES:		A function to spawn new actors
     /// ----------------------------------------------
-	public void SpawnActor(ActorType actorType, int ActorId, int team, float x, float z){
-		Debug.Log("Spawn actor " + ActorId + " " + actorType);
-        // TODO team stuff
-		if(actorType == ActorType.AlliedPlayer && ActorId == ConnectionManager.Instance.ClientId){
-			objectController.InstantiateObject(ActorType.Player, new Vector3(x,0,z), ActorId);
-		} else {
-			objectController.InstantiateObject(actorType, new Vector3(x,0,z), ActorId);
-		}
+	public void SpawnActor(ActorType actorType, int actorId, int team, float x, float z){
+        {
+			objectController.InstantiateObject(ActorType.Player, new Vector3(x,0,z), actorId, team);
+        }
 	}
 
 	/// ----------------------------------------------
