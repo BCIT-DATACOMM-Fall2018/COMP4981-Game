@@ -41,7 +41,7 @@ public class ConnectionManager
     public Boolean gameStarted;
     private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
-    public int Team {get; set;} = 2;
+    public int Team {get; set;} = 1;
     private int playerNum;
     public int PlayerNum {get{return playerNum;} set { 
         unreliableElementIds = new ElementId[value*2];
@@ -248,7 +248,7 @@ public class ConnectionManager
     private void BackgroundNetworking(String stringIp) {
         IPAddress address = IPAddress.Parse(stringIp);
         destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
-        socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
+        socket.Send(ReliableUDPConnection.CreateRequestPacket("Alice"), destination);
         Packet confirmationPacket = socket.Receive();
         ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
         ConnectReliableUDP();
