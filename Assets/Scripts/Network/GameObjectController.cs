@@ -27,6 +27,7 @@ public class GameObjectController : MonoBehaviour
     public GameObject Player;
     public GameObject AlliedPlayer;
     public GameObject EnemyPlayer;
+    public GameObject DummyPlayer;
     public Dictionary<int, GameObject> GameActors { get; private set; } = new Dictionary<int, GameObject>();  
 
 
@@ -116,5 +117,7 @@ public class GameObjectController : MonoBehaviour
                 break;
         }
         GameActors[actorId].GetComponent<Actor>().ActorId = actorId;
+        GameActors[actorId].GetComponent<Actor>().deathObject = DummyPlayer;
+
     }
 }

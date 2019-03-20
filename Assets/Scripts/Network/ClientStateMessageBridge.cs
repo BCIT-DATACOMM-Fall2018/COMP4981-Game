@@ -224,6 +224,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
         GameObject actor = objectController.GameActors[actorId];
         bool enableAgent = false;
         if(x == -10 && z == -10 && targetX == -10 && targetZ == -10){
+            actor.GetComponent<Actor>().Die();
             actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         } else {
             enableAgent = true;

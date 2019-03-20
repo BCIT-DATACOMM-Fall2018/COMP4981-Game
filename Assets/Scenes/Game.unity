@@ -1549,6 +1549,7 @@ MonoBehaviour:
   Player: {fileID: 1874078981, guid: 2da808f44e7ebe516a4eef24cdd49d3f, type: 3}
   AlliedPlayer: {fileID: 1874078981, guid: 5a7c13a5abc7caf93b3b5eccf16a078f, type: 3}
   EnemyPlayer: {fileID: 1874078981, guid: 99dcbccb647a5b98899d59bdf9d782c6, type: 3}
+  DummyPlayer: {fileID: 1874078981, guid: 29c1b9cc15888d4f99934925489b6e22, type: 3}
 --- !u!4 &2131352815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4908765312130676, guid: 47356d574ebc3a545bfaef26eb02a2ea,

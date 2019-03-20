@@ -156,7 +156,7 @@ public class ConnectionManager
     /// ----------------------------------------------
     private void CreateSocketUDP()
     {
-        socket = new UDPSocket(15);
+        socket = new UDPSocket(0);
         socket.Bind();
     }
 
