@@ -2917,8 +2917,8 @@ GameObject:
   - component: {fileID: 1874078988}
   - component: {fileID: 8573378066082649545}
   m_Layer: 10
-  m_Name: AlliedPlayer
-  m_TagString: Ally
+  m_Name: EnemyPlayer
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

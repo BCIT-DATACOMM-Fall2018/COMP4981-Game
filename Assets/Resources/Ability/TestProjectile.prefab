@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8710494664857520650}
   - component: {fileID: 2619274567392263366}
   - component: {fileID: 5254617860672452935}
-  m_Layer: 0
-  m_Name: AbilityBullet
+  m_Layer: 11
+  m_Name: TestProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,4 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e18466241000f45952163864a61c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creatorId: 0
+  abilityId: 0
   speed: 50

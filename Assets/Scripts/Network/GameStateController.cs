@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using NetworkLibrary;
 using NetworkLibrary.MessageElements;
 public class GameStateController : MonoBehaviour
@@ -9,6 +10,8 @@ public class GameStateController : MonoBehaviour
     private GameObjectController objectController;
     private ClientStateMessageBridge stateBridge;
     private ConcurrentQueue<UpdateElement> elementQueue;
+
+    private bool endGameTriggered;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -55,9 +58,18 @@ public class GameStateController : MonoBehaviour
     /// ----------------------------------------------
     void FixedUpdate()
     {
+        if(!endGameTriggered && ConnectionManager.Instance.GameOver){
+            Invoke("GoToLobby", 5);
+        }
+
         UpdateElement updateElement;
         while(elementQueue.TryDequeue(out updateElement)){
             updateElement.UpdateState(stateBridge);
         }
     }
+
+        private void GoToLobby (){
+        SceneManager.LoadScene("Login", LoadSceneMode.Single);
+    }
+
 }

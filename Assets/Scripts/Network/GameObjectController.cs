@@ -26,6 +26,8 @@ public class GameObjectController : MonoBehaviour
 {
     public GameObject Player;
     public GameObject AlliedPlayer;
+    public GameObject EnemyPlayer;
+    public GameObject DummyPlayer;
     public Dictionary<int, GameObject> GameActors { get; private set; } = new Dictionary<int, GameObject>();  
 
 
@@ -79,7 +81,8 @@ public class GameObjectController : MonoBehaviour
     /// 
     /// DATE:		March 14th, 2019
     /// 
-    /// REVISIONS:	
+    /// REVISIONS:	March 17th, 2019
+    ///                 Modify to support teams
     /// 
     /// DESIGNER:	Cameron Roberts
     /// 
@@ -94,19 +97,27 @@ public class GameObjectController : MonoBehaviour
     /// 
     /// NOTES:		
     /// ----------------------------------------------
-    public void InstantiateObject(ActorType type, Vector3 location, int actorId){
+    public void InstantiateObject(ActorType type, Vector3 location, int actorId, int team){
         switch (type)
         {
             case ActorType.Player:
-                GameActors.Add(actorId, Instantiate(Player, location, Quaternion.identity));
-                GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorId];
-                break;
-            case ActorType.AlliedPlayer:
-                GameActors.Add(actorId, Instantiate(AlliedPlayer, location, Quaternion.identity));
+                // Check if were creating the player
+                if(actorId == ConnectionManager.Instance.ClientId){
+                    GameActors.Add(actorId, Instantiate(Player, location, Quaternion.identity));
+                    GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorId];
+                // Check if the actor is an ally
+                } else if (team == ConnectionManager.Instance.Team){
+                    GameActors.Add(actorId, Instantiate(AlliedPlayer, location, Quaternion.identity));
+                // Otherwise its an enemy
+                } else {
+                    GameActors.Add(actorId, Instantiate(EnemyPlayer, location, Quaternion.identity));
+                }
                 break;
             default:
                 break;
         }
         GameActors[actorId].GetComponent<Actor>().ActorId = actorId;
+        GameActors[actorId].GetComponent<Actor>().deathObject = DummyPlayer;
+
     }
 }

@@ -41,6 +41,9 @@ public class ConnectionManager
     public Boolean gameStarted;
     private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
+    public int Team {get; set;} = 2;
+    public bool GameOver {get; set;}
+
     private int playerNum;
     public int PlayerNum {get{return playerNum;} set { 
         unreliableElementIds = new ElementId[value*2];
@@ -153,7 +156,7 @@ public class ConnectionManager
     /// ----------------------------------------------
     private void CreateSocketUDP()
     {
-        socket = new UDPSocket();
+        socket = new UDPSocket(0);
         socket.Bind();
     }
 
@@ -247,7 +250,7 @@ public class ConnectionManager
     private void BackgroundNetworking(String stringIp) {
         IPAddress address = IPAddress.Parse(stringIp);
         destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
-        socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
+        socket.Send(ReliableUDPConnection.CreateRequestPacket("Alice"), destination);
         Packet confirmationPacket = socket.Receive();
         ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
         ConnectReliableUDP();
@@ -256,12 +259,12 @@ public class ConnectionManager
         Debug.Log("Connected");
 
         List<UpdateElement> readyList = new List<UpdateElement>();
-        readyList.Add(new ReadyElement(true, ClientId));
+        readyList.Add(new ReadyElement(true, ClientId, Team));
         Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
         socket.Send(readyPacket, destination);
 
         Packet startPacket = socket.Receive();
-        UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {});
+        UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {ElementId.LobbyStatusElement});
         unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
         unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
 

@@ -32,6 +32,11 @@ public class Actor : MonoBehaviour
     public Status Status;
     public int ActorId {get;set;}
 
+    private bool alive;
+
+    [HideInInspector]
+    public GameObject deathObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +46,18 @@ public class Actor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(transform.position.x != -10){
+            alive = true;
+        }
         cUI.UpdateCharacterUI(Status);
+    }
+
+    public void Die(){
+        if(alive){
+            GameObject clone = Instantiate(deathObject, transform.position, transform.rotation);
+            //TODO make the created object animate
+            Destroy(clone, 3);
+            alive = false;
+        }
     }
 }
