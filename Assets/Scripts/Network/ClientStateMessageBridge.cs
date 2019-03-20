@@ -2,6 +2,8 @@ using System;
 using NetworkLibrary;
 using NetworkLibrary.MessageElements;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 /// ----------------------------------------------
@@ -219,24 +221,34 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	///				and target position. Behaviour differs if the actor is the player character.
     /// ----------------------------------------------
 	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
-
+        GameObject actor = objectController.GameActors[actorId];
+        bool enableAgent = false;
+        if(x == -10 && z == -10 && targetX == -10 && targetZ == -10){
+            actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+        } else {
+            enableAgent = true;
+        }
 		if(actorId == ConnectionManager.Instance.ClientId){
 			try {	
-				GameObject actor = objectController.GameActors[actorId];
 				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
 					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
 					actor.transform.position = targetPosition;
 				}
+                if(enableAgent){
+                    actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                }
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
 			}
 		} else {
 			try {	
-				GameObject actor = objectController.GameActors[actorId];
 				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
 					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
 					actor.transform.position = targetPosition;
 				}
+                if(enableAgent){
+                    actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                }
 				actor.GetComponent<ActorMovement>().SetTargetPosition(new Vector3(x, 0, z));
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
@@ -294,6 +306,17 @@ public class ClientStateMessageBridge : IStateMessageBridge
             Debug.Log("Id " + item.Id + ", Name " + item.Name + ", Team " + item.Team + ", Ready " + item.ReadyStatus);
         }
     }
+
+    public void EndGame(int winningTeam){
+        Debug.Log("Game End");
+        if(ConnectionManager.Instance.Team == winningTeam){
+            GameObject.Find("EndText").GetComponent<Text>().text = "You Win";
+        } else {
+            GameObject.Find("EndText").GetComponent<Text>().text = "You Lose";
+        }
+        ConnectionManager.Instance.GameOver = true;
+    }
+
 }
 
 
