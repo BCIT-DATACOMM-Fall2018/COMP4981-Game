@@ -32,6 +32,13 @@ public class PlayerAbilityController : AbilityController
     public float[] Cooldowns {get;set;}
     public float[] MaxCooldowns {get;set;}
 
+    private bool moveToAreaTarget;
+    private bool moveToActorTarget;
+    private AbilityType storedAbility;
+    Vector3 storedTargetLocation;
+    GameObject storedTargetActor;
+    private float recalculateTimer;
+
     /// ----------------------------------------------
     /// FUNCTION:	Start
     /// 
@@ -109,6 +116,30 @@ public class PlayerAbilityController : AbilityController
                 }
             }
         }
+        if(moveToAreaTarget){
+            Debug.Log("yay dood");
+            if(InitiateAreaAbilityUse(storedAbility, storedTargetLocation)){
+                GetComponent<PlayerMovement>().Stop();
+                CancelMoveToTarget();
+            }
+        }
+        if(moveToActorTarget){
+            recalculateTimer += Time.deltaTime;
+            if(recalculateTimer > 1){
+                recalculateTimer -= 0.25f;
+                GetComponent<PlayerMovement>().SetTargetPosition(storedTargetActor.transform.position);
+            }
+            if(InitiateTargetedAbilityUse(storedAbility, storedTargetActor)){
+                GetComponent<PlayerMovement>().Stop();
+                CancelMoveToTarget();
+                recalculateTimer = 0;
+            }
+        }
+    }
+
+    public void CancelMoveToTarget(){
+        moveToAreaTarget = false;
+        moveToActorTarget = false;
     }
     
 
@@ -135,14 +166,12 @@ public class PlayerAbilityController : AbilityController
     }
 
     bool InitiateAbilityUse(AbilityType abilityId){
-        int actorId = gameObject.GetComponent<Actor>().ActorId;
         AbilityInfo abilityInfo = AbilityInfo.InfoArray[(int)abilityId];
         if(abilityInfo.IsArea){
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (GameObject.Find("Terrain").GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
-                ConnectionManager.Instance.QueueReliableElement(new AreaAbilityElement(actorId, abilityId, hit.point.x, hit.point.z));
-                return true;
+                return InitiateAreaAbilityUse(abilityId, hit.point);
             }
         } else if (abilityInfo.IsTargeted){
             RaycastHit hit;
@@ -151,20 +180,64 @@ public class PlayerAbilityController : AbilityController
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask: layerMask))
             {
                 GameObject hitTarget = hit.transform.gameObject;
-                if(hitTarget.tag == gameObject.tag && !abilityInfo.AllyTargetAllowed){
-                    return false;
-                }
-                if(hitTarget.tag != gameObject.tag && !abilityInfo.EnemyTargetAllowed){
-                    return false;
-                }
-                int hitActorId = hitTarget.GetComponent<Actor>().ActorId;
-                ConnectionManager.Instance.QueueReliableElement(new TargetedAbilityElement(actorId, abilityId, hitActorId));
-                return true;
+                return InitiateTargetedAbilityUse(abilityId, hitTarget);
             }
         } else if (abilityInfo.IsSelf){
-            ConnectionManager.Instance.QueueReliableElement(new TargetedAbilityElement(actorId, abilityId, actorId));
-            return true;
+            return InitiateSelfAbilityUse(abilityId);
         }
         return false;
+    }
+
+    bool InitiateAreaAbilityUse(AbilityType abilityId, Vector3 target){
+        int actorId = gameObject.GetComponent<Actor>().ActorId;
+
+        AbilityInfo abilityInfo = AbilityInfo.InfoArray[(int)abilityId];
+        
+        if(Vector3.Distance(transform.position, target)>abilityInfo.Range && abilityInfo.Range != 0){
+            Debug.Log("Distance " + Vector3.Distance(transform.position, target) + " > Range " + abilityInfo.Range);
+            if(!moveToAreaTarget){
+                moveToAreaTarget = true;
+                storedTargetLocation = target;
+                storedAbility = abilityId;
+                GetComponent<PlayerMovement>().SetTargetPosition(target);
+            }
+            return false;
+        }
+        
+        ConnectionManager.Instance.QueueReliableElement(new AreaAbilityElement(actorId, abilityId, target.x, target.z));
+        return true;
+    }
+
+    bool InitiateTargetedAbilityUse(AbilityType abilityId, GameObject target){
+        int actorId = gameObject.GetComponent<Actor>().ActorId;
+
+        AbilityInfo abilityInfo = AbilityInfo.InfoArray[(int)abilityId];
+        if(target.tag == gameObject.tag && !abilityInfo.AllyTargetAllowed){
+            return false;
+        }
+        if(target.tag != gameObject.tag && !abilityInfo.EnemyTargetAllowed){
+            return false;
+        }
+        
+        if(Vector3.Distance(transform.position, target.transform.position)>abilityInfo.Range && abilityInfo.Range != 0){
+            if(!moveToActorTarget){
+                moveToActorTarget = true;
+                storedTargetActor = target;
+                storedAbility = abilityId;
+                GetComponent<PlayerMovement>().SetTargetPosition(target.transform.position);
+            }
+            return false;
+
+        }
+        int hitActorId = target.GetComponent<Actor>().ActorId;
+        ConnectionManager.Instance.QueueReliableElement(new TargetedAbilityElement(actorId, abilityId, hitActorId));
+        return true;
+    }
+
+    bool InitiateSelfAbilityUse(AbilityType abilityId){
+        int actorId = gameObject.GetComponent<Actor>().ActorId;
+
+        ConnectionManager.Instance.QueueReliableElement(new TargetedAbilityElement(actorId, abilityId, actorId));
+        return true;
     }
 }

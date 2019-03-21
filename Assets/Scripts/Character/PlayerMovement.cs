@@ -80,9 +80,15 @@ public class PlayerMovement : ActorMovement
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (terrain.GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
                 SetTargetPosition(hit.point);
+                GetComponent<PlayerAbilityController>().CancelMoveToTarget();
             }
-            
         }
+        if(Input.GetButtonDown("Stop")) {
+            Stop();
+            GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+        }
+
         base.Update();
     }
+
 }

@@ -149,4 +149,10 @@ public class ActorMovement : MonoBehaviour
             }
         }
     }
+
+
+    public void Stop(){
+        moving = false;
+        agent.SetDestination(transform.position);
+    }
 }
