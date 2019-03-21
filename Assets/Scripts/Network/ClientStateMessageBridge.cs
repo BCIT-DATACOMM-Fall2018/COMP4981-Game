@@ -195,7 +195,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// ----------------------------------------------
 	public void SpawnActor(ActorType actorType, int actorId, int team, float x, float z){
         {
-			objectController.InstantiateObject(ActorType.Player, new Vector3(x,0,z), actorId, team);
+			objectController.InstantiateObject(actorType, new Vector3(x,0,z), actorId, team);
         }
 	}
 

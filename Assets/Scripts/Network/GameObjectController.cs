@@ -97,10 +97,7 @@ public class GameObjectController : MonoBehaviour
     /// NOTES:		
     /// ----------------------------------------------
     public void InstantiateObject(ActorType type, Vector3 location, int actorId, int team){
-        switch (type)
-        {
-            case ActorType.Player:
-                // Check if were creating the player
+        if((int)type < 10){
                 if(actorId == ConnectionManager.Instance.ClientId){
                     GameActors.Add(actorId, Instantiate(Players[(int) type], location, Quaternion.identity));
                     GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorId];
@@ -108,9 +105,7 @@ public class GameObjectController : MonoBehaviour
                 } else {
                     GameActors.Add(actorId, Instantiate(NonPlayers[(int) type], location, Quaternion.identity));
                 }
-                break;
-            default:
-                break;
+
         }
         if(team == ConnectionManager.Instance.Team){
             GameActors[actorId].tag = "Ally";
