@@ -30,7 +30,7 @@ using System.Collections.Generic;
 public class ClientStateMessageBridge : IStateMessageBridge
 {
 	private GameObjectController objectController;
-	private const float POSITION_TOLERANCE = 8f;
+	private const float POSITION_TOLERANCE = 10f;
 
 	/// ----------------------------------------------
 	/// CONSTRUCTOR: ClientStateMessageBridge

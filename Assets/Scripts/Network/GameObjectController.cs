@@ -24,10 +24,9 @@ using NetworkLibrary;
 /// ----------------------------------------------
 public class GameObjectController : MonoBehaviour
 {
-    public GameObject Player;
-    public GameObject AlliedPlayer;
-    public GameObject EnemyPlayer;
-    public GameObject DummyPlayer;
+    public GameObject[] Players;
+    public GameObject[] NonPlayers;
+    public GameObject[] DummyPlayers;
     public Dictionary<int, GameObject> GameActors { get; private set; } = new Dictionary<int, GameObject>();  
 
 
@@ -103,21 +102,23 @@ public class GameObjectController : MonoBehaviour
             case ActorType.Player:
                 // Check if were creating the player
                 if(actorId == ConnectionManager.Instance.ClientId){
-                    GameActors.Add(actorId, Instantiate(Player, location, Quaternion.identity));
+                    GameActors.Add(actorId, Instantiate(Players[(int) type], location, Quaternion.identity));
                     GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorId];
                 // Check if the actor is an ally
-                } else if (team == ConnectionManager.Instance.Team){
-                    GameActors.Add(actorId, Instantiate(AlliedPlayer, location, Quaternion.identity));
-                // Otherwise its an enemy
                 } else {
-                    GameActors.Add(actorId, Instantiate(EnemyPlayer, location, Quaternion.identity));
+                    GameActors.Add(actorId, Instantiate(NonPlayers[(int) type], location, Quaternion.identity));
                 }
                 break;
             default:
                 break;
         }
+        if(team == ConnectionManager.Instance.Team){
+            GameActors[actorId].tag = "Ally";
+        } else {
+            GameActors[actorId].tag = "Enemy";
+        }
         GameActors[actorId].GetComponent<Actor>().ActorId = actorId;
-        GameActors[actorId].GetComponent<Actor>().deathObject = DummyPlayer;
+        GameActors[actorId].GetComponent<Actor>().deathObject = DummyPlayers[(int) type];
 
     }
 }

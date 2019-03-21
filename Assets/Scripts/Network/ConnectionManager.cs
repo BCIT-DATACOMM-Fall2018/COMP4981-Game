@@ -41,7 +41,7 @@ public class ConnectionManager
     public Boolean gameStarted;
     private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
-    public int Team {get; set;} = 2;
+    public int Team {get; set;} = 1;
     public bool GameOver {get; set;}
 
     private int playerNum;
@@ -156,7 +156,7 @@ public class ConnectionManager
     /// ----------------------------------------------
     private void CreateSocketUDP()
     {
-        socket = new UDPSocket(0);
+        socket = new UDPSocket(15);
         socket.Bind();
     }
 

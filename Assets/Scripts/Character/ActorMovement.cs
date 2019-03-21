@@ -82,10 +82,10 @@ public class ActorMovement : MonoBehaviour
         if(moving)
         {
             Move();
-            animator.SetFloat("inputV", 1);
+            animator.SetInteger("animation", 14);
         } else
         {
-            animator.SetFloat("inputV", 0);
+            animator.SetInteger("animation", 1);
         }
     }
 
