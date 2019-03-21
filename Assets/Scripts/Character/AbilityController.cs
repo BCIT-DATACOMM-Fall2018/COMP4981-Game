@@ -81,6 +81,8 @@ public class AbilityController : MonoBehaviour
     /// ----------------------------------------------
     public virtual void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
     {
+        transform.LookAt(new Vector3(x, 0, z));
+
         switch (abilityId)
         {
             case AbilityType.TestProjectile:
@@ -116,8 +118,14 @@ public class AbilityController : MonoBehaviour
     ///             the function.
     /// ----------------------------------------------
     public virtual void UseTargetedAbility(AbilityType abilityId, GameObject target, int collisionId){
+        if(target.transform.position.x != -10){
+            transform.LookAt(target.transform.position);
+        }
         switch (abilityId)
         {
+            case AbilityType.AutoAttack:
+                AbilityAutoAttack(target, collisionId);
+                break;
             case AbilityType.TestTargeted:
                 AbilityTestTargeted(target, collisionId);
                 break;
@@ -173,4 +181,10 @@ public class AbilityController : MonoBehaviour
         projectile.GetComponent<Ability>().abilityId = AbilityType.TestTargetedHoming;
         projectile.GetComponent<Ability>().collisionId = collisionId;
     }
+
+    private void AbilityAutoAttack(GameObject target, int collisionId){
+        // TODO Play some sort of animation. No collsion is needed as the
+        // abilities effect is instantly applied by the server
+    }
+    
 }

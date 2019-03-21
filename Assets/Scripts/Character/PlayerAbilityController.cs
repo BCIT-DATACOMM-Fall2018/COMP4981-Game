@@ -34,10 +34,15 @@ public class PlayerAbilityController : AbilityController
 
     private bool moveToAreaTarget;
     private bool moveToActorTarget;
+    private bool autoAttacking;
     private AbilityType storedAbility;
     Vector3 storedTargetLocation;
     GameObject storedTargetActor;
-    private float recalculateTimer;
+    GameObject autoAttackTarget;
+    float autoCooldown;
+    float maxAutoCooldown = 30 * SERVER_TICK_RATE_PER_SECOND;
+
+    private float followRecalculateTimer;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -94,6 +99,7 @@ public class PlayerAbilityController : AbilityController
     /// ----------------------------------------------
     void Update()
     {
+        autoCooldown -= Time.deltaTime;
         for (int i = 0; i < Cooldowns.Length; i++)
         {
             Cooldowns[i] -= Time.deltaTime;
@@ -110,6 +116,7 @@ public class PlayerAbilityController : AbilityController
                     return;
                 }
                 if(InitiateAbilityUse(abilities[i])){
+
                     Debug.Log("Used ability");
                 } else {
                     Debug.Log("Invalid ability use");
@@ -124,15 +131,30 @@ public class PlayerAbilityController : AbilityController
             }
         }
         if(moveToActorTarget){
-            recalculateTimer += Time.deltaTime;
-            if(recalculateTimer > 1){
-                recalculateTimer -= 0.25f;
+            followRecalculateTimer += Time.deltaTime;
+            if(followRecalculateTimer > 1){
+                followRecalculateTimer -= 0.25f;
                 GetComponent<PlayerMovement>().SetTargetPosition(storedTargetActor.transform.position);
             }
             if(InitiateTargetedAbilityUse(storedAbility, storedTargetActor)){
                 GetComponent<PlayerMovement>().Stop();
                 CancelMoveToTarget();
-                recalculateTimer = 0;
+                followRecalculateTimer = 0;
+            }
+        }
+        if(autoAttacking){
+            followRecalculateTimer += Time.deltaTime;
+            if(followRecalculateTimer > 1){
+                followRecalculateTimer -= 0.25f;
+                if(Vector3.Distance(transform.position, autoAttackTarget.transform.position)>15){
+                    GetComponent<PlayerMovement>().SetTargetPosition(autoAttackTarget.transform.position);
+                }
+            }
+            if(!(Vector3.Distance(transform.position, autoAttackTarget.transform.position)>15)){
+                    GetComponent<PlayerMovement>().Stop();
+                    if(autoCooldown <= 0) {
+                        InitiateTargetedAbilityUse(AbilityType.AutoAttack, autoAttackTarget);
+                }
             }
         }
     }
@@ -140,6 +162,7 @@ public class PlayerAbilityController : AbilityController
     public void CancelMoveToTarget(){
         moveToAreaTarget = false;
         moveToActorTarget = false;
+        autoAttacking = false;
     }
     
 
@@ -157,6 +180,11 @@ public class PlayerAbilityController : AbilityController
 
 
     bool PutAbilityOnCooldown(AbilityType abilityId){
+        if(abilityId == AbilityType.AutoAttack){
+            autoCooldown = maxAutoCooldown;
+            Debug.Log("Auto put on cooldown");
+            return true;
+        }
         int index = Array.IndexOf(abilities, abilityId);
         if(index != -1){
             Cooldowns[index] = MaxCooldowns[index];
@@ -240,4 +268,11 @@ public class PlayerAbilityController : AbilityController
         ConnectionManager.Instance.QueueReliableElement(new TargetedAbilityElement(actorId, abilityId, actorId));
         return true;
     }
+
+    public void AutoAttack(GameObject target){
+        autoAttacking = true;
+        autoAttackTarget = target;
+        GetComponent<PlayerMovement>().SetTargetPosition(autoAttackTarget.transform.position);
+    }
+
 }
