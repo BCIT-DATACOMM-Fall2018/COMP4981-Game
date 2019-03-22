@@ -142,7 +142,11 @@ public class PlayerAbilityController : AbilityController
                 followRecalculateTimer = 0;
             }
         }
+        if(autoAttacking && autoAttackTarget.transform.position.x == -10){
+            autoAttacking = false;
+        }
         if(autoAttacking){
+            
             followRecalculateTimer += Time.deltaTime;
             if(followRecalculateTimer > 1){
                 followRecalculateTimer -= 0.25f;
