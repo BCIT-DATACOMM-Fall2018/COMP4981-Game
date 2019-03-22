@@ -56,7 +56,7 @@ public class Actor : MonoBehaviour
         if(alive){
             GameObject clone = Instantiate(deathObject, transform.position, transform.rotation);
             //TODO make the created object animate
-            clone.GetComponent<Animator>().SetInteger("animation", new System.Random().Next(6,8));
+            clone.GetComponent<Animator>().SetInteger("die", new System.Random().Next(1,3));
             Destroy(clone, 3);
             alive = false;
         }

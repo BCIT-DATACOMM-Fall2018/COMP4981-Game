@@ -102,7 +102,6 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	public void UpdateActorHealth (int actorId, int newHealth){
 		try{
 			objectController.GameActors[actorId].GetComponent<Actor>().Status.HP = newHealth;
-			Debug.Log("Update health of actor " + actorId + " to " +newHealth);
 
 		} catch	(KeyNotFoundException e){
 

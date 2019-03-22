@@ -150,6 +150,7 @@ public class AbilityController : MonoBehaviour
         projectile.GetComponent<Ability>().creator = gameObject;
         projectile.GetComponent<Ability>().abilityId = AbilityType.TestProjectile;
         projectile.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack4");
 
 
     }
@@ -162,11 +163,17 @@ public class AbilityController : MonoBehaviour
         area.GetComponent<Ability>().creator = gameObject;;
         area.GetComponent<Ability>().abilityId = AbilityType.TestAreaOfEffect;
         area.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack2");
+
     }
 
     private void AbilityTestTargeted(GameObject target, int collisionId){
         // TODO Play some sort of animation. No collsion is needed as the
         // abilities effect is instantly applied by the server
+        GetComponent<Animator>().SetTrigger("attack3");
+        int targetId = target.GetComponent<Actor>().ActorId;
+        int casterId = gameObject.GetComponent<Actor>().ActorId;
+        StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.TestTargeted, targetId, casterId, collisionId), 0.5f));
     }
 
     private void AbilityTestTargetedHoming(GameObject target, int collisionId){
@@ -180,11 +187,22 @@ public class AbilityController : MonoBehaviour
         projectile.GetComponent<Ability>().GetComponent<Ability>().creator = gameObject;
         projectile.GetComponent<Ability>().abilityId = AbilityType.TestTargetedHoming;
         projectile.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack4");
+
     }
 
     private void AbilityAutoAttack(GameObject target, int collisionId){
         // TODO Play some sort of animation. No collsion is needed as the
         // abilities effect is instantly applied by the server
+        GetComponent<Animator>().SetTrigger("attack1");
+        int targetId = target.GetComponent<Actor>().ActorId;
+        int casterId = gameObject.GetComponent<Actor>().ActorId;
+        StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.AutoAttack, targetId, casterId, collisionId), 0.25f));
+        Debug.Log("Play autoattack animation");
     }
-    
+
+    IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)  {
+        yield return new WaitForSeconds(delayTime);
+        ConnectionManager.Instance.QueueReliableElement(collisionElement);
+    }  
 }

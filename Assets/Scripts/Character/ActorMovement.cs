@@ -82,10 +82,10 @@ public class ActorMovement : MonoBehaviour
         if(moving)
         {
             Move();
-            animator.SetInteger("animation", 14);
+            animator.SetBool("moving", true);
         } else
         {
-            animator.SetInteger("animation", 1);
+            animator.SetBool("moving", false);
         }
     }
 
