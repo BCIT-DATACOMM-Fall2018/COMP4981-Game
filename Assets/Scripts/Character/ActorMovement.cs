@@ -32,6 +32,7 @@ public class ActorMovement : MonoBehaviour
     protected bool moving;
 
 
+
     /// ----------------------------------------------
     /// FUNCTION:	Start
     /// 
