@@ -44,19 +44,29 @@ public class ConnectionManager
     public int Team {get; set;} = 2;
     public bool GameOver {get; set;}
 
-    private int playerNum;
-    public int PlayerNum {get{return playerNum;} set { 
-        unreliableElementIds = new ElementId[value*2];
-        for (int i = 0; i < value*2; i++)
-        {
-            if(i % 2 == 0){
-                unreliableElementIds[i] = ElementId.HealthElement;
-            } else{
-                unreliableElementIds[i] = ElementId.MovementElement;
-            }
-        }
-        playerNum = value;
-    }}
+    private int _playerNum;
+    public int PlayerNum 
+	{
+		get { return _playerNum; } 
+		set 
+		{ 
+			unreliableElementIds = new ElementId[value*2];
+
+			for (int i = 0; i < value*2; i++)
+			{
+				if (i % 2 == 0)
+				{
+					unreliableElementIds[i] = ElementId.HealthElement;
+				} 
+				else
+				{
+					unreliableElementIds[i] = ElementId.MovementElement;
+				}
+			}
+
+			_playerNum = value;
+		}
+	}
 
 
     /// ----------------------------------------------
@@ -128,8 +138,8 @@ public class ConnectionManager
     /// 
     /// NOTES:		
     /// ----------------------------------------------
-    public void InitializeConnection(String stringIp){
-
+    public void InitializeConnection(String stringIp)
+	{
         StartBackgroundNetworking(stringIp);
     }
 
@@ -179,6 +189,38 @@ public class ConnectionManager
     {
         connection = new ReliableUDPConnection(ClientId);
     }
+
+    /// ----------------------------------------------
+    /// FUNCTION:	Reset
+    /// 
+    /// DATE:		March 23rd, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Simon Shoban
+    /// 
+    /// PROGRAMMER:	Simon Shoban
+    /// 
+    /// INTERFACE: 	public void Reset()
+    /// 
+    /// NOTES:		Resets all the values in the ConnectionManager
+    /// ----------------------------------------------
+	public void Reset()
+	{
+		destination = null;
+		socket = null;
+		connection = null;
+
+		ClientId = -1;
+		PlayerNum = 1;
+		connected = false;
+		inLobby = false;
+		gameStarted = false;
+		GameOver = false;
+
+		MessageQueue = new ConcurrentQueue<UpdateElement>();
+        ReliableElementQueue = new ConcurrentQueue<UpdateElement>();
+	}
 
     /// ----------------------------------------------
     /// FUNCTION:	SendStatePacket
