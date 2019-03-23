@@ -26,7 +26,7 @@ namespace RTS_Cam
 
         #endregion
 
-        private Transform m_Transform; //camera tranform
+        //private Transform m_Transform; //camera tranform
         public bool useFixedUpdate = false; //use FixedUpdate() or Update()
 
         #region Movement
@@ -51,7 +51,7 @@ namespace RTS_Cam
         public float keyboardZoomingSensitivity = 2f;
         public float scrollWheelZoomingSensitivity = 25f;
 
-        private float zoomPos = 0; //value in range (0, 1) used as t in Matf.Lerp
+        private float zoomPos = 1; //value in range (0, 1) used as t in Matf.Lerp
 
         #endregion
 
@@ -167,7 +167,10 @@ namespace RTS_Cam
 
         private void Start()
         {
-            m_Transform = transform;
+            //m_Transform.position = transform.position;
+            //m_Transform.rotation = transform.rotation;
+
+            //m_Transform = transform;
         }
 
         private void Update()
@@ -213,9 +216,9 @@ namespace RTS_Cam
                 desiredMove *= keyboardMovementSpeed;
                 desiredMove *= Time.deltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
-                desiredMove = m_Transform.InverseTransformDirection(desiredMove);
+                desiredMove = transform.InverseTransformDirection(desiredMove);
 
-                m_Transform.Translate(desiredMove, Space.Self);
+                transform.Translate(desiredMove, Space.Self);
             }
 
             if (useScreenEdgeInput)
@@ -233,9 +236,9 @@ namespace RTS_Cam
                 desiredMove *= screenEdgeMovementSpeed;
                 desiredMove *= Time.deltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
-                desiredMove = m_Transform.InverseTransformDirection(desiredMove);
+                desiredMove = transform.InverseTransformDirection(desiredMove);
 
-                m_Transform.Translate(desiredMove, Space.Self);
+                transform.Translate(desiredMove, Space.Self);
             }       
         
             if(usePanning && Input.GetKey(panningKey) && MouseAxis != Vector2.zero)
@@ -245,9 +248,9 @@ namespace RTS_Cam
                 desiredMove *= panningSpeed;
                 desiredMove *= Time.deltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
-                desiredMove = m_Transform.InverseTransformDirection(desiredMove);
+                desiredMove = transform.InverseTransformDirection(desiredMove);
 
-                m_Transform.Translate(desiredMove, Space.Self);
+                transform.Translate(desiredMove, Space.Self);
             }
         }
 
@@ -270,8 +273,8 @@ namespace RTS_Cam
             if(distanceToGround != targetHeight)
                 difference = targetHeight - distanceToGround;
 
-            m_Transform.position = Vector3.Lerp(m_Transform.position, 
-                new Vector3(m_Transform.position.x, targetHeight + difference, m_Transform.position.z), Time.deltaTime * heightDampening);
+            transform.position = Vector3.Lerp(transform.position, 
+                new Vector3(transform.position.x, targetHeight + difference, transform.position.z), Time.deltaTime * heightDampening);
         }
 
         /// <summary>
@@ -283,7 +286,7 @@ namespace RTS_Cam
                 transform.Rotate(Vector3.up, RotationDirection * Time.deltaTime * rotationSped, Space.World);
 
             if (useMouseRotation && Input.GetKey(mouseRotationKey))
-                m_Transform.Rotate(Vector3.up, -MouseAxis.x * Time.deltaTime * mouseRotationSpeed, Space.World);
+                transform.Rotate(Vector3.up, -MouseAxis.x * Time.deltaTime * mouseRotationSpeed, Space.World);
         }
 
         /// <summary>
@@ -291,8 +294,8 @@ namespace RTS_Cam
         /// </summary>
         private void FollowTarget()
         {
-            Vector3 targetPos = new Vector3(targetFollow.position.x, m_Transform.position.y, targetFollow.position.z) + targetOffset;
-            m_Transform.position = Vector3.MoveTowards(m_Transform.position, targetPos, Time.deltaTime * followingSpeed);
+            Vector3 targetPos = new Vector3(targetFollow.position.x, transform.position.y, targetFollow.position.z) + targetOffset;
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, Time.deltaTime * followingSpeed);
         }
 
         /// <summary>
@@ -303,9 +306,9 @@ namespace RTS_Cam
             if (!limitMap)
                 return;
                 
-            m_Transform.position = new Vector3(Mathf.Clamp(m_Transform.position.x, -limitX, limitX),
-                m_Transform.position.y,
-                Mathf.Clamp(m_Transform.position.z, -limitY, limitY));
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -limitX, limitX),
+                transform.position.y,
+                Mathf.Clamp(transform.position.z, -limitY, limitY));
         }
 
         /// <summary>
@@ -331,10 +334,10 @@ namespace RTS_Cam
         /// <returns></returns>
         private float DistanceToGround()
         {
-            Ray ray = new Ray(m_Transform.position, Vector3.down);
+            Ray ray = new Ray(transform.position, Vector3.down);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, groundMask.value))
-                return (hit.point - m_Transform.position).magnitude;
+                return (hit.point - transform.position).magnitude;
 
             return 0f;
         }
