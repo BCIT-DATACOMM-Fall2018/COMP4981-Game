@@ -13,6 +13,7 @@ public class CameraSelector : MonoBehaviour
     {
         playerLockCamera.enabled = false;
         isometricCamera.enabled = true;
+        isometricCamera.transform.position = playerLockCamera.transform.position;
     }
 
     // Update is called once per frame
@@ -20,6 +21,10 @@ public class CameraSelector : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
+            if (playerLockCamera.enabled)
+            {
+                isometricCamera.transform.position = playerLockCamera.transform.position;
+            } 
             playerLockCamera.enabled = !playerLockCamera.enabled;
             isometricCamera.enabled = !isometricCamera.enabled;
         }

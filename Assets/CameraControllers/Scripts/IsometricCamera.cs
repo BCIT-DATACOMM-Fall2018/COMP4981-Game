@@ -3,18 +3,32 @@
 public class IsometricCamera : MonoBehaviour
 {
 
-    public float panSpeed = 20f;
+    public float panSpeed = 35f;
     public float panBorderThickness = 10f;
     public Vector2 panLimit;
     public float mapSize;
 
     public float scrollSpeed = 20f;
+    public float dragSpeed = 5f;
     public float minY = 20f;
     public float maxY = 120f;
+    
+
+    private Vector3 dragOrigin;
+    private bool isDragging;
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetMouseButton(2))
+        {
+            float speed = dragSpeed * Time.deltaTime;
+            Vector3 dragPos = new Vector3(Input.GetAxis("Mouse X") * 50f * speed, 0, Input.GetAxis("Mouse Y") * 50f * speed);
+            Camera.main.transform.position -= dragPos;
+            
+            return;
+        }
 
         Vector3 pos = transform.position;
 
@@ -43,5 +57,6 @@ public class IsometricCamera : MonoBehaviour
         pos.z = Mathf.Clamp(pos.z, 0, mapSize - 100);
 
         transform.position = pos;
+
     }
 }
