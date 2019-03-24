@@ -26,19 +26,9 @@ public class PlayerLockCamera : MonoBehaviour
         transform.position = player.transform.position + offset;
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        //pos.y -= scroll * scrollSpeed * 100f * Time.deltaTime;
         linkedCamera.fieldOfView -= scroll * scrollSpeed;
         linkedCamera.fieldOfView = Mathf.Clamp(linkedCamera.fieldOfView, fovMin, fovMax);
 
-        //if (Input.GetAxis("Mouse ScrollWheel") > 0)
-        //{
-        //    GetComponent<Transform>().position = new Vector3(transform.position.x, transform.position.y - yZoom, transform.position.z + zZoom);
-        //    offset = transform.position - player.transform.position;
-        //}
-        //if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        //{
-        //    GetComponent<Transform>().position = new Vector3(transform.position.x, transform.position.y + yZoom, transform.position.z - zZoom);
-        //    offset = transform.position - player.transform.position;
-        //}
+
     }
 }

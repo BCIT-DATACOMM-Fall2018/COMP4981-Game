@@ -5,18 +5,12 @@ public class IsometricCamera : MonoBehaviour
 
     public float panSpeed = 35f;
     public float panBorderThickness = 10f;
-    public Vector2 panLimit;
     public float mapSize;
-
     public float scrollSpeed = 20f;
     public float dragSpeed = 5f;
-    public float minY = 20f;
-    public float maxY = 120f;
-
     public float fovMin = 20f;
     public float fovMax = 60f;
     public Camera linkedCamera;
-    
 
     private Vector3 dragOrigin;
     private bool isDragging;
@@ -58,12 +52,10 @@ public class IsometricCamera : MonoBehaviour
             }
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-            //pos.y -= scroll * scrollSpeed * 100f * Time.deltaTime;
             linkedCamera.fieldOfView -= scroll * scrollSpeed;
             linkedCamera.fieldOfView = Mathf.Clamp(linkedCamera.fieldOfView, fovMin, fovMax);
 
             pos.x = Mathf.Clamp(pos.x, 0, mapSize);
-            //pos.y = Mathf.Clamp(pos.y, minY, maxY);
             pos.z = Mathf.Clamp(pos.z, 0, mapSize - 100);
 
             transform.position = pos;
