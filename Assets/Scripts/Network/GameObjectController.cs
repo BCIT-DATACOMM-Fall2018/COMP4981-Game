@@ -100,7 +100,7 @@ public class GameObjectController : MonoBehaviour
         if((int)type < 10){
                 if(actorId == ConnectionManager.Instance.ClientId){
                     GameActors.Add(actorId, Instantiate(Players[(int) type], location, Quaternion.identity));
-                    GameObject.Find("Main Camera").GetComponent<CameraController>().player = GameActors[actorId];
+                    GameObject.Find("Main Camera").GetComponent<PlayerLockCamera>().player = GameActors[actorId];
                 // Check if the actor is an ally
                 } else {
                     GameActors.Add(actorId, Instantiate(NonPlayers[(int) type], location, Quaternion.identity));

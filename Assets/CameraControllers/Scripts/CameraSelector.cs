@@ -24,7 +24,12 @@ public class CameraSelector : MonoBehaviour
             if (playerLockCamera.enabled)
             {
                 isometricCamera.transform.position = playerLockCamera.transform.position;
+                isometricCamera.fieldOfView = playerLockCamera.fieldOfView;
             } 
+            else
+            {
+                playerLockCamera.fieldOfView = isometricCamera.fieldOfView;
+            }
             playerLockCamera.enabled = !playerLockCamera.enabled;
             isometricCamera.enabled = !isometricCamera.enabled;
         }
