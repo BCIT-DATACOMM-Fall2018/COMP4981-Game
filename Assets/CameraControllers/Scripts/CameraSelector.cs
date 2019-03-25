@@ -11,8 +11,8 @@ public class CameraSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerLockCamera.enabled = false;
-        isometricCamera.enabled = true;
+        playerLockCamera.enabled = true;
+        isometricCamera.enabled = false;
         isometricCamera.transform.position = playerLockCamera.transform.position;
     }
 
@@ -35,4 +35,10 @@ public class CameraSelector : MonoBehaviour
         }
         
     }
+
+    public void SetIsometricToPlayer(){
+        isometricCamera.transform.position = playerLockCamera.transform.position;
+        isometricCamera.fieldOfView = playerLockCamera.fieldOfView;
+    }
+
 }

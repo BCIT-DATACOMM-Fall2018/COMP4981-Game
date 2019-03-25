@@ -2214,6 +2214,7 @@ GameObject:
   - component: {fileID: 6859553481493412588}
   - component: {fileID: 3665147050698773752}
   - component: {fileID: 401994957193631230}
+  - component: {fileID: 6732260556257192909}
   m_Layer: 10
   m_Name: PlayerKnightD
   m_TagString: Ally
@@ -2357,6 +2358,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ce02773ea66b10084aab36173446fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6732260556257192909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5885341717929327634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661f4659a03f8cf4a9c94061cf8ae4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLockCamera: {fileID: 0}
+  isometricCamera: {fileID: 0}
 --- !u!1 &5894236871120343704
 GameObject:
   m_ObjectHideFlags: 0

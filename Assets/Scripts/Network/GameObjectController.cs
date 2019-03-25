@@ -100,7 +100,13 @@ public class GameObjectController : MonoBehaviour
         if((int)type < 10){
                 if(actorId == ConnectionManager.Instance.ClientId){
                     GameActors.Add(actorId, Instantiate(Players[(int) type], location, Quaternion.identity));
-                    GameObject.Find("Main Camera").GetComponent<PlayerLockCamera>().player = GameActors[actorId];
+                    GameObject.Find("PlayerLockCamera").GetComponent<PlayerLockCamera>().player = GameActors[actorId];
+                    GameObject.Find("PlayerLockCamera").GetComponent<CameraOcclusion>().playerPos = GameActors[actorId].transform;
+                    GameObject.Find("IsometricCamera").GetComponent<CameraOcclusion>().playerPos = GameActors[actorId].transform;
+                    GameActors[actorId].GetComponent<CameraSelector>().playerLockCamera = GameObject.Find("PlayerLockCamera").GetComponent<Camera>();
+                    GameActors[actorId].GetComponent<CameraSelector>().isometricCamera = GameObject.Find("IsometricCamera").GetComponent<Camera>();
+                    GameObject.Find("PlayerLockCamera").GetComponent<PlayerLockCamera>().SetCameraLock();
+                    GameActors[actorId].GetComponent<CameraSelector>().SetIsometricToPlayer();
                 // Check if the actor is an ally
                 } else {
                     GameActors.Add(actorId, Instantiate(NonPlayers[(int) type], location, Quaternion.identity));

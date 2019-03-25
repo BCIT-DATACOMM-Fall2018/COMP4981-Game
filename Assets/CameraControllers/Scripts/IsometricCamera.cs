@@ -20,6 +20,8 @@ public class IsometricCamera : MonoBehaviour
         linkedCamera = GetComponent<Camera>();
     }
 
+    
+
     // Update is called once per frame
     void LateUpdate()
     {

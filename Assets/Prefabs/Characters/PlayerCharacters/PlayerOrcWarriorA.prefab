@@ -1887,6 +1887,7 @@ GameObject:
   - component: {fileID: 2636100678006099545}
   - component: {fileID: 7858714773299330238}
   - component: {fileID: 2931078475444313150}
+  - component: {fileID: 4878765269603972911}
   m_Layer: 10
   m_Name: PlayerOrcWarriorA
   m_TagString: Ally
@@ -2027,6 +2028,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ce02773ea66b10084aab36173446fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4878765269603972911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427056599955238356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661f4659a03f8cf4a9c94061cf8ae4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLockCamera: {fileID: 0}
+  isometricCamera: {fileID: 0}
 --- !u!1 &4451128509294826329
 GameObject:
   m_ObjectHideFlags: 0
