@@ -30,13 +30,14 @@ public class AbilityController : MonoBehaviour
     private GameObject testProjectile;
     private GameObject testHomingProjectile;
     private GameObject testAreaOfEffect;
+    private GameObject wallAbilityObject;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
     /// 
     /// DATE:		March 14th, 2019
     /// 
-    /// REVISIONS:	
+    /// REVISIONS:	March 24th, 2019 - JK - added Wall ability Object
     /// 
     /// DESIGNER:	Cameron Roberts
     /// 
@@ -55,6 +56,7 @@ public class AbilityController : MonoBehaviour
         testProjectile = Resources.Load<GameObject>("Ability/TestProjectile");
         testHomingProjectile = Resources.Load<GameObject>("Ability/TestHomingProjectile");
         testAreaOfEffect = Resources.Load<GameObject>("Ability/TestAreaOfEffect");
+        wallAbilityObject = Resources.Load<GameObject>("Ability/WallAbilityObject");
     }
 
 
@@ -90,6 +92,11 @@ public class AbilityController : MonoBehaviour
                 break;
             case AbilityType.TestAreaOfEffect:
                 AbilityTestAreaOfEffect(x, z, collisionId);
+                break;
+            case AbilityType.Wall:
+                AbilityWall(x, z);
+                break;
+            case AbilityType.Banish:
                 break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
@@ -199,6 +206,23 @@ public class AbilityController : MonoBehaviour
         int casterId = gameObject.GetComponent<Actor>().ActorId;
         StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.AutoAttack, targetId, casterId, collisionId), 0.25f));
         Debug.Log("Play autoattack animation");
+    }
+
+    private void AbilityWall(float x, float z) {
+        // Instantiate Wall ability object
+        var area = Instantiate(wallAbilityObject, new Vector3(x, 0.01f, z), Quaternion.identity);
+
+        // Set its creator id and ability type which will be used later for collisions
+        area.GetComponent<Ability>().creator = gameObject; ;
+        area.GetComponent<Ability>().abilityId = AbilityType.Wall;
+        GetComponent<Animator>().SetTrigger("attack2");
+    }
+
+    private void AbilityBanish(GameObject target) {
+        int targetId = target.GetComponent<Actor>().ActorId;
+        int casterId = gameObject.GetComponent<Actor>().ActorId;
+
+        GetComponent<Animator>().SetTrigger("attack2");
     }
 
     IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)  {
