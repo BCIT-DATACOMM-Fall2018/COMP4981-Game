@@ -7,22 +7,22 @@ using NetworkLibrary.MessageElements;
 
 /// ----------------------------------------------
 /// Class: 	AbilityController - A script to provide the logic to use abilities
-/// 
+///
 /// PROGRAM: SKOM
 ///
 /// FUNCTIONS:	void Start()
 ///				void Awake()
 ///             public void UseAbility(AbilityType abilityId, float x, float z)
-/// 
+///
 /// DATE: 		March 14th, 2019
 ///
-/// REVISIONS: 
+/// REVISIONS:
 ///
 /// DESIGNER: 	Cameron Roberts
 ///
 /// PROGRAMMER: Cameron Roberts
 ///
-/// NOTES:		
+/// NOTES:
 /// ----------------------------------------------
 public class AbilityController : MonoBehaviour
 {
@@ -34,19 +34,19 @@ public class AbilityController : MonoBehaviour
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
+    ///
     /// REVISIONS:	March 24th, 2019 - JK - added Wall ability Object
-    /// 
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	void Start()
-    /// 
+    ///
     /// RETURNS: 	void
-    /// 
+    ///
     /// NOTES:		MonoBehaviour function.
     ///             Called before the first Update().
     ///             Loads resources.
@@ -62,22 +62,22 @@ public class AbilityController : MonoBehaviour
 
     /// ----------------------------------------------
     /// FUNCTION:	UseAreaAbility
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Wu
-    /// 
+    ///
     /// PROGRAMMER:	Simon Wu, Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	public void UseAbility(AbilityType abilityId, float x, float z)
     ///                 AbilityType abilityId: The ability to be used
     ///                 float x: The x coordinate to use for the ability's location
     ///                 float z: The z coordinate to use for the ability's location
-    /// 
+    ///
     /// RETURNS: 	void
-    /// 
+    ///
     /// NOTES:		Contains logic to use various abilities based on the abilityId passed to
     ///             the function.
     /// ----------------------------------------------
@@ -96,8 +96,6 @@ public class AbilityController : MonoBehaviour
             case AbilityType.Wall:
                 AbilityWall(x, z);
                 break;
-            case AbilityType.Banish:
-                break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
                 break;
@@ -106,21 +104,21 @@ public class AbilityController : MonoBehaviour
 
     /// ----------------------------------------------
     /// FUNCTION:	UserTargetedAbility
-    /// 
+    ///
     /// DATE:		March 15th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Wu
-    /// 
+    ///
     /// PROGRAMMER:	Simon Wu, Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	public void UseTargetedAbility(AbilityType abilityId, int targetId)
     ///                 AbilityType abilityId: The ability to be used
     ///                 int targetId: The actor id of the target GameObject
-    /// 
+    ///
     /// RETURNS: 	void
-    /// 
+    ///
     /// NOTES:		Contains logic to use various abilities based on the abilityId passed to
     ///             the function.
     /// ----------------------------------------------
@@ -139,6 +137,9 @@ public class AbilityController : MonoBehaviour
             case AbilityType.TestTargetedHoming:
                 AbilityTestTargetedHoming(target, collisionId);
                 break;
+            case AbilityType.Banish:
+                AbilityBanish(target);
+                break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
                 break;
@@ -148,11 +149,11 @@ public class AbilityController : MonoBehaviour
     private void AbilityTestProjectile(float x, float z, int collisionId){
         // Instantiate projectile
         var projectile = Instantiate(testProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
-        
+
         // Set the projectiles velocity the direction of the target location
         Vector3 targetLocation = new Vector3(x, 0, z);
         projectile.GetComponent<Rigidbody>().velocity = (targetLocation - transform.position).normalized;
-        
+
         // Set its creator id and ability type which will be used later for collisions
         projectile.GetComponent<Ability>().creator = gameObject;
         projectile.GetComponent<Ability>().abilityId = AbilityType.TestProjectile;
@@ -165,7 +166,7 @@ public class AbilityController : MonoBehaviour
     private void AbilityTestAreaOfEffect(float x, float z, int collisionId){
         // Instantiate projectile
         var area = Instantiate(testAreaOfEffect, new Vector3(x, 0.01f, z), Quaternion.identity);
-        
+
         // Set its creator id and ability type which will be used later for collisions
         area.GetComponent<Ability>().creator = gameObject;;
         area.GetComponent<Ability>().abilityId = AbilityType.TestAreaOfEffect;
@@ -186,10 +187,10 @@ public class AbilityController : MonoBehaviour
     private void AbilityTestTargetedHoming(GameObject target, int collisionId){
         // Instantiate projectile
         var projectile = Instantiate(testHomingProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
-        
+
         // Set the projectiles target
         projectile.GetComponent<TestTargetedHomingAbility>().target = target;
-        
+
         // Set its creator id and ability type which will be used later for collisions
         projectile.GetComponent<Ability>().GetComponent<Ability>().creator = gameObject;
         projectile.GetComponent<Ability>().abilityId = AbilityType.TestTargetedHoming;
@@ -210,7 +211,7 @@ public class AbilityController : MonoBehaviour
 
     private void AbilityWall(float x, float z) {
         // Instantiate Wall ability object
-        var area = Instantiate(wallAbilityObject, new Vector3(x, 0.01f, z), Quaternion.identity);
+        var area = Instantiate(wallAbilityObject, new Vector3(x, 0.01f, z), gameObject.transform.rotation);
 
         // Set its creator id and ability type which will be used later for collisions
         area.GetComponent<Ability>().creator = gameObject; ;
@@ -228,5 +229,5 @@ public class AbilityController : MonoBehaviour
     IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)  {
         yield return new WaitForSeconds(delayTime);
         ConnectionManager.Instance.QueueReliableElement(collisionElement);
-    }  
+    }
 }
