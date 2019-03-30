@@ -30,6 +30,7 @@ public class AbilityController : MonoBehaviour
     private GameObject testProjectile;
     private GameObject testHomingProjectile;
     private GameObject testAreaOfEffect;
+    private GameObject fireball;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -55,6 +56,7 @@ public class AbilityController : MonoBehaviour
         testProjectile = Resources.Load<GameObject>("Ability/TestProjectile");
         testHomingProjectile = Resources.Load<GameObject>("Ability/TestHomingProjectile");
         testAreaOfEffect = Resources.Load<GameObject>("Ability/TestAreaOfEffect");
+        fireball = Resources.Load<GameObject>("Ability/Fireball");
     }
 
 
@@ -90,6 +92,9 @@ public class AbilityController : MonoBehaviour
                 break;
             case AbilityType.TestAreaOfEffect:
                 AbilityTestAreaOfEffect(x, z, collisionId);
+                break;
+            case AbilityType.Fireball:
+                AbilityFireball(x, z, collisionId);
                 break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
@@ -162,6 +167,18 @@ public class AbilityController : MonoBehaviour
         // Set its creator id and ability type which will be used later for collisions
         area.GetComponent<Ability>().creator = gameObject;;
         area.GetComponent<Ability>().abilityId = AbilityType.TestAreaOfEffect;
+        area.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack2");
+
+    }
+
+    private void AbilityFireball(float x, float z, int collisionId){
+        // Instantiate projectile
+        var area = Instantiate(fireball, new Vector3(x, 0.01f, z), Quaternion.identity);
+        
+        // Set its creator id and ability type which will be used later for collisions
+        area.GetComponent<Ability>().creator = gameObject;
+        area.GetComponent<Ability>().abilityId = AbilityType.Fireball;
         area.GetComponent<Ability>().collisionId = collisionId;
         GetComponent<Animator>().SetTrigger("attack2");
 
