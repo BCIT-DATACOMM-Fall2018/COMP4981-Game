@@ -91,6 +91,9 @@ public class AbilityController : MonoBehaviour
             case AbilityType.TestAreaOfEffect:
                 AbilityTestAreaOfEffect(x, z, collisionId);
                 break;
+			case AbilityType.Blink:
+				AbilityBlink (x, z);
+				break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
                 break;
@@ -204,5 +207,10 @@ public class AbilityController : MonoBehaviour
     IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)  {
         yield return new WaitForSeconds(delayTime);
         ConnectionManager.Instance.QueueReliableElement(collisionElement);
-    }  
+    } 
+
+	private void AbilityBlink(float x, float z) {
+		GetComponent<PlayerMovement>().ForceTargetPosition(new Vector3(x, 0, z));
+		GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+	}
 }
