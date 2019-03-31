@@ -73,7 +73,6 @@ public class PlayerAbilityController : AbilityController
 
         for (int i = 0; i < abilities.Length; i++)
         {
-            Debug.Log("ability type number for ability # " + i + ": " + (int)abilities[i]);
             MaxCooldowns[i] = (float)AbilityInfo.InfoArray[(int)abilities[i]].Cooldown * SERVER_TICK_RATE_PER_SECOND;
         }
     }
@@ -216,10 +215,8 @@ public class PlayerAbilityController : AbilityController
                 return InitiateTargetedAbilityUse(abilityId, hitTarget);
             }
         } else if (abilityInfo.IsSelf){
-            Debug.Log("is self ability");
             return InitiateSelfAbilityUse(abilityId);
         }
-        Debug.Log("lol what ability is this");
         return false;
     }
 

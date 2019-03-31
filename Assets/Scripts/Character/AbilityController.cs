@@ -214,8 +214,6 @@ public class AbilityController : MonoBehaviour
     private void AbilityUwuImScared(){
         // not sure what else to do here
         // play some sort of animation?
-        //GetComponent<Animator>().SetTrigger("attack4");
-        Debug.Log("i'm scaredd");
     }
 
     private void AbilityAutoAttack(GameObject target, int collisionId){
