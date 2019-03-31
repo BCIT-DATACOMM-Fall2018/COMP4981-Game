@@ -137,6 +137,9 @@ public class AbilityController : MonoBehaviour
             case AbilityType.TestTargetedHoming:
                 AbilityTestTargetedHoming(target, collisionId);
                 break;
+            case AbilityType.UwuImScared:
+                AbilityUwuImScared();
+                break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
                 break;
@@ -206,6 +209,12 @@ public class AbilityController : MonoBehaviour
         projectile.GetComponent<Ability>().collisionId = collisionId;
         GetComponent<Animator>().SetTrigger("attack4");
 
+    }
+
+    private void AbilityUwuImScared(){
+        // not sure what else to do here
+        // play some sort of animation?
+        GetComponent<Animator>().SetTrigger("attack4");
     }
 
     private void AbilityAutoAttack(GameObject target, int collisionId){
