@@ -15,13 +15,13 @@ using NetworkLibrary.MessageElements;
 ///
 /// DATE: 		March 14th, 2019
 ///
-/// REVISIONS: 
+/// REVISIONS:
 ///
 /// DESIGNER: 	Cameron Roberts
 ///
 /// PROGRAMMER: Cameron Roberts
 ///
-/// NOTES:		
+/// NOTES:
 /// ----------------------------------------------
 public abstract class Ability : MonoBehaviour
 {

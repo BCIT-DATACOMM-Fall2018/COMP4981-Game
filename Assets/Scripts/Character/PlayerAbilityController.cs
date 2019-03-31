@@ -8,21 +8,21 @@ using NetworkLibrary.MessageElements;
 /// ----------------------------------------------
 /// Class: 	PlayerAbilityController - A script to provide the logic for player
 ///                                   initiated abilities.
-/// 
+///
 /// PROGRAM: SKOM
 ///
 /// FUNCTIONS:	void Start()
 ///				void Update()
-/// 
+///
 /// DATE: 		March 14th, 2019
 ///
-/// REVISIONS: 
+/// REVISIONS:
 ///
 /// DESIGNER: 	Simon Wu, Cameron Roberts
 ///
 /// PROGRAMMER: Simon Wu, Cameron Roberts
 ///
-/// NOTES:		
+/// NOTES:
 /// ----------------------------------------------
 public class PlayerAbilityController : AbilityController
 {
@@ -46,19 +46,19 @@ public class PlayerAbilityController : AbilityController
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	void Start()
-    /// 
+    ///
     /// RETURNS: 	void
-    /// 
+    ///
     /// NOTES:		MonoBehaviour function.
     ///             Called before the first Update().
     /// ----------------------------------------------
@@ -66,35 +66,36 @@ public class PlayerAbilityController : AbilityController
     {
         base.Start();
 
-        abilities = new AbilityType[] {AbilityType.TestProjectile, AbilityType.TestTargeted, AbilityType.TestTargetedHoming, AbilityType.TestAreaOfEffect};
+        abilities = new AbilityType[] {AbilityType.TestProjectile, AbilityType.TestTargeted, AbilityType.UwuImScared, AbilityType.Fireball};
         buttonNames = new String[] {"Ability1", "Ability2", "Ability3", "Ability4"};
         Cooldowns = new float[4];
         MaxCooldowns = new float[4];
 
         for (int i = 0; i < abilities.Length; i++)
         {
+            Debug.Log("ability type number for ability # " + i + ": " + (int)abilities[i]);
             MaxCooldowns[i] = (float)AbilityInfo.InfoArray[(int)abilities[i]].Cooldown * SERVER_TICK_RATE_PER_SECOND;
         }
     }
 
     /// ----------------------------------------------
     /// FUNCTION:	Update
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts, Simon Wu
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts, Simon Wu
-    /// 
+    ///
     /// INTERFACE: 	void Update()
-    /// 
+    ///
     /// RETURNS: 	void
-    /// 
+    ///
     /// NOTES:		MonoBehaviour function. Called every frame.
     ///             Checks if a key is pressed and queues
-    ///             a reliable Update element based on the 
+    ///             a reliable Update element based on the
     ///             ability used.
     /// ----------------------------------------------
     void Update()
@@ -146,7 +147,7 @@ public class PlayerAbilityController : AbilityController
             autoAttacking = false;
         }
         if(autoAttacking){
-            
+
             followRecalculateTimer += Time.deltaTime;
             if(followRecalculateTimer > 1){
                 followRecalculateTimer -= 0.25f;
@@ -168,7 +169,7 @@ public class PlayerAbilityController : AbilityController
         moveToActorTarget = false;
         autoAttacking = false;
     }
-    
+
 
     public override void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
     {
@@ -215,8 +216,10 @@ public class PlayerAbilityController : AbilityController
                 return InitiateTargetedAbilityUse(abilityId, hitTarget);
             }
         } else if (abilityInfo.IsSelf){
+            Debug.Log("is self ability");
             return InitiateSelfAbilityUse(abilityId);
         }
+        Debug.Log("lol what ability is this");
         return false;
     }
 
@@ -224,7 +227,7 @@ public class PlayerAbilityController : AbilityController
         int actorId = gameObject.GetComponent<Actor>().ActorId;
 
         AbilityInfo abilityInfo = AbilityInfo.InfoArray[(int)abilityId];
-        
+
         if(Vector3.Distance(transform.position, target)>abilityInfo.Range && abilityInfo.Range != 0){
             Debug.Log("Distance " + Vector3.Distance(transform.position, target) + " > Range " + abilityInfo.Range);
             if(!moveToAreaTarget){
@@ -235,7 +238,7 @@ public class PlayerAbilityController : AbilityController
             }
             return false;
         }
-        
+
         ConnectionManager.Instance.QueueReliableElement(new AreaAbilityElement(actorId, abilityId, target.x, target.z));
         return true;
     }
@@ -250,7 +253,7 @@ public class PlayerAbilityController : AbilityController
         if(target.tag != gameObject.tag && !abilityInfo.EnemyTargetAllowed){
             return false;
         }
-        
+
         if(Vector3.Distance(transform.position, target.transform.position)>abilityInfo.Range && abilityInfo.Range != 0){
             if(!moveToActorTarget){
                 moveToActorTarget = true;
