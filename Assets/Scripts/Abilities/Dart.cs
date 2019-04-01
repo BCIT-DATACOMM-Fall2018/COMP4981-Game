@@ -5,24 +5,24 @@ using UnityEngine;
 /// ----------------------------------------------
 /// Class: 	TestProjectileAbility - A script to provide the logic to move
 ///                a projectile shot by the player.
-/// 
+///
 /// PROGRAM: NetworkLibrary
 ///
 /// FUNCTIONS:	void Start()
 ///				void Update()
 ///             void OnCollisionEnter()
 ///
-/// DATE: 		March 14th, 2019
+/// DATE: 		March 27th, 2019
 ///
-/// REVISIONS: 
+/// REVISIONS:
 ///
 /// DESIGNER: 	Cameron Roberts
 ///
-/// PROGRAMMER: Cameron Roberts
+/// PROGRAMMER: Keishi Asai
 ///
-/// NOTES:		
+/// NOTES:
 /// ----------------------------------------------
-public class TestProjectileAbility : Ability
+public class Dart : Ability
 {
 
     public float speed = 50f;
@@ -30,19 +30,19 @@ public class TestProjectileAbility : Ability
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	void Start()
-    /// 
+    ///
     /// RETURNS: 	void
-    /// 
+    ///
     /// NOTES:		MonoBehaviour function.
     ///             Called before the first Update().
     /// ----------------------------------------------
@@ -54,19 +54,19 @@ public class TestProjectileAbility : Ability
 
     /// ----------------------------------------------
     /// FUNCTION:	Update
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	void Update()
-    /// 
+    ///
     /// RETURNS: 	void
-    /// 
+    ///
     /// NOTES:		MonoBehaviour function. Called at a fixed interval.
     ///             Check how far the GameObject has moved from its
     ///             starting point and delete it if it has gone too far.
@@ -79,29 +79,27 @@ public class TestProjectileAbility : Ability
 
     /// ----------------------------------------------
     /// FUNCTION:	OnTriggerEnter
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	void OnCollisionEnter(Collider col)
-    /// 
+    ///
     /// RETURNS: 	void
-    /// 
-    /// NOTES:		
+    ///
+    /// NOTES:
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
-		Debug.Log("TEST PROJECTILE ABILITY HIT SMTH");
         if(col.gameObject.tag == creator.tag){
             Physics.IgnoreCollision(col, GetComponent<Collider>());
 
         } else{
-			
             SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
             Destroy(gameObject);
         }
