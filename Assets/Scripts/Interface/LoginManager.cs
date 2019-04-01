@@ -58,7 +58,7 @@ public class LoginManager : MonoBehaviour
             if (ConnectionManager.Instance.RequestConnection(IP.text, Name.text)) {
                 SceneManager.LoadScene("Lobby");
             } else {
-                ErrorMessage.text = "Connection Request Timeout";
+                ErrorMessage.text = "Connection Timeout";
             }
         } else {
             // Prompt User of Incorrect InputFields
