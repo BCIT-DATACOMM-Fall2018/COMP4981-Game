@@ -18,9 +18,9 @@ using NetworkLibrary.MessageElements;
 ///
 /// REVISIONS:
 ///
-/// DESIGNER: 	Cameron Roberts
+/// DESIGNER: 	Cameron Roberts, Simon Wu
 ///
-/// PROGRAMMER: Cameron Roberts
+/// PROGRAMMER: Cameron Roberts, Simon Wu
 ///
 /// NOTES:
 /// ----------------------------------------------
@@ -34,6 +34,8 @@ public class AbilityController : MonoBehaviour
     private GameObject bulletAbility;
     private GameObject dart;
     private GameObject fireball;
+    private GameObject weebOut;
+    private GameObject whale;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -43,9 +45,9 @@ public class AbilityController : MonoBehaviour
     /// REVISIONS:	March 24th, 2019 - JK - added Wall ability Object
     ///
     /// DESIGNER:	Cameron Roberts
-    ///
-    /// PROGRAMMER:	Cameron Roberts
-    ///
+    /// 
+    /// PROGRAMMER:	Cameron Roberts, Simon Wu
+    /// 
     /// INTERFACE: 	void Start()
     ///
     /// RETURNS: 	void
@@ -63,6 +65,8 @@ public class AbilityController : MonoBehaviour
         bulletAbility = Resources.Load<GameObject>("Ability/BulletAbility");
         dart = Resources.Load<GameObject>("Ability/Dart");
         fireball = Resources.Load<GameObject>("Ability/Fireball");
+        weebOut = Resources.Load<GameObject>("Ability/WeebOut");
+        whale = Resources.Load<GameObject>("Ability/Whale");
     }
 
 
@@ -107,6 +111,12 @@ public class AbilityController : MonoBehaviour
                 break;
             case AbilityType.Fireball:
                 AbilityFireball(x, z, collisionId);
+                break;
+            case AbilityType.WeebOut:
+                AbilityWeebOut(x, z, collisionId);
+                break;
+            case AbilityType.Whale:
+                AbilityWhale(x, z, collisionId);
                 break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
@@ -334,6 +344,30 @@ public class AbilityController : MonoBehaviour
         // Set its creator id and ability type which will be used later for collisions
         area.GetComponent<Ability>().creator = gameObject;
         area.GetComponent<Ability>().abilityId = AbilityType.Fireball;
+        area.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack2");
+    }
+    private void AbilityWeebOut(float x, float z, int collisionId)
+    {
+        // Instantiate projectile
+        var area = Instantiate(weebOut, new Vector3(x, 0.01f, z), Quaternion.identity);
+
+        // Set its creator id and ability type which will be used later for collisions
+        area.GetComponent<Ability>().creator = gameObject; ;
+        area.GetComponent<Ability>().abilityId = AbilityType.WeebOut;
+        area.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack2");
+
+    }
+
+    private void AbilityWhale(float x, float z, int collisionId)
+    {
+        // Instantiate projectile
+        var area = Instantiate(whale, new Vector3(x, 0.01f, z), Quaternion.identity);
+
+        // Set its creator id and ability type which will be used later for collisions
+        area.GetComponent<Ability>().creator = gameObject; ;
+        area.GetComponent<Ability>().abilityId = AbilityType.Whale;
         area.GetComponent<Ability>().collisionId = collisionId;
         GetComponent<Animator>().SetTrigger("attack2");
 
