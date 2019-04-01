@@ -11,22 +11,22 @@ using NetworkLibrary.MessageElements;
 /// ----------------------------------------------
 /// Interface: 	ConnectionManager - A singleton class to manage a connection
 ///                                 to the server
-/// 
+///
 /// PROGRAM: SKOM
 ///
 /// CONSTRUCTORS:	private ConnectionManager()
-/// 
+///
 /// FUNCTIONS:	TBD
-/// 
+///
 /// DATE: 		March 14th, 2019
 ///
-/// REVISIONS: 
+/// REVISIONS:
 ///
 /// DESIGNER: 	Simon Wu, Simon Shoban, Cameron Roberts
 ///
 /// PROGRAMMER: Simon Wu, Simon Shoban, Cameron Roberts
 ///
-/// NOTES:		
+/// NOTES:
 /// ----------------------------------------------
 public class ConnectionManager
 {
@@ -42,7 +42,7 @@ public class ConnectionManager
     private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
     private int playerNum;
-    public int PlayerNum {get{return playerNum;} set { 
+    public int PlayerNum {get{return playerNum;} set {
         unreliableElementIds = new ElementId[value*2];
         for (int i = 0; i < value*2; i++)
         {
@@ -58,17 +58,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
 	/// CONSTRUCTOR: ConnectionManager
-	/// 
+	///
 	/// DATE: 		March 14th, 2019
-	/// 
-	/// REVISIONS:	
-	/// 
+	///
+	/// REVISIONS:
+	///
 	/// DESIGNER:	Simon Shoban, Simon Wu
-	/// 
+	///
 	/// PROGRAMMER:	Simon Shoban, Simon Wu
-	/// 
+	///
 	/// INTERFACE: 	private ConnectionManager ()
-	/// 
+	///
 	/// NOTES:		Default constructor. Private to maintain singleton
 	/// ----------------------------------------------
     private ConnectionManager()
@@ -82,18 +82,18 @@ public class ConnectionManager
 
 	/// ----------------------------------------------
     /// FUNCTION:	QueueReliableElement
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	public void QueueReliableElement(UpdateElement element)
 	///					UpdateElement element: The UpdateElement to add to the queue
-    /// 
+    ///
     /// NOTES:		Any UpdateElement added to the queue will be sent to the server with
     ///             the next packet (assuming theres space in the packet)
     /// ----------------------------------------------
@@ -111,19 +111,19 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	InitializeConnection
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Shoban, Simon Wu, Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Simon Shoban, Simon Wu, Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	public void InitializeConnection(String stringIp)
 	///					String stringIp: The IP address of the server as a string
-    /// 
-    /// NOTES:		
+    ///
+    /// NOTES:
     /// ----------------------------------------------
     public void InitializeConnection(String stringIp){
 
@@ -138,17 +138,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	CreateUDPSocket
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Shoban, Simon Wu
-    /// 
+    ///
     /// PROGRAMMER:	Simon Shoban, Simon Wu
-    /// 
+    ///
     /// INTERFACE: 	private void CreateSocketUDP()
-    /// 
+    ///
     /// NOTES:		Creates and binds a UDP socket
     /// ----------------------------------------------
     private void CreateSocketUDP()
@@ -159,17 +159,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	ConnectReliableUDP
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Shoban, Simon Wu
-    /// 
+    ///
     /// PROGRAMMER:	Simon Shoban, Simon Wu
-    /// 
+    ///
     /// INTERFACE: 	private void CreateSocketUDP()
-    /// 
+    ///
     /// NOTES:		Initiates the ReliableUDPConnection
     /// ----------------------------------------------
     private void ConnectReliableUDP()
@@ -179,17 +179,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	SendStatePacket
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	public void SendStatePacket(List<UpdateElement> gameState)
-    /// 
+    ///
     /// NOTES:		Takes the given UpdateElements and combines them
     ///             with UpdateElements from the ReliableElementQueue
     ///             and sends the packet to the server.
@@ -207,18 +207,74 @@ public class ConnectionManager
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:	StarBackgroundNetworking
-    /// 
-    /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    /// FUNCTION:	Login
+    ///
+    /// DATE:		March 31th, 2019
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
+    /// PROGRAMMER:	Viktor Alvar
+    ///
+    /// INTERFACE: 	public void Login(String stringIp)
+    ///
+    /// NOTES:      Sends initial connect packet to the server and
+    ///             loads the lobby scene if connection was successfull.
+    /// ----------------------------------------------
+    private void Login(String stringIp){
+        // TODO: Get User's Name
+
+        // Create and Send Request Packet
+        IPAddress address = IPAddress.Parse(stringIp);
+        destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
+        socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
+
+        // TODO: Load Lobby Scene
+        // TODO: Pass ClientId to Lobby Scene
+        // Receive Confirmation Packet and Establish Connection
+        Packet confirmationPacket = socket.Receive();
+        ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
+        ConnectReliableUDP();
+
+        connected = true;
+        Debug.Log("Connected");
+
+        // Create ReadyElement for current client
+        List<UpdateElement> readyList = new List<UpdateElement>();
+        readyList.Add(new ReadyElement(true, ClientId));
+
+        // TODO: Keep Sending Heartbeat Packets until Game Start (maybe for Lobby Scene)
+        // TODO: Client send ready or not read packets to server in (maybe for Lobby Scene)
+        // Send Heartbeat Packet to let Server add current client to PlayerConnection array
+        // The packet lets the server know the client is ready to start the game
+        Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
+        socket.Send(readyPacket, destination);
+
+        // Receive the start packet
+        // Start Packet contains Unreliable Elements which contians number of connections to server
+        // Start Packet contains Reliable Elements which contains each client's properties
+        Packet startPacket = socket.Receive();
+        UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] { });
+        unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
+        unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
+
+        // TODO: Pass start packet elements to Lobby Scene to display each client
+    }
+
+    /// ----------------------------------------------
+    /// FUNCTION:	StarBackgroundNetworking
+    ///
+    /// DATE:		March 14th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	private void StartBackgroundNetworking(String stringIp)
-    /// 
+    ///
     /// NOTES:		Creates and starts a thread that will perform network operations
     ///             in the background.
     /// ----------------------------------------------
@@ -227,43 +283,24 @@ public class ConnectionManager
         backgroundRead.Start();
     }
 
-
     /// ----------------------------------------------
     /// FUNCTION:	BackgroundNetworking
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	private void BackgroundNetworking(String stringIp)
-    /// 
+    ///
     /// NOTES:		Recieves packets from the server and queues elements
     ///             from the received packets.
     /// ----------------------------------------------
     private void BackgroundNetworking(String stringIp) {
-        IPAddress address = IPAddress.Parse(stringIp);
-        destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
-        socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
-        Packet confirmationPacket = socket.Receive();
-        ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
-        ConnectReliableUDP();
-
-        connected = true;
-        Debug.Log("Connected");
-
-        List<UpdateElement> readyList = new List<UpdateElement>();
-        readyList.Add(new ReadyElement(true, ClientId));
-        Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
-        socket.Send(readyPacket, destination);
-
-        Packet startPacket = socket.Receive();
-        UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {});
-        unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
-        unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
+        Login(stringIp);
 
         //Game State
         while(true){
