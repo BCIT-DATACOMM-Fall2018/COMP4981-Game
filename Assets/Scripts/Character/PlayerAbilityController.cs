@@ -66,11 +66,7 @@ public class PlayerAbilityController : AbilityController
     {
         base.Start();
 
-<<<<<<< HEAD
-        abilities = new AbilityType[] {AbilityType.TestProjectile, AbilityType.TestTargeted, AbilityType.Banish, AbilityType.Wall};
-=======
-        abilities = new AbilityType[] {AbilityType.TestProjectile, AbilityType.TestTargeted, AbilityType.UwuImScared, AbilityType.Fireball};
->>>>>>> f90f85ebd9523d20589e658647efdc79a4dded83
+        abilities = new AbilityType[] {AbilityType.TestProjectile, AbilityType.Blink, AbilityType.TestTargetedHoming, AbilityType.TestAreaOfEffect};
         buttonNames = new String[] {"Ability1", "Ability2", "Ability3", "Ability4"};
         Cooldowns = new float[4];
         MaxCooldowns = new float[4];

@@ -243,13 +243,13 @@ public class ClientStateMessageBridge : IStateMessageBridge
 		} else {
 			try {
 				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
-					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
-					actor.transform.position = targetPosition;
-				}
-                if(enableAgent){
-                    actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
+                actor.transform.position = targetPosition;
                 }
-				actor.GetComponent<ActorMovement>().SetTargetPosition(new Vector3(x, 0, z));
+                if(enableAgent){
+                actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                }
+                actor.GetComponent<ActorMovement>().SetTargetPosition(new Vector3(x, 0, z));
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
 			}
@@ -317,8 +317,8 @@ public class ClientStateMessageBridge : IStateMessageBridge
         ConnectionManager.Instance.GameOver = true;
     }
 
-    public void UpdateActorExperience(int actorId, int experience)
-    {
+	public void UpdateActorExperience(int actorId, int newExp) {
 
-    }
+	}
+
 }
