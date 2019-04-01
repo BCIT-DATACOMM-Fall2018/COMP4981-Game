@@ -33,6 +33,7 @@ public class AbilityController : MonoBehaviour
     private GameObject wallAbilityObject;
     private GameObject bulletAbility;
     private GameObject dart;
+    private GameObject fireball;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -61,6 +62,7 @@ public class AbilityController : MonoBehaviour
         wallAbilityObject = Resources.Load<GameObject>("Ability/WallAbilityObject");
         bulletAbility = Resources.Load<GameObject>("Ability/BulletAbility");
         dart = Resources.Load<GameObject>("Ability/Dart");
+        fireball = Resources.Load<GameObject>("Ability/Fireball");
     }
 
 
@@ -102,6 +104,9 @@ public class AbilityController : MonoBehaviour
                 break;
             case AbilityType.Dart:
                 Dart(x, z, collisionId);
+                break;
+            case AbilityType.Fireball:
+                AbilityFireball(x, z, collisionId);
                 break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
@@ -155,6 +160,9 @@ public class AbilityController : MonoBehaviour
                 break;
             case AbilityType.Purification:
                 Purification(target, collisionId);
+                break;
+            case AbilityType.UwuImScared:
+                AbilityUwuImScared();
                 break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
@@ -319,6 +327,18 @@ public class AbilityController : MonoBehaviour
 
     }
 
+    private void AbilityFireball(float x, float z, int collisionId){
+        // Instantiate projectile
+        var area = Instantiate(fireball, new Vector3(x, 0.01f, z), Quaternion.identity);
+
+        // Set its creator id and ability type which will be used later for collisions
+        area.GetComponent<Ability>().creator = gameObject;
+        area.GetComponent<Ability>().abilityId = AbilityType.Fireball;
+        area.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack2");
+
+    }
+
     private void AbilityTestTargeted(GameObject target, int collisionId){
         // TODO Play some sort of animation. No collsion is needed as the
         // abilities effect is instantly applied by the server
@@ -341,6 +361,11 @@ public class AbilityController : MonoBehaviour
         projectile.GetComponent<Ability>().collisionId = collisionId;
         GetComponent<Animator>().SetTrigger("attack4");
 
+    }
+
+    private void AbilityUwuImScared(){
+        // not sure what else to do here
+        // play some sort of animation?
     }
 
     private void AbilityAutoAttack(GameObject target, int collisionId){
