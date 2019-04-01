@@ -219,7 +219,7 @@ public class ConnectionManager
     ///             is called when the client logs into the the lobby
     /// ----------------------------------------------
     public Boolean RequestConnection(String stringIp, String clientName) {
-        IPAddress address = IPAddress.Parse(Ipaddress);
+        IPAddress address = IPAddress.Parse(stringIp);
         destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
         socket.Send(ReliableUDPConnection.CreateRequestPacket(clientName), destination);
         // TODO: Receive call just blocks, introduce client or server timeout
