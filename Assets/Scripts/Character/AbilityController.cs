@@ -132,6 +132,12 @@ public class AbilityController : MonoBehaviour
             case AbilityType.TestTargetedHoming:
                 AbilityTestTargetedHoming(target, collisionId);
                 break;
+            case AbilityType.PewPew:
+                AbilityTestTargeted(target, collisionId);
+                break;
+            case AbilityType.Sploosh:
+                AbilityTestTargeted(target, collisionId);
+                break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
                 break;
@@ -201,8 +207,37 @@ public class AbilityController : MonoBehaviour
         Debug.Log("Play autoattack animation");
     }
 
+    private void AbilityPewPew(GameObject target, int collisionId)
+    {
+        // Instantiate projectile
+        var projectile = Instantiate(testHomingProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
+
+        // Set the projectiles target
+        projectile.GetComponent<TestTargetedHomingAbility>().target = target;
+
+        // Set its creator id and ability type which will be used later for collisions
+        projectile.GetComponent<Ability>().GetComponent<Ability>().creator = gameObject;
+        projectile.GetComponent<Ability>().abilityId = AbilityType.PewPew;
+        projectile.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack4");
+    }
+
+    private void AbilitySploosh(GameObject target, int collisionId)
+    {
+        // TODO Play some sort of animation. No collsion is needed as the
+        // abilities effect is instantly applied by the server
+        GetComponent<Animator>().SetTrigger("attack1");
+        int targetId = target.GetComponent<Actor>().ActorId;
+        int casterId = gameObject.GetComponent<Actor>().ActorId;
+        StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.Sploosh, targetId, casterId, collisionId), 0.25f));
+        Debug.Log("Play autoattack animation");
+
+
+    }
+
     IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)  {
         yield return new WaitForSeconds(delayTime);
         ConnectionManager.Instance.QueueReliableElement(collisionElement);
     }  
+
 }

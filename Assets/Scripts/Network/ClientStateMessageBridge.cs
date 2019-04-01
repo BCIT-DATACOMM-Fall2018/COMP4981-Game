@@ -317,6 +317,11 @@ public class ClientStateMessageBridge : IStateMessageBridge
         ConnectionManager.Instance.GameOver = true;
     }
 
+    public void UpdateActorExperience(int actorId, int exp)
+    {
+
+    }
+
 }
 
 
