@@ -202,17 +202,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	SendLobbyHeartbeat
-    /// 
+    ///
     /// DATE:		March 28h, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Rhys Snaydon
-    /// 
+    ///
     /// PROGRAMMER: Rhys Snaydon
-    /// 
+    ///
     /// INTERFACE: 	public void SendLobbyHeartbeat(List<UpdateElement> readyList)
-    /// 
+    ///
     /// NOTES:		Sends a hearbeat packet to the server to update the client's
     ///             ready status and team.
     /// ----------------------------------------------
@@ -224,17 +224,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	StarLobbyNetworking
-    /// 
+    ///
     /// DATE:		March 28h, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Rhys Snaydon
-    /// 
+    ///
     /// PROGRAMMER: Rhys Snaydon
-    /// 
+    ///
     /// INTERFACE: 	public void StartLobbyNetworking(LobbyStateMessageBridge StateBridge, ConcurrentQueue<UpdateElement> ElementQueue)
-    /// 
+    ///
     /// NOTES:		Creates and starts a thread that will receive server updates
     ///             in the background of the lobby state.
     /// ----------------------------------------------
@@ -247,18 +247,18 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	LobbyNetworking
-    /// 
+    ///
     /// DATE:		March 28h, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Rhys Snaydon
-    /// 
+    ///
     /// PROGRAMMER: Rhys Snaydon
-    /// 
+    ///
     /// INTERFACE: 	public void StartLobbyNetworking(LobbyStateMessageBridge StateBridge, ConcurrentQueue<UpdateElement> ElementQueue)
-    /// 
-    /// NOTES:		Receives LobbyStatusElements from the server and adds the to 
+    ///
+    /// NOTES:		Receives LobbyStatusElements from the server and adds the to
     ///             a concurrent queue to be processed by the LobbyManager.
     /// ----------------------------------------------
     private void LobbyNetworking(LobbyStateMessageBridge StateBridge, ConcurrentQueue<UpdateElement> ElementQueue)
@@ -274,17 +274,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	LobbyNetworking
-    /// 
+    ///
     /// DATE:		April 1, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Rhys Snaydon
-    /// 
+    ///
     /// PROGRAMMER: Rhys Snaydon
-    /// 
+    ///
     /// INTERFACE: 	public void ExitLobbyState(int PlayerCount)
-    /// 
+    ///
     /// NOTES:		Sets up the game state and starts the background networking.
     /// ----------------------------------------------
     public void ExitLobbyState(int PlayerCount)
@@ -341,60 +341,59 @@ public class ConnectionManager
     /// NOTES:      Sends initial connect packet to the server and
     ///             loads the lobby scene if connection was successfull.
     /// ----------------------------------------------
-    private void Login(String stringIp){
-        // TODO: Get User's Name
+    // private void Login(String stringIp){
+    //     // TODO: Get User's Name
 
+    //     // Create and Send Request Packet
+    //     IPAddress address = IPAddress.Parse(stringIp);
+    //     destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
+    //     socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
 
-        // Create and Send Request Packet
-        IPAddress address = IPAddress.Parse(stringIp);
-        destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
-        socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
+    //     // TODO: Load Lobby Scene
+    //     // TODO: Pass ClientId to Lobby Scene
+    //     // Receive Confirmation Packet and Establish Connection
+    //     Packet confirmationPacket = socket.Receive();
+    //     ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
+    //     ConnectReliableUDP();
 
-        // TODO: Load Lobby Scene
-        // TODO: Pass ClientId to Lobby Scene
-        // Receive Confirmation Packet and Establish Connection
-        Packet confirmationPacket = socket.Receive();
-        ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
-        ConnectReliableUDP();
+    //     connected = true;
+    //     Debug.Log("Connected");
 
-        connected = true;
-        Debug.Log("Connected");
+    //     // Create ReadyElement for current client
+    //     List<UpdateElement> readyList = new List<UpdateElement>();
+    //     readyList.Add(new ReadyElement(true, ClientId, 0));
 
-        // Create ReadyElement for current client
-        List<UpdateElement> readyList = new List<UpdateElement>();
-        readyList.Add(new ReadyElement(true, ClientId));
+    //     // TODO: Keep Sending Heartbeat Packets until Game Start (maybe for Lobby Scene)
+    //     // TODO: Client send ready or not read packets to server in (maybe for Lobby Scene)
+    //     // Send Heartbeat Packet to let Server add current client to PlayerConnection array
+    //     // The packet lets the server know the client is ready to start the game
+    //     Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
+    //     socket.Send(readyPacket, destination);
 
-        // TODO: Keep Sending Heartbeat Packets until Game Start (maybe for Lobby Scene)
-        // TODO: Client send ready or not read packets to server in (maybe for Lobby Scene)
-        // Send Heartbeat Packet to let Server add current client to PlayerConnection array
-        // The packet lets the server know the client is ready to start the game
-        Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
-        socket.Send(readyPacket, destination);
+    //     // Receive the start packet
+    //     // Start Packet contains Unreliable Elements which contians number of connections to server
+    //     // Start Packet contains Reliable Elements which contains each client's properties
+    //     Packet startPacket = socket.Receive();
+    //     UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] { });
+    //     unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
+    //     unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
 
-        // Receive the start packet
-        // Start Packet contains Unreliable Elements which contians number of connections to server
-        // Start Packet contains Reliable Elements which contains each client's properties
-        Packet startPacket = socket.Receive();
-        UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] { });
-        unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
-        unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
-
-        // TODO: Pass start packet elements to Lobby Scene to display each client
-    }
+    //     // TODO: Pass start packet elements to Lobby Scene to display each client
+    // }
 
     /// ----------------------------------------------
     /// FUNCTION:	StarBackgroundNetworking
     ///
     /// DATE:		March 14th, 2019
-    /// 
+    ///
     /// REVISIONS:	April 1st, 2019
-    /// 
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts, Rhys Snaydon
-    /// 
+    ///
     /// INTERFACE: 	private void StartBackgroundNetworking()
-    /// 
+    ///
     /// NOTES:		Creates and starts a thread that will perform network operations
     ///             in the background.
     /// ----------------------------------------------
@@ -407,15 +406,15 @@ public class ConnectionManager
     /// FUNCTION:	BackgroundNetworking
     ///
     /// DATE:		March 14th, 2019
-    /// 
+    ///
     /// REVISIONS:	April 1st, 2019
-    /// 
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts, Rhys Snaydon
-    /// 
+    ///
     /// INTERFACE: 	private void BackgroundNetworking()
-    /// 
+    ///
     /// NOTES:		Recieves packets from the server and queues elements
     ///             from the received packets.
     /// ----------------------------------------------
