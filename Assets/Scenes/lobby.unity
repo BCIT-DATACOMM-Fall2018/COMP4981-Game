@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 181627633}
   - component: {fileID: 181627632}
   m_Layer: 5
-  m_Name: teamA
+  m_Name: TeamA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 678744483}
-        m_MethodName: selectTeamA
+        m_MethodName: Select
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 342872215}
   - component: {fileID: 342872214}
   m_Layer: 5
-  m_Name: idle
+  m_Name: Idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 489623860}
   - component: {fileID: 489623859}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ReadyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -703,7 +703,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ready
+  m_Text: 
 --- !u!222 &489623860
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -848,7 +848,7 @@ GameObject:
   - component: {fileID: 678744484}
   - component: {fileID: 678744483}
   m_Layer: 0
-  m_Name: SelectTeamManager
+  m_Name: LobbyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -866,10 +866,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c2825dcd8b8f64da1b840de37a3b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a1: {fileID: 2045966037}
-  a2: {fileID: 135697882}
-  a3: {fileID: 1683646190}
-  aIndex: 0
+  TeamAText: {fileID: 1654575377}
+  IdleText: {fileID: 1407857974}
+  TeamBText: {fileID: 1903646569}
+  ReadyText: {fileID: 489623859}
 --- !u!4 &678744484
 Transform:
   m_ObjectHideFlags: 0
@@ -897,7 +897,7 @@ GameObject:
   - component: {fileID: 792478912}
   - component: {fileID: 792478911}
   m_Layer: 5
-  m_Name: teamB
+  m_Name: TeamB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1331,7 +1331,7 @@ GameObject:
   - component: {fileID: 1407857975}
   - component: {fileID: 1407857974}
   m_Layer: 5
-  m_Name: Text
+  m_Name: IdleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1490,7 +1490,7 @@ GameObject:
   - component: {fileID: 1485251154}
   - component: {fileID: 1485251153}
   m_Layer: 5
-  m_Name: ready
+  m_Name: Ready
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1555,7 +1555,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1485251154}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 678744483}
+        m_MethodName: ToggleReady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1485251154
@@ -1607,7 +1618,7 @@ GameObject:
   - component: {fileID: 1654575378}
   - component: {fileID: 1654575377}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TeamAText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1915,7 +1926,7 @@ GameObject:
   - component: {fileID: 1903646570}
   - component: {fileID: 1903646569}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TeamBText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

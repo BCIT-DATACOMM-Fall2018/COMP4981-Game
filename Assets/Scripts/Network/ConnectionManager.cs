@@ -41,6 +41,9 @@ public class ConnectionManager
     public Boolean gameStarted;
     private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
+    public int Team {get; set;} = 2;
+    public bool GameOver {get; set;}
+
     private int playerNum;
     public int PlayerNum {get{return playerNum;} set {
         unreliableElementIds = new ElementId[value*2];
@@ -77,7 +80,7 @@ public class ConnectionManager
         MessageQueue = new ConcurrentQueue<UpdateElement>();
         ReliableElementQueue = new ConcurrentQueue<UpdateElement>();
         CreateSocketUDP();
-        InitializeConnection("127.0.0.1");
+        //InitializeConnection("127.0.0.1");
     }
 
 	/// ----------------------------------------------
@@ -127,7 +130,7 @@ public class ConnectionManager
     /// ----------------------------------------------
     public void InitializeConnection(String stringIp){
 
-        StartBackgroundNetworking(stringIp);
+        StartBackgroundNetworking();
     }
 
     private class NestedConnectionManager
@@ -153,7 +156,7 @@ public class ConnectionManager
     /// ----------------------------------------------
     private void CreateSocketUDP()
     {
-        socket = new UDPSocket();
+        socket = new UDPSocket(0);
         socket.Bind();
     }
 
@@ -176,6 +179,122 @@ public class ConnectionManager
     {
         connection = new ReliableUDPConnection(ClientId);
     }
+
+
+    //
+    //
+    //
+    //  T E M P   H E L P E R
+    //
+    //
+    //
+    public void InitConnection(String Ipaddress)
+    {
+        IPAddress address = IPAddress.Parse(Ipaddress);
+        destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
+        socket.Send(ReliableUDPConnection.CreateRequestPacket("Alice"), destination);
+        Packet confirmationPacket = socket.Receive();
+        ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
+        ConnectionManager.Instance.ConnectReliableUDP();
+    }
+
+
+
+    /// ----------------------------------------------
+    /// FUNCTION:	SendLobbyHeartbeat
+    /// 
+    /// DATE:		March 28h, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Rhys Snaydon
+    /// 
+    /// PROGRAMMER: Rhys Snaydon
+    /// 
+    /// INTERFACE: 	public void SendLobbyHeartbeat(List<UpdateElement> readyList)
+    /// 
+    /// NOTES:		Sends a hearbeat packet to the server to update the client's
+    ///             ready status and team.
+    /// ----------------------------------------------
+    public void SendLobbyHeartbeat(List<UpdateElement> readyList)
+    {
+        Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
+        socket.Send(readyPacket, destination);
+    }
+
+    /// ----------------------------------------------
+    /// FUNCTION:	StarLobbyNetworking
+    /// 
+    /// DATE:		March 28h, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Rhys Snaydon
+    /// 
+    /// PROGRAMMER: Rhys Snaydon
+    /// 
+    /// INTERFACE: 	public void StartLobbyNetworking(LobbyStateMessageBridge StateBridge, ConcurrentQueue<UpdateElement> ElementQueue)
+    /// 
+    /// NOTES:		Creates and starts a thread that will receive server updates
+    ///             in the background of the lobby state.
+    /// ----------------------------------------------
+    public void StartLobbyNetworking(LobbyStateMessageBridge StateBridge, ConcurrentQueue<UpdateElement> ElementQueue)
+    {
+        inLobby = true;
+        Thread backgroundReceive = new Thread(() => LobbyNetworking(StateBridge, ElementQueue));
+        backgroundReceive.Start();
+    }
+
+    /// ----------------------------------------------
+    /// FUNCTION:	LobbyNetworking
+    /// 
+    /// DATE:		March 28h, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Rhys Snaydon
+    /// 
+    /// PROGRAMMER: Rhys Snaydon
+    /// 
+    /// INTERFACE: 	public void StartLobbyNetworking(LobbyStateMessageBridge StateBridge, ConcurrentQueue<UpdateElement> ElementQueue)
+    /// 
+    /// NOTES:		Receives LobbyStatusElements from the server and adds the to 
+    ///             a concurrent queue to be processed by the LobbyManager.
+    /// ----------------------------------------------
+    private void LobbyNetworking(LobbyStateMessageBridge StateBridge, ConcurrentQueue<UpdateElement> ElementQueue)
+    {
+        while (inLobby)
+        {
+            Packet ServerPacket = socket.Receive();
+            UnpackedPacket UnpacketLobbyStatus = connection.ProcessPacket(ServerPacket, new ElementId[] {ElementId.LobbyStatusElement});
+            UnpacketLobbyStatus.UnreliableElements.ForEach(ElementQueue.Enqueue);
+            UnpacketLobbyStatus.ReliableElements.ForEach(ElementQueue.Enqueue);
+        }
+    }
+
+    /// ----------------------------------------------
+    /// FUNCTION:	LobbyNetworking
+    /// 
+    /// DATE:		April 1, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Rhys Snaydon
+    /// 
+    /// PROGRAMMER: Rhys Snaydon
+    /// 
+    /// INTERFACE: 	public void ExitLobbyState(int PlayerCount)
+    /// 
+    /// NOTES:		Sets up the game state and starts the background networking.
+    /// ----------------------------------------------
+    public void ExitLobbyState(int PlayerCount)
+    {
+        PlayerNum = PlayerCount;
+        inLobby = false;
+		gameStarted = true;
+        StartBackgroundNetworking();
+    }
+
 
     /// ----------------------------------------------
     /// FUNCTION:	SendStatePacket
@@ -267,20 +386,20 @@ public class ConnectionManager
     /// FUNCTION:	StarBackgroundNetworking
     ///
     /// DATE:		March 14th, 2019
-    ///
-    /// REVISIONS:
-    ///
+    /// 
+    /// REVISIONS:	April 1st, 2019
+    /// 
     /// DESIGNER:	Cameron Roberts
-    ///
-    /// PROGRAMMER:	Cameron Roberts
-    ///
-    /// INTERFACE: 	private void StartBackgroundNetworking(String stringIp)
-    ///
+    /// 
+    /// PROGRAMMER:	Cameron Roberts, Rhys Snaydon
+    /// 
+    /// INTERFACE: 	private void StartBackgroundNetworking()
+    /// 
     /// NOTES:		Creates and starts a thread that will perform network operations
     ///             in the background.
     /// ----------------------------------------------
-    private void StartBackgroundNetworking(String stringIp){
-        Thread backgroundRead = new Thread(() => BackgroundNetworking(stringIp));
+    private void StartBackgroundNetworking(){
+        Thread backgroundRead = new Thread(() => BackgroundNetworking());
         backgroundRead.Start();
     }
 
@@ -288,20 +407,38 @@ public class ConnectionManager
     /// FUNCTION:	BackgroundNetworking
     ///
     /// DATE:		March 14th, 2019
-    ///
-    /// REVISIONS:
-    ///
+    /// 
+    /// REVISIONS:	April 1st, 2019
+    /// 
     /// DESIGNER:	Cameron Roberts
-    ///
-    /// PROGRAMMER:	Cameron Roberts
-    ///
-    /// INTERFACE: 	private void BackgroundNetworking(String stringIp)
-    ///
+    /// 
+    /// PROGRAMMER:	Cameron Roberts, Rhys Snaydon
+    /// 
+    /// INTERFACE: 	private void BackgroundNetworking()
+    /// 
     /// NOTES:		Recieves packets from the server and queues elements
     ///             from the received packets.
     /// ----------------------------------------------
-    private void BackgroundNetworking(String stringIp) {
-        Login(stringIp);
+    private void BackgroundNetworking() {
+        // IPAddress address = IPAddress.Parse(stringIp);
+        // destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
+        // socket.Send(ReliableUDPConnection.CreateRequestPacket("Alice"), destination);
+        // Packet confirmationPacket = socket.Receive();
+        // ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
+        // ConnectReliableUDP();
+
+        // connected = true;
+        // Debug.Log("Connected");
+
+        // List<UpdateElement> readyList = new List<UpdateElement>();
+        // readyList.Add(new ReadyElement(true, ClientId, Team));
+        // Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
+        // socket.Send(readyPacket, destination);
+
+        // Packet startPacket = socket.Receive();
+        // UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {ElementId.LobbyStatusElement});
+        // unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
+        // unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
 
         //Game State
         while(true){

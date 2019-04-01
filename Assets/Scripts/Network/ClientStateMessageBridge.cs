@@ -1,6 +1,9 @@
 using System;
 using NetworkLibrary;
+using NetworkLibrary.MessageElements;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 /// ----------------------------------------------
@@ -124,8 +127,8 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// NOTES:		A function to instruct an actor to use an ability on another actor.
     /// ----------------------------------------------
-	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId){
-		//TODO Implement this function
+	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId, int collisionId){
+        objectController.GameActors[actorId].GetComponent<AbilityController>().UseTargetedAbility(abilityId, objectController.GameActors[targetId], collisionId);
 	}
 
 	/// ----------------------------------------------
@@ -147,8 +150,8 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// NOTES:		A function to instruct an actor to use an ability on a location.
     /// ----------------------------------------------
-	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z){
-        objectController.GameActors[actorId].GetComponent<AbilityController>().UseAbility(abilityId, x, z);
+	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z, int collisionId){
+        objectController.GameActors[actorId].GetComponent<AbilityController>().UseAreaAbility(abilityId, x, z, collisionId);
     }
 
 	/// ----------------------------------------------
@@ -166,7 +169,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// NOTES:		Function not intended to be used on the client.
     /// ----------------------------------------------
-	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId){
+	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId, int collisionId){
 
 	}
 
@@ -181,21 +184,19 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// PROGRAMMER:	Cameron Roberts
     /// 
-    /// INTERFACE: 	public void SpawnActor(ActorType actorType, int ActorId, float x, float z)
+    /// INTERFACE: 	public void SpawnActor(ActorType actorType, int ActorId, int team, float x, float z)
 	///					ActorType actorType: The type of actor to spawn
 	///					int actorId: An id to assign the newly created actor
+    ///                 int team: The team the actor should be on
 	///					float x: The x position to spawn the actor in
 	///					float z: The z position to spawn the actor in
     /// 
     /// NOTES:		A function to spawn new actors
     /// ----------------------------------------------
-	public void SpawnActor(ActorType actorType, int ActorId, float x, float z){
-		Debug.Log("Spawn actor " + ActorId + " " + actorType);
-		if(actorType == ActorType.AlliedPlayer && ActorId == ConnectionManager.Instance.ClientId){
-			objectController.InstantiateObject(ActorType.Player, new Vector3(x,0,z), ActorId);
-		} else {
-			objectController.InstantiateObject(actorType, new Vector3(x,0,z), ActorId);
-		}
+	public void SpawnActor(ActorType actorType, int actorId, int team, float x, float z){
+        {
+			objectController.InstantiateObject(ActorType.Player, new Vector3(x,0,z), actorId, team);
+        }
 	}
 
 	/// ----------------------------------------------
@@ -220,25 +221,35 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	///				and target position. Behaviour differs if the actor is the player character.
     /// ----------------------------------------------
 	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
-		Debug.Log("Setting actor movement of " + actorId + " position + "+ x+","+z +" target"+targetX+","+targetZ);
-
+        GameObject actor = objectController.GameActors[actorId];
+        bool enableAgent = false;
+        if(x == -10 && z == -10 && targetX == -10 && targetZ == -10){
+            actor.GetComponent<Actor>().Die();
+            actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+        } else {
+            enableAgent = true;
+        }
 		if(actorId == ConnectionManager.Instance.ClientId){
 			try {	
-				GameObject actor = objectController.GameActors[actorId];
 				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
 					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
 					actor.transform.position = targetPosition;
 				}
+                if(enableAgent){
+                    actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                }
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
 			}
 		} else {
 			try {	
-				GameObject actor = objectController.GameActors[actorId];
 				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
 					Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
 					actor.transform.position = targetPosition;
 				}
+                if(enableAgent){
+                    actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                }
 				actor.GetComponent<ActorMovement>().SetTargetPosition(new Vector3(x, 0, z));
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
@@ -258,11 +269,11 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// 
     /// PROGRAMMER:	
     /// 
-    /// INTERFACE: 	public void SetReady(int clientId, bool ready)
+    /// INTERFACE: 	public void SetReady(int clientId, bool ready, int team)
     /// 
     /// NOTES:		Function not intended to be used on the client.
     /// ----------------------------------------------
-	public void SetReady(int clientId, bool ready){
+	public void SetReady(int clientId, bool ready, int team){
 
 	}
 
@@ -288,6 +299,24 @@ public class ClientStateMessageBridge : IStateMessageBridge
 		ConnectionManager.Instance.PlayerNum = playerNum;
 		ConnectionManager.Instance.gameStarted = true;
 	}
+
+    public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo){
+		Debug.Log("Lobby Status");
+        foreach (var item in playerInfo)
+        {
+            Debug.Log("Id " + item.Id + ", Name " + item.Name + ", Team " + item.Team + ", Ready " + item.ReadyStatus);
+        }
+    }
+
+    public void EndGame(int winningTeam){
+        Debug.Log("Game End");
+        if(ConnectionManager.Instance.Team == winningTeam){
+            GameObject.Find("EndText").GetComponent<Text>().text = "You Win";
+        } else {
+            GameObject.Find("EndText").GetComponent<Text>().text = "You Lose";
+        }
+        ConnectionManager.Instance.GameOver = true;
+    }
 
 }
 

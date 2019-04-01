@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	Shot - A script to provide the logic to move
-///                a projectile shot by the player.
+/// Class: 	TestAreaOfEffectAbility - A script to provide the logic for an area of effect
 /// 
 /// PROGRAM: NetworkLibrary
 ///
@@ -22,13 +21,11 @@ using UnityEngine;
 ///
 /// NOTES:		
 /// ----------------------------------------------
-public class Shot : MonoBehaviour
+public class TestAreaOfEffectAbility : Ability
 {
 
-    public float speed = 10f;
-    public int creatorId;
-
-    private Vector3 start;
+    private float timer;
+    private const float MAX_TIME = 5f;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -50,8 +47,7 @@ public class Shot : MonoBehaviour
     /// ----------------------------------------------
     void Start ()
     {
-        GetComponent<Rigidbody>().velocity *= speed;
-        start = transform.position;
+
     }
 
     /// ----------------------------------------------
@@ -74,7 +70,8 @@ public class Shot : MonoBehaviour
     ///             starting point and delete it if it has gone too far.
     /// ----------------------------------------------
     void Update(){
-        if(Vector3.Distance(start, transform.position) > 49){
+        timer += Time.deltaTime;
+        if(timer > MAX_TIME){
             Destroy(gameObject);
         }
     }
@@ -92,19 +89,18 @@ public class Shot : MonoBehaviour
     /// 
     /// INTERFACE: 	void OnCollisionEnter(Collision col)
     /// 
-    /// RETURNS: 	void
+    /// RETURNS: 	void 
     /// 
-    /// NOTES:		MonoBehaviour function. Called at a fixed interval.
-    ///             Check how far the GameObject has moved from its
-    ///             starting point and delete it if it has gone too far.
+    /// NOTES:		
     /// ----------------------------------------------
-    void OnCollisionEnter (Collision col)
+    void OnTriggerEnter (Collider col)
     {
-        if(col.gameObject.name == "Rock1")
-        {
-            Destroy(col.gameObject);
+        Debug.Log("Collision with area of effect");
+        if(col.gameObject.tag == creator.tag){
+            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
+        } else{
+            SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
+            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
         }
     }
-
-
 }
