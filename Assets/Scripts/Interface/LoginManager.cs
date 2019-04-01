@@ -52,11 +52,14 @@ public class LoginManager : MonoBehaviour
     ///
     /// NOTES:		Handles the Login onClick event.
     /// ----------------------------------------------
-    public void onClickLogin() {
+    public void OnClickLogin() {
         if (!string.IsNullOrEmpty(IP.text) || !string.IsNullOrEmpty(Name.text)) {
             // Send Connect Packet
-            
-            SceneManager.LoadScene("Lobby");
+            if (ConnectionManager.Instance.RequestConnection(IP.text, Name.text)) {
+                SceneManager.LoadScene("Lobby");
+            } else {
+                ErrorMessage.text = "Connection Request Timeout";
+            }
         } else {
             // Prompt User of Incorrect InputFields
             ErrorMessage.text = "Invalid Input Fields";

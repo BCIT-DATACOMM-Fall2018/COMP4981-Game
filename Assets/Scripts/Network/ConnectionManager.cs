@@ -198,7 +198,41 @@ public class ConnectionManager
         ConnectionManager.Instance.ConnectReliableUDP();
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	ConnectReliableUDP
+    ///
+    /// DATE:		March 14th, 2019
+    ///
+    /// REVISIONS:  April 1st, 2019
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts, Viktor Alvar
+    ///
+    /// INTERFACE: 	private Boolean RequestConnection(String stringIp, String clientName)
+    ///                 String stringIp: Ip address entered by client
+    ///                 String clientName: Name entered by client
+    ///
+    /// RETURN:     Boolean. True if connection successful, otherwise False
+    ///
+    /// NOTES:		Requests initial connection to server. This function
+    ///             is called when the client logs into the the lobby
+    /// ----------------------------------------------
+    public Boolean RequestConnection(String stringIp, String clientName) {
+        IPAddress address = IPAddress.Parse(Ipaddress);
+        destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
+        socket.Send(ReliableUDPConnection.CreateRequestPacket(clientName), destination);
+        // TODO: Receive call just blocks, introduce client or server timeout
+        Packet confirmationPacket = socket.Receive();
 
+        // Check if received packet is a confirmation packet
+        if (ReliableUDPConnection.GetPacketType(confirmationPacket) != PacketType.ConfirmationPacket)
+            return false;
+
+        ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
+        ConnectReliableUDP();
+        return true;
+    }
 
     /// ----------------------------------------------
     /// FUNCTION:	SendLobbyHeartbeat
