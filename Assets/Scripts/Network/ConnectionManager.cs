@@ -225,6 +225,7 @@ public class ConnectionManager
     private void Login(String stringIp){
         // TODO: Get User's Name
 
+
         // Create and Send Request Packet
         IPAddress address = IPAddress.Parse(stringIp);
         destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
