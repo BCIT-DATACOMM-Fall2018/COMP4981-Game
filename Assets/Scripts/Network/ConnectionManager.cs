@@ -11,22 +11,22 @@ using NetworkLibrary.MessageElements;
 /// ----------------------------------------------
 /// Interface: 	ConnectionManager - A singleton class to manage a connection
 ///                                 to the server
-/// 
+///
 /// PROGRAM: SKOM
 ///
 /// CONSTRUCTORS:	private ConnectionManager()
-/// 
+///
 /// FUNCTIONS:	TBD
-/// 
+///
 /// DATE: 		March 14th, 2019
 ///
-/// REVISIONS: 
+/// REVISIONS:
 ///
 /// DESIGNER: 	Simon Wu, Simon Shoban, Cameron Roberts
 ///
 /// PROGRAMMER: Simon Wu, Simon Shoban, Cameron Roberts
 ///
-/// NOTES:		
+/// NOTES:
 /// ----------------------------------------------
 public class ConnectionManager
 {
@@ -45,7 +45,7 @@ public class ConnectionManager
     public bool GameOver {get; set;}
 
     private int playerNum;
-    public int PlayerNum {get{return playerNum;} set { 
+    public int PlayerNum {get{return playerNum;} set {
         unreliableElementIds = new ElementId[value*2];
         for (int i = 0; i < value*2; i++)
         {
@@ -61,17 +61,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
 	/// CONSTRUCTOR: ConnectionManager
-	/// 
+	///
 	/// DATE: 		March 14th, 2019
-	/// 
-	/// REVISIONS:	
-	/// 
+	///
+	/// REVISIONS:
+	///
 	/// DESIGNER:	Simon Shoban, Simon Wu
-	/// 
+	///
 	/// PROGRAMMER:	Simon Shoban, Simon Wu
-	/// 
+	///
 	/// INTERFACE: 	private ConnectionManager ()
-	/// 
+	///
 	/// NOTES:		Default constructor. Private to maintain singleton
 	/// ----------------------------------------------
     private ConnectionManager()
@@ -85,18 +85,18 @@ public class ConnectionManager
 
 	/// ----------------------------------------------
     /// FUNCTION:	QueueReliableElement
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	public void QueueReliableElement(UpdateElement element)
 	///					UpdateElement element: The UpdateElement to add to the queue
-    /// 
+    ///
     /// NOTES:		Any UpdateElement added to the queue will be sent to the server with
     ///             the next packet (assuming theres space in the packet)
     /// ----------------------------------------------
@@ -114,19 +114,19 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	InitializeConnection
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Shoban, Simon Wu, Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Simon Shoban, Simon Wu, Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	public void InitializeConnection(String stringIp)
 	///					String stringIp: The IP address of the server as a string
-    /// 
-    /// NOTES:		
+    ///
+    /// NOTES:
     /// ----------------------------------------------
     public void InitializeConnection(String stringIp){
 
@@ -141,17 +141,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	CreateUDPSocket
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Shoban, Simon Wu
-    /// 
+    ///
     /// PROGRAMMER:	Simon Shoban, Simon Wu
-    /// 
+    ///
     /// INTERFACE: 	private void CreateSocketUDP()
-    /// 
+    ///
     /// NOTES:		Creates and binds a UDP socket
     /// ----------------------------------------------
     private void CreateSocketUDP()
@@ -162,17 +162,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	ConnectReliableUDP
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Shoban, Simon Wu
-    /// 
+    ///
     /// PROGRAMMER:	Simon Shoban, Simon Wu
-    /// 
+    ///
     /// INTERFACE: 	private void CreateSocketUDP()
-    /// 
+    ///
     /// NOTES:		Initiates the ReliableUDPConnection
     /// ----------------------------------------------
     private void ConnectReliableUDP()
@@ -182,17 +182,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	SendStatePacket
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	public void SendStatePacket(List<UpdateElement> gameState)
-    /// 
+    ///
     /// NOTES:		Takes the given UpdateElements and combines them
     ///             with UpdateElements from the ReliableElementQueue
     ///             and sends the packet to the server.
@@ -211,17 +211,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	StarBackgroundNetworking
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	private void StartBackgroundNetworking(String stringIp)
-    /// 
+    ///
     /// NOTES:		Creates and starts a thread that will perform network operations
     ///             in the background.
     /// ----------------------------------------------
@@ -233,17 +233,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	BackgroundNetworking
-    /// 
+    ///
     /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts
-    /// 
+    ///
     /// INTERFACE: 	private void BackgroundNetworking(String stringIp)
-    /// 
+    ///
     /// NOTES:		Recieves packets from the server and queues elements
     ///             from the received packets.
     /// ----------------------------------------------

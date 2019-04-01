@@ -31,6 +31,8 @@ public class AbilityController : MonoBehaviour
     private GameObject testHomingProjectile;
     private GameObject testAreaOfEffect;
     private GameObject wallAbilityObject;
+    private GameObject bulletAbility;
+    private GameObject dart;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -57,6 +59,8 @@ public class AbilityController : MonoBehaviour
         testHomingProjectile = Resources.Load<GameObject>("Ability/TestHomingProjectile");
         testAreaOfEffect = Resources.Load<GameObject>("Ability/TestAreaOfEffect");
         wallAbilityObject = Resources.Load<GameObject>("Ability/WallAbilityObject");
+        bulletAbility = Resources.Load<GameObject>("Ability/BulletAbility");
+        dart = Resources.Load<GameObject>("Ability/Dart");
     }
 
 
@@ -95,6 +99,9 @@ public class AbilityController : MonoBehaviour
                 break;
             case AbilityType.Wall:
                 AbilityWall(x, z);
+                break;
+            case AbilityType.Dart:
+                Dart(x, z, collisionId);
                 break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
@@ -140,11 +147,148 @@ public class AbilityController : MonoBehaviour
             case AbilityType.Banish:
                 AbilityBanish(target);
                 break;
+            case AbilityType.BulletAbility:
+                BulletAbility(target, collisionId);
+                break;
+            case AbilityType.PorkChop:
+                PorkChop(target, collisionId);
+                break;
+            case AbilityType.Purification:
+                Purification(target, collisionId);
+                break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
                 break;
         }
     }
+
+    /// ----------------------------------------------
+    /// FUNCTION:	BulletAbility
+    ///
+    /// DATE:		March 27th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Phat Le
+    ///
+    /// INTERFACE: 	public void BulletAbility(AbilityType abilityId, int targetId)
+    ///                 GameObject target: Target
+    ///                 int collisionId: Collision Id of the target
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Homing Bullet Attack
+    /// ----------------------------------------------
+    private void BulletAbility(GameObject target, int collisionId){
+        // Instantiate projectile
+        var projectile = Instantiate(bulletAbility, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
+
+        // Set the projectiles target
+        projectile.GetComponent<BulletAbility>().target = target;
+
+        // Set its creator id and ability type which will be used later for collisions
+        projectile.GetComponent<Ability>().GetComponent<Ability>().creator = gameObject;
+        projectile.GetComponent<Ability>().abilityId = AbilityType.BulletAbility;
+        projectile.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack4");
+
+    }
+
+    /// ----------------------------------------------
+    /// FUNCTION:	PorkChop
+    ///
+    /// DATE:		March 27th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Phat Le
+    ///
+    /// INTERFACE: 	public void PorkChop(AbilityType abilityId, int targetId)
+    ///                 GameObject target: Target
+    ///                 int collisionId: Collision Id of the target
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Melee Attack
+    /// ----------------------------------------------
+    private void PorkChop(GameObject target, int collisionId){
+        // TODO Play some sort of animation. No collsion is needed as the
+        // abilities effect is instantly applied by the server
+        GetComponent<Animator>().SetTrigger("attack3");
+        int targetId = target.GetComponent<Actor>().ActorId;
+        int casterId = gameObject.GetComponent<Actor>().ActorId;
+        StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.PorkChop, targetId, casterId, collisionId), 0.5f));
+    }
+
+
+    /// ----------------------------------------------
+    /// FUNCTION:	Dart
+    ///
+    /// DATE:		March 27th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	keishi Asai
+    ///
+    /// INTERFACE: 	public void Dart(AbilityType abilityId, int targetId)
+    ///                 GameObject target: Target
+    ///                 int collisionId: Collision Id of the target
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Range Damage over Time Skill
+    /// ----------------------------------------------
+    private void Dart(float x, float z, int collisionId){
+        // Instantiate projectile
+        var projectile = Instantiate(dart, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
+
+        // Set the projectiles velocity the direction of the target location
+        Vector3 targetLocation = new Vector3(x, 0, z);
+        projectile.GetComponent<Rigidbody>().velocity = (targetLocation - transform.position).normalized;
+
+        // Set its creator id and ability type which will be used later for collisions
+        projectile.GetComponent<Ability>().creator = gameObject;
+        projectile.GetComponent<Ability>().abilityId = AbilityType.Dart;
+        projectile.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack4");
+
+    }
+
+    /// ----------------------------------------------
+    /// FUNCTION:   Purification
+    ///
+    /// DATE:		March 27th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	keishi Asai
+    ///
+    /// INTERFACE: 	public void Purification(AbilityType abilityId, int targetId)
+    ///                 GameObject target: Target
+    ///                 int collisionId: Collision Id of the target
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Healing Skill
+    /// ----------------------------------------------
+    private void Purification(GameObject target, int collisionId){
+        // TODO Play some sort of animation. No collsion is needed as the
+        // abilities effect is instantly applied by the server
+        GetComponent<Animator>().SetTrigger("attack3");
+        int targetId = target.GetComponent<Actor>().ActorId;
+        int casterId = gameObject.GetComponent<Actor>().ActorId;
+        StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.Purification, targetId, casterId, collisionId), 0.5f));
+    }
+
+
 
     private void AbilityTestProjectile(float x, float z, int collisionId){
         // Instantiate projectile
