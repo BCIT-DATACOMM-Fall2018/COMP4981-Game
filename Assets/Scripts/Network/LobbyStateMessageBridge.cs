@@ -1,10 +1,19 @@
 ﻿using System;
 using NetworkLibrary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using NetworkLibrary;
+using NetworkLibrary.MessageElements;
 
 public class LobbyStateMessageBridge : IStateMessageBridge
 {
+    private List<LobbyStatusElement.PlayerInfo> ConnectedPlayers;
+
+    public LobbyStateMessageBridge(List<LobbyStatusElement.PlayerInfo> ConnectedList)
+    {
+        this.ConnectedPlayers = ConnectedList;
+    }
 
     //throw exception
     public void UpdateActorPosition(int actorId, float x, float z)
@@ -19,19 +28,19 @@ public class LobbyStateMessageBridge : IStateMessageBridge
     }
 
     //throw exception
-	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId, int collisionId)
+	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId, int collissionId)
     {
 
     }
 
     //throw exception
-	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z, int collisionId)
+	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z, int collissionId)
     {
 
     }
 
     //throw exception
-	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId, int collisionId)
+	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId, int collissionId)
     {
 
     }
@@ -57,13 +66,23 @@ public class LobbyStateMessageBridge : IStateMessageBridge
     //throw exception
 	public void StartGame(int playerNum)
     {
-
+        ConnectionManager.Instance.ExitLobbyState(ConnectedPlayers.Count);
+        SceneManager.LoadScene("Game");
     }
 
-    //throw exception
-	public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo)
+    public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo)
     {
-
+        // Debug.Log("Lobby Status");
+        // foreach (var item in playerInfo)
+        // {
+        //     Debug.Log("Id " + item.Id + ", Name " + item.Name + ", Team " + item.Team + ", Ready " + item.ReadyStatus);
+        // }
+        ConnectedPlayers.Clear();
+        foreach (var item in playerInfo)
+        {
+            ConnectedPlayers.Add(item);
+            Debug.Log("Id " + item.Id + ", Name " + item.Name + ", Team " + item.Team + ", Ready " + item.ReadyStatus);
+        }
     }
 
     //throw exception
