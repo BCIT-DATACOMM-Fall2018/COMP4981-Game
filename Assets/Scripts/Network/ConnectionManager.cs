@@ -199,7 +199,7 @@ public class ConnectionManager
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:	ConnectReliableUDP
+    /// FUNCTION:	RequestConnection
     ///
     /// DATE:		March 14th, 2019
     ///
