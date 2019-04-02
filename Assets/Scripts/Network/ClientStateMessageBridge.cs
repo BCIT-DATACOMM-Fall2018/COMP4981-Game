@@ -321,4 +321,8 @@ public class ClientStateMessageBridge : IStateMessageBridge
 
 	}
 
+    public void UpdateActorSpeed(int actorId, int speed){
+        
+    }
+
 }

@@ -41,7 +41,7 @@ public class ConnectionManager
     public Boolean gameStarted;
     private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
-    public int Team {get; set;} = 1;
+    public int Team {get; set;} = 2;
     public bool GameOver {get; set;}
 
     private int playerNum;
@@ -197,7 +197,7 @@ public class ConnectionManager
     /// ----------------------------------------------
 	public void Reset()
 	{
-		destination = null;
+		destination = new Destination();
 		socket = null;
 		connection = null;
 
@@ -295,10 +295,12 @@ public class ConnectionManager
         Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
         socket.Send(readyPacket, destination);
 
-        Packet startPacket = socket.Receive();
-        UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {ElementId.LobbyStatusElement});
-        unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
-        unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
+        while(!gameStarted){
+            Packet startPacket = socket.Receive();
+            UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {ElementId.LobbyStatusElement});
+            unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
+            unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
+        }
 
         //Game State
         while(true){
