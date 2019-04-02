@@ -156,7 +156,7 @@ public class ConnectionManager
     /// ----------------------------------------------
     private void CreateSocketUDP()
     {
-        socket = new UDPSocket(0);
+        socket = new UDPSocket(15);
         socket.Bind();
     }
 
@@ -335,6 +335,38 @@ public class ConnectionManager
 
 
     /// ----------------------------------------------
+    /// FUNCTION:	Reset
+    /// 
+    /// DATE:		March 23rd, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Simon Shoban
+    /// 
+    /// PROGRAMMER:	Simon Shoban
+    /// 
+    /// INTERFACE: 	public void Reset()
+    /// 
+    /// NOTES:		Resets all the values in the ConnectionManager
+    /// ----------------------------------------------
+	public void Reset()
+	{
+		destination = new Destination();
+		socket = null;
+		connection = null;
+
+		ClientId = -1;
+		PlayerNum = 1;
+		connected = false;
+		inLobby = false;
+		gameStarted = false;
+		GameOver = false;
+
+		MessageQueue = new ConcurrentQueue<UpdateElement>();
+        ReliableElementQueue = new ConcurrentQueue<UpdateElement>();
+	}
+
+    /// ----------------------------------------------
     /// FUNCTION:	SendStatePacket
     ///
     /// DATE:		March 14th, 2019
@@ -472,10 +504,12 @@ public class ConnectionManager
         // Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
         // socket.Send(readyPacket, destination);
 
-        // Packet startPacket = socket.Receive();
-        // UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {ElementId.LobbyStatusElement});
-        // unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
-        // unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
+        // while(!gameStarted){
+        //     Packet startPacket = socket.Receive();
+        //     UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {ElementId.LobbyStatusElement});
+        //     unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
+        //     unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
+        // }
 
         //Game State
         while(true){

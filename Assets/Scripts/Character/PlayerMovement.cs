@@ -27,6 +27,8 @@ using UnityEngine.AI;
 public class PlayerMovement : ActorMovement
 {
     private GameObject terrain;
+
+    private bool attackMove;
     
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -74,15 +76,69 @@ public class PlayerMovement : ActorMovement
     /// ----------------------------------------------
     void Update()
     {
+        if (Input.GetButtonDown("AttackMove")){
+            attackMove = true;
+            Debug.Log("prepare attack move");
+        }
+        if (Input.GetMouseButtonDown(0)){
+            if(attackMove){
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (terrain.GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                    float shortestDistance = 0;
+                    GameObject closestEnemy = null;
+                    int i = 0;
+                    for (; i < enemies.Length; i++)
+                    {
+                        if(enemies[i].transform.position.x != -10){
+                            closestEnemy = enemies[i];
+                            shortestDistance = (enemies[i].transform.position - hit.point).sqrMagnitude;
+                            break;
+                        }
+                    }
+                    for (; i < enemies.Length; i++)
+                    {
+                        float distance = (enemies[i].transform.position - hit.point).sqrMagnitude;
+                        if(distance < shortestDistance){
+                            distance = shortestDistance;
+                            closestEnemy = enemies[i];
+                        }
+                    }
+                    if(closestEnemy != null) {
+                        GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+                        GetComponent<PlayerAbilityController>().AutoAttack(closestEnemy);
+                    }
+                }
+            }
+        }
         if (Input.GetMouseButtonDown(1))
         {
+            attackMove = false;
             RaycastHit hit;
+            int layerMask = 1 << 10;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (terrain.GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
-                SetTargetPosition(hit.point);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask: layerMask))
+            {
+                GameObject hitTarget = hit.transform.gameObject;
+                if(hitTarget.tag != gameObject.tag){
+                    Debug.Log("time to auto");
+                    GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+                    GetComponent<PlayerAbilityController>().AutoAttack(hitTarget);
+                }
+            } else{ 
+                if (terrain.GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
+                    SetTargetPosition(hit.point);
+                    GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+                }
             }
-            
         }
+        if(Input.GetButtonDown("Stop")) {
+            Stop();
+            GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+        }
+
         base.Update();
     }
+
 }

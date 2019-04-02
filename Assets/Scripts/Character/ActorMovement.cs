@@ -32,6 +32,7 @@ public class ActorMovement : MonoBehaviour
     protected bool moving;
 
 
+
     /// ----------------------------------------------
     /// FUNCTION:	Start
     /// 
@@ -82,10 +83,10 @@ public class ActorMovement : MonoBehaviour
         if(moving)
         {
             Move();
-            animator.SetFloat("inputV", 1);
+            animator.SetBool("moving", true);
         } else
         {
-            animator.SetFloat("inputV", 0);
+            animator.SetBool("moving", false);
         }
     }
 
@@ -149,4 +150,15 @@ public class ActorMovement : MonoBehaviour
             }
         }
     }
+
+
+    public void Stop(){
+        moving = false;
+        agent.SetDestination(transform.position);
+    }
+
+	public void ForceTargetPosition (Vector3 target) {
+		//moving = true;
+		agent.SetDestination(target);
+	}
 }

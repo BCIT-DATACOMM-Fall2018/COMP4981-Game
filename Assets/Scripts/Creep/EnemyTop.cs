@@ -10,9 +10,11 @@ public class EnemyTop : Enemy
         health = startHealth;
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
-        target = WavePoint.waypoint;
-        Debug.Log(gameObject.name + "has collided ");
+        if (other.gameObject.name == "WavePointTop") {
+           target = WavePoint.waypoint;
+        }
+        //Debug.Log(gameObject.name + " has collided with " + other.gameObject.name);
     }
 }

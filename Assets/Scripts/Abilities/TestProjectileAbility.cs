@@ -96,10 +96,12 @@ public class TestProjectileAbility : Ability
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
+		Debug.Log("TEST PROJECTILE ABILITY HIT SMTH");
         if(col.gameObject.tag == creator.tag){
             Physics.IgnoreCollision(col, GetComponent<Collider>());
 
         } else{
+			
             SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
             Destroy(gameObject);
         }
