@@ -196,6 +196,7 @@ public class ConnectionManager
         Packet confirmationPacket = socket.Receive();
         ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
         ConnectionManager.Instance.ConnectReliableUDP();
+        connected = true;
     }
 
 
@@ -265,8 +266,11 @@ public class ConnectionManager
     {
         while (inLobby)
         {
+            Debug.Log("Receiving in Lobby Networking");
             Packet ServerPacket = socket.Receive();
+            Debug.Log("Unpacking packet in Lobby Networking");
             UnpackedPacket UnpacketLobbyStatus = connection.ProcessPacket(ServerPacket, new ElementId[] {ElementId.LobbyStatusElement});
+            Debug.Log("Queueing elements in Lobby Networking");
             UnpacketLobbyStatus.UnreliableElements.ForEach(ElementQueue.Enqueue);
             UnpacketLobbyStatus.ReliableElements.ForEach(ElementQueue.Enqueue);
         }
@@ -361,7 +365,7 @@ public class ConnectionManager
 
         // Create ReadyElement for current client
         List<UpdateElement> readyList = new List<UpdateElement>();
-        readyList.Add(new ReadyElement(true, ClientId));
+        //readyList.Add(new ReadyElement(true, ClientId));
 
         // TODO: Keep Sending Heartbeat Packets until Game Start (maybe for Lobby Scene)
         // TODO: Client send ready or not read packets to server in (maybe for Lobby Scene)
@@ -453,15 +457,18 @@ public class ConnectionManager
                 Packet packet = socket.Receive();
 
                 if(ReliableUDPConnection.GetPacketType(packet) != PacketType.GameplayPacket){
+                    Debug.Log("This is breaking everything");
                     continue;
                 }
 
                 Debug.Log("ReceivedPacket");
                 UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
 
-                unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
+                unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);  
                 unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
-            } catch(TimeoutException e){
+            } catch(Exception e){
+                Debug.Log(e.StackTrace);
+                Debug.Log(e.Message);
                 connected = false;
                 return;
             }

@@ -318,6 +318,21 @@ public class ClientStateMessageBridge : IStateMessageBridge
         ConnectionManager.Instance.GameOver = true;
     }
 
+    public void UpdateActorExperience(int ActorId, int Experience)
+    {
+
+    }
+
+    public void UpdateActorSpeed(int ActorId, int Speed)
+    {
+
+    }
+
+    public void UpdateAbilityAssignment(int whatever, int fuckit)
+    {
+        
+    }
+
 }
 
 

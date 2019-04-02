@@ -72,11 +72,6 @@ public class LobbyStateMessageBridge : IStateMessageBridge
 
     public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo)
     {
-        // Debug.Log("Lobby Status");
-        // foreach (var item in playerInfo)
-        // {
-        //     Debug.Log("Id " + item.Id + ", Name " + item.Name + ", Team " + item.Team + ", Ready " + item.ReadyStatus);
-        // }
         ConnectedPlayers.Clear();
         foreach (var item in playerInfo)
         {
@@ -87,6 +82,21 @@ public class LobbyStateMessageBridge : IStateMessageBridge
 
     //throw exception
     public void EndGame(int winningTeam)
+    {
+        
+    }
+
+    public void UpdateActorExperience(int ActorId, int Experience)
+    {
+        
+    }
+
+    public void UpdateActorSpeed(int ActorId, int Speed)
+    {
+        
+    }
+
+    public void UpdateAbilityAssignment(int whatever, int fuckit)
     {
         
     }

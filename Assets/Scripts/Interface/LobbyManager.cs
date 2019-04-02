@@ -22,7 +22,7 @@ public class LobbyManager : MonoBehaviour
     public int ClientId {get; set;}
     public int Team {get; set;}
 
-    private int UpdateTime = 2;
+    private float UpdateTime = 0.1f;
     private float Timer = 0;
     public Text TeamAText;
     public Text IdleText;
@@ -48,6 +48,7 @@ public class LobbyManager : MonoBehaviour
     {
         ElementQueue = new ConcurrentQueue<UpdateElement>();
         ConnectedPlayers = new List<LobbyStatusElement.PlayerInfo>();
+        StateBridge = new LobbyStateMessageBridge(ConnectedPlayers);
 
         ConnectionManager.Instance.InitConnection("127.0.0.1");
 
