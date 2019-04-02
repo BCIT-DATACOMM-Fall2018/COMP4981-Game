@@ -156,4 +156,9 @@ public class ActorMovement : MonoBehaviour
         moving = false;
         agent.SetDestination(transform.position);
     }
+
+	public void ForceTargetPosition (Vector3 target) {
+		//moving = true;
+		agent.SetDestination(target);
+	}
 }
