@@ -55,3 +55,6 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+# Other OS specific generated files
+.DS_Store
