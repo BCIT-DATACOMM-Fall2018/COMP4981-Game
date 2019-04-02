@@ -220,6 +220,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	///				and target position. Behaviour differs if the actor is the player character.
     /// ----------------------------------------------
 	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
+        Debug.Log("Moving actor: " + actorId);
         GameObject actor = objectController.GameActors[actorId];
         bool enableAgent = false;
         if(x == -10 && z == -10 && targetX == -10 && targetZ == -10){
@@ -327,13 +328,9 @@ public class ClientStateMessageBridge : IStateMessageBridge
         
     }
 
-}
 	public void UpdateActorExperience(int actorId, int newExp) {
 
 	}
 
-    public void UpdateActorSpeed(int actorId, int speed){
-        
-    }
-
 }
+

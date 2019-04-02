@@ -88,16 +88,19 @@ public class LobbyManager : MonoBehaviour
         if (TeamPanel.name == "Idle")
         {
             Team = 0;
+            ConnectionManager.Instance.Team = 0;
             return;
         }
         if (TeamPanel.name == "TeamA")
         {
             Team = 1;
+            ConnectionManager.Instance.Team = 1;
             return;
         }
         if (TeamPanel.name == "TeamB")
         {
             Team = 2;
+            ConnectionManager.Instance.Team = 2;
             return;
         }
     }

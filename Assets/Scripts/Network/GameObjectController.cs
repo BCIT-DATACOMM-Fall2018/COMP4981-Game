@@ -113,9 +113,16 @@ public class GameObjectController : MonoBehaviour
                 }
 
         }
+        else
+        {
+            
+        }
+        Debug.Log("Actor dictionary length: " + GameActors.Count);
         if(team == ConnectionManager.Instance.Team){
+            Debug.Log("Ally actor: " + actorId);
             GameActors[actorId].tag = "Ally";
         } else {
+            Debug.Log("Enemy actor: " + actorId);
             GameActors[actorId].tag = "Enemy";
         }
         GameActors[actorId].GetComponent<Actor>().ActorId = actorId;
