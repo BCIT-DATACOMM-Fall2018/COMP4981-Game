@@ -50,7 +50,7 @@ public class LobbyManager : MonoBehaviour
         ConnectedPlayers = new List<LobbyStatusElement.PlayerInfo>();
         StateBridge = new LobbyStateMessageBridge(ConnectedPlayers);
 
-        ConnectionManager.Instance.InitConnection("127.0.0.1");
+        //ConnectionManager.Instance.InitConnection("127.0.0.1");
 
         ReadyState = false;
         ClientId = ConnectionManager.Instance.ClientId;
@@ -153,27 +153,4 @@ public class LobbyManager : MonoBehaviour
         IdleText.text = "";
     }
 
-    // public void selectTeamA()
-    // {
-    //     a1.text = "Player 1";
-    //     a2.text = "";
-    //     a3.text = "";
-
-    // }
-
-    // public void selectTeamB()
-    // {
-    //     a1.text = "";
-    //     a2.text = "";
-    //     a3.text = "Player 1";
-
-    // }
-
-    // public void selectTeamIdle()
-    // {
-    //     a1.text = "";
-    //     a2.text = "Player 1";
-    //     a3.text = "";
-
-    // }
 }

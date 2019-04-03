@@ -232,6 +232,7 @@ public class ConnectionManager
 
         ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
         ConnectReliableUDP();
+        connected = true;
         return true;
     }
 
