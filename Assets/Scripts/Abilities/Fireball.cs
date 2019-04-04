@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	TestProjectileAbility - A script to provide the logic to move
-///                a projectile shot by the player.
+/// Class: 	TestAreaOfEffectAbility - A script to provide the logic for an area of effect
 /// 
 /// PROGRAM: NetworkLibrary
 ///
@@ -22,11 +21,11 @@ using UnityEngine;
 ///
 /// NOTES:		
 /// ----------------------------------------------
-public class TestProjectileAbility : Ability
+public class Fireball : Ability
 {
 
-    public float speed = 50f;
-    private Vector3 start;
+    private float timer;
+    private const float MAX_TIME = 5f;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -48,8 +47,7 @@ public class TestProjectileAbility : Ability
     /// ----------------------------------------------
     void Start ()
     {
-        GetComponent<Rigidbody>().velocity *= speed;
-        start = transform.position;
+
     }
 
     /// ----------------------------------------------
@@ -72,13 +70,14 @@ public class TestProjectileAbility : Ability
     ///             starting point and delete it if it has gone too far.
     /// ----------------------------------------------
     void Update(){
-        if(Vector3.Distance(start, transform.position) > 50){
+        timer += Time.deltaTime;
+        if(timer > MAX_TIME){
             Destroy(gameObject);
         }
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:	OnTriggerEnter
+    /// FUNCTION:	OnCollisionEnter
     /// 
     /// DATE:		March 14th, 2019
     /// 
@@ -88,22 +87,20 @@ public class TestProjectileAbility : Ability
     /// 
     /// PROGRAMMER:	Cameron Roberts
     /// 
-    /// INTERFACE: 	void OnCollisionEnter(Collider col)
+    /// INTERFACE: 	void OnCollisionEnter(Collision col)
     /// 
-    /// RETURNS: 	void
+    /// RETURNS: 	void 
     /// 
     /// NOTES:		
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
-		Debug.Log("TEST PROJECTILE ABILITY HIT SMTH");
+        Debug.Log("Collision with area of effect");
         if(col.gameObject.tag == creator.tag){
-            Physics.IgnoreCollision(col, GetComponent<Collider>());
-
+            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
         } else{
-			
             SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
-            Destroy(gameObject);
+            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
         }
     }
 }
