@@ -35,6 +35,7 @@ public class ConnectionManager
     private ReliableUDPConnection connection;
     public ConcurrentQueue<UpdateElement> MessageQueue {get; private set;}
     private ConcurrentQueue<UpdateElement> ReliableElementQueue {get; set;}
+    public List<LobbyStatusElement.PlayerInfo> playerInfo;
 
     private Boolean connected;
     private Boolean inLobby;
@@ -338,17 +339,17 @@ public class ConnectionManager
 
     /// ----------------------------------------------
     /// FUNCTION:	Reset
-    /// 
+    ///
     /// DATE:		March 23rd, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Shoban
-    /// 
+    ///
     /// PROGRAMMER:	Simon Shoban
-    /// 
+    ///
     /// INTERFACE: 	public void Reset()
-    /// 
+    ///
     /// NOTES:		Resets all the values in the ConnectionManager
     /// ----------------------------------------------
 	public void Reset()
@@ -534,7 +535,7 @@ public class ConnectionManager
                 //Debug.Log("ReceivedPacket");
                 UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
 
-                unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);  
+                unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
                 unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
             } catch(Exception e){
                 Debug.Log(e.StackTrace);

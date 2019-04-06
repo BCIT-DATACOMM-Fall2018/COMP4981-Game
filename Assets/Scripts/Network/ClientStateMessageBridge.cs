@@ -326,7 +326,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
 
     public void UpdateAbilityAssignment(int whatever, int fuckit)
     {
-        
+
     }
 
 	public void UpdateActorExperience(int actorId, int newExp) {
@@ -334,4 +334,3 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	}
 
 }
-
