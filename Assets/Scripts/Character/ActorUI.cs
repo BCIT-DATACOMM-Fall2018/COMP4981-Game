@@ -32,7 +32,21 @@ public class ActorUI : MonoBehaviour
     Text nameTag;
 
 
-    // Start is called before the first frame update
+    /// ----------------------------------------------
+    /// FUNCTION:	Start
+    ///
+    /// DATE:		February 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Keishi Asai, Simon Shoban
+    ///
+    /// PROGRAMMER: Keishi Asai, Simon Shoban
+    ///
+    /// INTERFACE: 	void Start()
+    ///
+    /// NOTES:	    Start is called before the first frame update
+    /// ----------------------------------------------
     void Start()
     {
         hpBar = gameObject.transform.Find("HPBarObject/Canvas/HPBar").GetComponent<Slider>();
@@ -53,11 +67,12 @@ public class ActorUI : MonoBehaviour
 
                 if (gameObject.tag == "Ally")
                 {
-                    //nameTag.color = new Color32(161, 215, 255, 255);
-                    nameTag.color = new Color32(242, 132, 130, 255);
+                    // Light blue
+                    nameTag.color = new Color32(161, 215, 255, 255);
                 }
                 else
                 {
+                    // Light red
                     nameTag.color = new Color32(242, 132, 130, 255);
                 }
             }
