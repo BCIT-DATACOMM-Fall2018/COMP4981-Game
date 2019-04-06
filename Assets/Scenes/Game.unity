@@ -1363,6 +1363,7 @@ MonoBehaviour:
   - {fileID: 6374351989919577606, guid: c4b1c60296dc808159db17b784bf7bb4, type: 3}
   - {fileID: 6533135240368932861, guid: 666e835764220fa4eb0f90279b71b403, type: 3}
   - {fileID: 1235590646438420295, guid: c765354b3586e525393319b00f68270e, type: 3}
+  Tower: {fileID: 7818655753596694070, guid: 74eb13a9f4bfaa0f0a68ca1e15048b18, type: 3}
 --- !u!1001 &2096864660
 PrefabInstance:
   m_ObjectHideFlags: 0

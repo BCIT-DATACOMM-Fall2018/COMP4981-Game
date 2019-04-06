@@ -29,7 +29,7 @@ public class IsometricCamera : MonoBehaviour
         if (Input.GetMouseButton(2))
         {
             float speed = dragSpeed * Time.deltaTime;
-            Vector3 dragPos = new Vector3(Input.GetAxis("Mouse X") * 50f * speed, 0, Input.GetAxis("Mouse Y") * 50f * speed);
+            Vector3 dragPos = new Vector3(-Input.GetAxis("Mouse Y") * 50f * speed, 0, Input.GetAxis("Mouse X") * 50f * speed);
             Camera.main.transform.position -= dragPos;
             return;
         } else
@@ -38,19 +38,19 @@ public class IsometricCamera : MonoBehaviour
 
             if (Input.GetKey(KeyCode.UpArrow) || Input.mousePosition.y >= Screen.height - panBorderThickness)
             {
-                pos.z += panSpeed * Time.deltaTime;
+                pos.x += panSpeed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.DownArrow) || Input.mousePosition.y <= panBorderThickness)
             {
-                pos.z -= panSpeed * Time.deltaTime;
+                pos.x -= panSpeed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.RightArrow) || Input.mousePosition.x >= Screen.width - panBorderThickness)
             {
-                pos.x += panSpeed * Time.deltaTime;
+                pos.z -= panSpeed * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.LeftArrow) || Input.mousePosition.x <= panBorderThickness)
             {
-                pos.x -= panSpeed * Time.deltaTime;
+                pos.z += panSpeed * Time.deltaTime;
             }
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");

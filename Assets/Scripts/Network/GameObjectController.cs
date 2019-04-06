@@ -27,6 +27,7 @@ public class GameObjectController : MonoBehaviour
     public GameObject[] Players;
     public GameObject[] NonPlayers;
     public GameObject[] DummyPlayers;
+    public GameObject Tower;
     public Dictionary<int, GameObject> GameActors { get; private set; } = new Dictionary<int, GameObject>();  
 
 
@@ -107,6 +108,8 @@ public class GameObjectController : MonoBehaviour
                     GameActors[actorId].GetComponent<CameraSelector>().isometricCamera = GameObject.Find("IsometricCamera").GetComponent<Camera>();
                     GameObject.Find("PlayerLockCamera").GetComponent<PlayerLockCamera>().SetCameraLock();
                     GameActors[actorId].GetComponent<CameraSelector>().SetIsometricToPlayer();
+                    
+                    GameActors[actorId].GetComponent<Actor>().deathObject = DummyPlayers[(int) type];
                 // Check if the actor is an ally
                 } else {
                     GameActors.Add(actorId, Instantiate(NonPlayers[(int) type], location, Quaternion.identity));
@@ -115,7 +118,9 @@ public class GameObjectController : MonoBehaviour
         }
         else
         {
-            
+            if(type == ActorType.TowerA){
+                GameActors.Add(actorId, Instantiate(Tower, location, Quaternion.identity));
+            }
         }
         Debug.Log("Actor dictionary length: " + GameActors.Count);
         if(team == ConnectionManager.Instance.Team){
@@ -126,7 +131,6 @@ public class GameObjectController : MonoBehaviour
             GameActors[actorId].tag = "Enemy";
         }
         GameActors[actorId].GetComponent<Actor>().ActorId = actorId;
-        GameActors[actorId].GetComponent<Actor>().deathObject = DummyPlayers[(int) type];
 
     }
 }

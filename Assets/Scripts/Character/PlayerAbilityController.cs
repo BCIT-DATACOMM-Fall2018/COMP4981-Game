@@ -111,6 +111,7 @@ public class PlayerAbilityController : AbilityController
         for (int i = 0; i < buttonNames.Length; i++)
         {
             if(Input.GetButtonDown(buttonNames[i])) {
+                Debug.Log("Hit button " + i);
                 if(Cooldowns[i] != 0){
                     Debug.Log("Ability on cooldown");
                     return;

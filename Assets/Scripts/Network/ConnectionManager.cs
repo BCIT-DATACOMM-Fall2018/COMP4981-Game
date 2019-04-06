@@ -46,7 +46,7 @@ public class ConnectionManager
 
     private int playerNum;
     public int PlayerNum {get{return playerNum;} set {
-        unreliableElementIds = new ElementId[value*2];
+        unreliableElementIds = new ElementId[value*2 + 1];
         for (int i = 0; i < value*2; i++)
         {
             if(i % 2 == 0){
@@ -55,6 +55,7 @@ public class ConnectionManager
                 unreliableElementIds[i] = ElementId.MovementElement;
             }
         }
+        unreliableElementIds[unreliableElementIds.Length-1] = ElementId.TowerHealthElement;
         playerNum = value;
     }}
 
@@ -521,7 +522,7 @@ public class ConnectionManager
                 continue;
             }
             try{
-                Debug.Log("Waiting for packet");
+                //Debug.Log("Waiting for packet");
 
                 Packet packet = socket.Receive();
 
@@ -530,7 +531,7 @@ public class ConnectionManager
                     continue;
                 }
 
-                Debug.Log("ReceivedPacket");
+                //Debug.Log("ReceivedPacket");
                 UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
 
                 unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);  

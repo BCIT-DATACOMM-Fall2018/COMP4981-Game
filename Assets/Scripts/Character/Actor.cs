@@ -28,23 +28,24 @@ public struct Status
 /// ---------------------------------------------- 
 public class Actor : MonoBehaviour
 {
-    private ActorUI cUI;
+    protected ActorUI cUI;
     public Status Status;
     public int ActorId {get;set;}
 
-    private bool alive;
+    protected bool alive;
 
     [HideInInspector]
     public GameObject deathObject;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
+        Status.HP = 1000;
         cUI = GetComponent<ActorUI>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if(transform.position.x != -10){
             alive = true;
@@ -52,7 +53,7 @@ public class Actor : MonoBehaviour
         cUI.UpdateCharacterUI(Status);
     }
 
-    public void Die(){
+    public virtual void Die(){
         if(alive){
             GameObject clone = Instantiate(deathObject, transform.position, transform.rotation);
             //TODO make the created object animate
