@@ -49,14 +49,19 @@ public class ConnectionManager
 
     private int playerNum;
     public int PlayerNum {get{return playerNum;} set {
-        unreliableElementIds = new ElementId[value*2+2];
-        for (int i = 0; i < value*2; i++)
-        {
-            if(i % 2 == 0){
+        unreliableElementIds = new ElementId[value*3+2];
+        int j = 0;
+        for (int i = 0; i < value*3; i++)
+        {  
+            if(j == 0){
                 unreliableElementIds[i] = ElementId.HealthElement;
-            } else{
+            } else if (j == 1){
                 unreliableElementIds[i] = ElementId.MovementElement;
+            } else {
+                j = -1;
+                unreliableElementIds[i] = ElementId.ExperienceElement;
             }
+            j++;
         }
         unreliableElementIds[unreliableElementIds.Length-2] = ElementId.RemainingLivesElement;
         unreliableElementIds[unreliableElementIds.Length-1] = ElementId.TowerHealthElement;

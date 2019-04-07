@@ -78,10 +78,8 @@ public class Gungnir : Ability
     {
         if(col.gameObject.tag == creator.tag){
             Physics.IgnoreCollision(col, GetComponent<Collider>());
-
         } else{
             SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
-            //Destroy(gameObject);
         }
     }
 }

@@ -364,11 +364,12 @@ public class ClientStateMessageBridge : IStateMessageBridge
     }
 
 	public void UpdateActorExperience(int actorId, int newExp) {
-
+        if(actorId == ConnectionManager.Instance.ClientId){
+            GameObject.Find("AbilityBar/Canvas/ExpBar").GetComponent<ExpBarControl>().exp = newExp;
+        }
 	}
 
     public void UpdateLifeCount (List<RemainingLivesElement.LivesInfo> livesInfo){
-        Debug.Log("Updating Life Count");
         if(livesInfo.Count != 2){
             return;
         }

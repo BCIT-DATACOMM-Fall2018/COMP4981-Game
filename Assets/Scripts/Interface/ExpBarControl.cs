@@ -5,9 +5,15 @@ using UnityEngine.UI;
 
 public class ExpBarControl : MonoBehaviour
 {
-    private int level;
-    private int exp;
-    private int expToLvlUp;
+
+    const int LEVEL1_EXP = 128;
+    const int LEVEL2_EXP = 256;
+    const int LEVEL3_EXP = 512;
+
+    
+    private int level {get; set;}
+    public int exp {get;set;}
+    private int expToLvlUp {get;set;}
 
     public Slider expBar;
     public Text lvlLabel;
@@ -15,59 +21,44 @@ public class ExpBarControl : MonoBehaviour
     void Start()
     {
         level = 1;
-        exp = 50;
-        expToLvlUp = 100;
-        expBar.value = exp;
-        expBar.maxValue = expToLvlUp;
-
+        exp = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(exp >= expToLvlUp)
-        {
+        if(currentLevel(exp) > level){
             levelUp();
         }
-    }
-
-    public int getLevel()
-    {
-        return level;
-    }
-
-    public int getExp()
-    {
-        return exp;
-    }
-
-    public int getExpToLvlUp()
-    {
-        return expToLvlUp;
-    }
-
-    public void setLevel(int value)
-    {
-        level = value;
-    }
-
-    public void setExp(int value)
-    {
-        exp = value;
-    }
-
-    public void SetExpToLvlUp(int value)
-    {
-        expToLvlUp = value;
+        switch(level){
+            case 1:
+                expBar.value = (float)((float)exp)/(float)LEVEL1_EXP;
+                break;
+            case 2:
+                expBar.value = (float)((float)exp - (float)LEVEL1_EXP)/(float)LEVEL2_EXP;
+                break;
+            case 3:
+                expBar.value = (float)((float)exp - (float)LEVEL1_EXP - (float)LEVEL2_EXP)/(float)LEVEL3_EXP;
+                break;
+            case 4:
+                expBar.value = 1;
+                break;
+        }
     }
 
     void levelUp()
     {
-        exp = 0;
-        expBar.value = exp;
-        expToLvlUp += expToLvlUp;
-        expBar.maxValue = expToLvlUp;
-        level += 1;
+        level++;
         lvlLabel.text = "Level " + level.ToString();
     }
+
+    public static int currentLevel(int exp) {
+            if (exp < LEVEL1_EXP)
+                return 1;
+            if (exp < LEVEL2_EXP)
+                return 2;
+            if (exp < LEVEL3_EXP)
+                return 3;
+            return 4;
+        }
 }
