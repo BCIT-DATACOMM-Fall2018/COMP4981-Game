@@ -25,7 +25,7 @@ using UnityEngine;
 public class Dart : Ability
 {
 
-    public float speed = 50f;
+    public float speed = 180f;
     private Vector3 start;
 
     /// ----------------------------------------------

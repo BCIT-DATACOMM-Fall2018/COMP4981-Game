@@ -25,7 +25,7 @@ public class WhaleAbility : Ability
 {
 
     private float timer;
-    private const float MAX_TIME = 40f;
+    private const float MAX_TIME = 0.25f;
 
     /// ----------------------------------------------
     /// FUNCTION:   Start
