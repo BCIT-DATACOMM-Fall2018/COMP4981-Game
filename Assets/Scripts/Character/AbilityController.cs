@@ -37,6 +37,8 @@ public class AbilityController : MonoBehaviour
     private GameObject weebOut;
     private GameObject whale;
     private GameObject towerShot;
+    private GameObject gungnir;
+    private GameObject slash;
     private GameObject healEffect;
     private GameObject pewPew;
 
@@ -73,6 +75,8 @@ public class AbilityController : MonoBehaviour
         weebOut = Resources.Load<GameObject>("Ability/WeebOut");
         whale = Resources.Load<GameObject>("Ability/Whale");
         towerShot = Resources.Load<GameObject>("Ability/TowerShot");
+        gungnir = Resources.Load<GameObject>("Ability/Gungnir");
+        slash = Resources.Load<GameObject>("Ability/Slash");
         healEffect = Resources.Load<GameObject>("Ability/HealEffect");
         pewPew = Resources.Load<GameObject>("Ability/PewPew");
 
@@ -102,7 +106,9 @@ public class AbilityController : MonoBehaviour
     /// ----------------------------------------------
     public virtual void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
     {
-        transform.LookAt(new Vector3(x, 0, z));
+        if(AbilityInfo.InfoArray[(int)abilityId].Range != 0){
+            transform.LookAt(new Vector3(x, 0, z));
+        }
 
         switch (abilityId)
         {
@@ -129,6 +135,12 @@ public class AbilityController : MonoBehaviour
                 break;
             case AbilityType.Blink:
                 AbilityBlink(x, z);
+                break;
+            case AbilityType.Gungnir:
+                AbilityGungnir(x, z, collisionId);
+                break;
+            case AbilityType.Slash:
+                AbilitySlash(x, z, collisionId);
                 break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
@@ -550,5 +562,33 @@ public class AbilityController : MonoBehaviour
         projectile.GetComponent<Ability>().GetComponent<Ability>().creator = gameObject;
         projectile.GetComponent<Ability>().abilityId = AbilityType.TowerAttack;
         projectile.GetComponent<Ability>().collisionId = collisionId;
+    }
+
+    private void AbilityGungnir(float x, float z, int collisionId)
+    {
+        // Instantiate projectile
+        var projectile = Instantiate(gungnir, transform.position + new Vector3(0, 5, 0), transform.rotation * dart.transform.rotation);
+        // Set the projectiles velocity the direction of the target location
+        Vector3 targetLocation = new Vector3(x, 0, z);
+        projectile.GetComponent<Rigidbody>().velocity = (targetLocation - transform.position).normalized;
+
+        // Set its creator id and ability type which will be used later for collisions
+        projectile.GetComponent<Ability>().creator = gameObject;
+        projectile.GetComponent<Ability>().abilityId = AbilityType.Gungnir;
+        projectile.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack4");
+    }
+
+    private void AbilitySlash(float x, float z, int collisionId)
+    {
+        // Instantiate projectile
+        var area = Instantiate(slash, new Vector3(x, 0.01f, z), transform.rotation * slash.transform.rotation);
+        area.transform.Translate(Vector3.forward*15);
+        // Set its creator id and ability type which will be used later for collisions
+        area.GetComponent<Ability>().creator = gameObject; ;
+        area.GetComponent<Ability>().abilityId = AbilityType.Slash;
+        area.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack2");
+
     }
 }
