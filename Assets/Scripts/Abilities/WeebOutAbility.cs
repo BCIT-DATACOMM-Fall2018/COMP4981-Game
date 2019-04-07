@@ -25,7 +25,7 @@ public class WeebOutAbility : Ability
 {
 
     private float timer;
-    private const float MAX_TIME = 3f;
+    private const float MAX_TIME =0.2f;
 
     /// ----------------------------------------------
     /// FUNCTION:   Start

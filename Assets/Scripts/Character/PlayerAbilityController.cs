@@ -205,6 +205,9 @@ public class PlayerAbilityController : AbilityController
     bool InitiateAbilityUse(AbilityType abilityId){
         AbilityInfo abilityInfo = AbilityInfo.InfoArray[(int)abilityId];
         if(abilityInfo.IsArea){
+            if(abilityInfo.Range == 0){
+                return InitiateAreaAbilityUse(abilityId, gameObject.transform.position);
+            }
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (GameObject.Find("Terrain").GetComponent<Collider>().Raycast (ray, out hit, Mathf.Infinity)) {
@@ -229,7 +232,7 @@ public class PlayerAbilityController : AbilityController
         int actorId = gameObject.GetComponent<Actor>().ActorId;
 
         AbilityInfo abilityInfo = AbilityInfo.InfoArray[(int)abilityId];
-
+        
         if(Vector3.Distance(transform.position, target)>abilityInfo.Range && abilityInfo.Range != 0){
             Debug.Log("Distance " + Vector3.Distance(transform.position, target) + " > Range " + abilityInfo.Range);
             if(!moveToAreaTarget){

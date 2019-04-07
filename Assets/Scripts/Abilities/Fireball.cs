@@ -25,7 +25,7 @@ public class Fireball : Ability
 {
 
     private float timer;
-    private const float MAX_TIME = 5f;
+    private const float MAX_TIME = 0.2f;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
