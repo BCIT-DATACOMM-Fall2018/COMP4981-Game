@@ -427,10 +427,10 @@ RectTransform:
   m_Father: {fileID: 211369963375657083}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21, y: 300}
-  m_SizeDelta: {x: 500, y: 250}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -53}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &211369963935062383
 CanvasRenderer:
@@ -473,7 +473,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Red 50 | Blue 50
+  m_Text: "0\x13 | 0\n"
 --- !u!114 &211369963935062380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,7 +633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 211369964424653148}
   m_Layer: 0
-  m_Name: Environments
+  m_Name: GameMapPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -100,4 +100,8 @@ public class LobbyStateMessageBridge : IStateMessageBridge
     {
         
     }
+
+    public void UpdateLifeCount (List<RemainingLivesElement.LivesInfo> livesInfo){
+
+    }
 }

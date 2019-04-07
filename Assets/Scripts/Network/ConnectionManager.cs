@@ -48,7 +48,7 @@ public class ConnectionManager
 
     private int playerNum;
     public int PlayerNum {get{return playerNum;} set {
-        unreliableElementIds = new ElementId[value*2+1];
+        unreliableElementIds = new ElementId[value*2+2];
         for (int i = 0; i < value*2; i++)
         {
             if(i % 2 == 0){
@@ -57,6 +57,7 @@ public class ConnectionManager
                 unreliableElementIds[i] = ElementId.MovementElement;
             }
         }
+        unreliableElementIds[unreliableElementIds.Length-2] = ElementId.RemainingLivesElement;
         unreliableElementIds[unreliableElementIds.Length-1] = ElementId.TowerHealthElement;
         playerNum = value;
     }}

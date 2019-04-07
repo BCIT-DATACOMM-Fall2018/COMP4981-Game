@@ -333,5 +333,14 @@ public class ClientStateMessageBridge : IStateMessageBridge
 
 	}
 
+    public void UpdateLifeCount (List<RemainingLivesElement.LivesInfo> livesInfo){
+        Debug.Log("Updating Life Count");
+        if(livesInfo.Count != 2){
+            return;
+        }
+        var lifeCounter = GameObject.Find("GameMapPrefab/Canvas/GlobalLifeCounter");
+        var text = lifeCounter.GetComponent<Text>();
+        text.text = livesInfo[0].Lives + " | " + livesInfo[1].Lives;
+    }
 }
 
