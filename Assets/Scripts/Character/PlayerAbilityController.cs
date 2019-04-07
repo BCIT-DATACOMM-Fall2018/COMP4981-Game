@@ -16,11 +16,12 @@ using NetworkLibrary.MessageElements;
 ///
 /// DATE: 		March 14th, 2019
 ///
-/// REVISIONS:
+/// REVISIONS:  April 6th, 2019 -- Ian Lo
+///             - Updated to allow for external assignment of abilities
 ///
 /// DESIGNER: 	Simon Wu, Cameron Roberts
 ///
-/// PROGRAMMER: Simon Wu, Cameron Roberts
+/// PROGRAMMER: Simon Wu, Cameron Roberts, Ian Lo
 ///
 /// NOTES:
 /// ----------------------------------------------
@@ -31,6 +32,8 @@ public class PlayerAbilityController : AbilityController
     private string[] buttonNames;
     public float[] Cooldowns {get;set;}
     public float[] MaxCooldowns {get;set;}
+	private const short MAX_NUMBER_OF_ABILILITES = 4;
+	private short abilityCount = 0;
 
     private bool moveToAreaTarget;
     private bool moveToActorTarget;
@@ -49,7 +52,9 @@ public class PlayerAbilityController : AbilityController
     ///
     /// DATE:		March 14th, 2019
     ///
-    /// REVISIONS:
+	/// REVISIONS:  April 6th, 2019 -- Ian Lo
+	///             -Cooldowns have been Externalized.
+	///             -Skills are now dynamically set.
     ///
     /// DESIGNER:	Cameron Roberts
     ///
@@ -65,16 +70,14 @@ public class PlayerAbilityController : AbilityController
     protected override void Start()
     {
         base.Start();
-
-        abilities = new AbilityType[] {AbilityType.TestProjectile, AbilityType.Blink, AbilityType.TestTargetedHoming, AbilityType.TestAreaOfEffect};
+		Debug.Log ("AMSTARTED");
+		if (abilities == null)
+		{
+			abilities = new AbilityType[MAX_NUMBER_OF_ABILILITES];
+		} 
         buttonNames = new String[] {"Ability1", "Ability2", "Ability3", "Ability4"};
-        Cooldowns = new float[4];
-        MaxCooldowns = new float[4];
-
-        for (int i = 0; i < abilities.Length; i++)
-        {
-            MaxCooldowns[i] = (float)AbilityInfo.InfoArray[(int)abilities[i]].Cooldown * SERVER_TICK_RATE_PER_SECOND;
-        }
+		Debug.Log (abilityCount);
+		makeCooldown ();
     }
 
     /// ----------------------------------------------
@@ -99,6 +102,7 @@ public class PlayerAbilityController : AbilityController
     /// ----------------------------------------------
     void Update()
     {
+
         autoCooldown -= Time.deltaTime;
         for (int i = 0; i < Cooldowns.Length; i++)
         {
@@ -108,7 +112,7 @@ public class PlayerAbilityController : AbilityController
             }
 
         }
-        for (int i = 0; i < buttonNames.Length; i++)
+		for (int i = 0; i < abilityCount; i++)
         {
             if(Input.GetButtonDown(buttonNames[i])) {
                 Debug.Log("Hit button " + i);
@@ -280,4 +284,74 @@ public class PlayerAbilityController : AbilityController
         GetComponent<PlayerMovement>().SetTargetPosition(autoAttackTarget.transform.position);
     }
 
+
+	/// ----------------------------------------------
+	/// FUNCTION:	addAbility
+	///
+	/// DATE:		April 6th, 2019
+	///
+	/// REVISIONS:
+	///
+	/// DESIGNER:	Cameron Roberts, Ian Lo
+	///
+	/// PROGRAMMER:	Ian Lo
+	///
+	/// INTERFACE: 	addAbility(int Ability)
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		Interface to add an ability externally.
+	///             Fails to add the ability if MAX_NUMBER_OF_ABILITIES
+	///             is exceeded.
+	/// ----------------------------------------------
+	public void addAbility(int ability)
+	{
+		if (abilityCount < MAX_NUMBER_OF_ABILILITES)
+		{
+			Debug.Log ("assigning ability" + ability);
+			if (abilities == null)
+			{
+				abilities = new AbilityType[MAX_NUMBER_OF_ABILILITES];
+			}
+			abilities [abilityCount] = (AbilityType)ability;
+
+			//MaxCooldowns [abilityCount] = (float)AbilityInfo.InfoArray [(int)abilities [abilityCount]].Cooldown * SERVER_TICK_RATE_PER_SECOND;
+			makeCooldown();
+
+
+			GetComponent<AbilityUI>().setAbilityIcon(abilityCount, (AbilityType)ability);
+			Debug.Log ("successfully set ability");
+
+			++abilityCount;
+		}
+	}
+
+	/// ----------------------------------------------
+	/// FUNCTION:	makeCooldown
+	///
+	/// DATE:		April 6th, 2019
+	///
+	/// REVISIONS:
+	///
+	/// DESIGNER:	Ian Lo
+	///
+	/// PROGRAMMER:	Ian Lo
+	///
+	/// INTERFACE: 	void makeCooldown()
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		Wrapper function to add cooldowns to
+	///             existing skills. 
+	/// ----------------------------------------------
+	private void makeCooldown()
+	{
+		if (Cooldowns == null)
+			Cooldowns = new float[MAX_NUMBER_OF_ABILILITES];
+		if (MaxCooldowns == null)
+			MaxCooldowns = new float[MAX_NUMBER_OF_ABILILITES];
+		for (int i = 0; i < abilities.Length; i++) {
+			MaxCooldowns [i] = (float)AbilityInfo.InfoArray [(int)abilities [i]].Cooldown * SERVER_TICK_RATE_PER_SECOND;
+		}
+	}
 }
