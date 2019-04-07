@@ -18,7 +18,10 @@ using System.Collections.Generic;
 ///
 /// DATE: 		March 14th, 2019
 ///
-/// REVISIONS:
+/// REVISIONS:  April 3rd, 2019 -- Rhys Snaydon
+///             - defined prototypes for abilities.
+///             April 6th, 2019 -- Ian Lo
+///             - added ability function implementation
 ///
 /// DESIGNER: 	Cameron Roberts
 ///
@@ -334,9 +337,30 @@ public class ClientStateMessageBridge : IStateMessageBridge
 
     }
 
-    public void UpdateAbilityAssignment(int whatever, int fuckit)
-    {
 
+	/// ----------------------------------------------
+	/// FUNCTION:	UpdateAbilityAssignment
+	///
+	/// DATE:		April 3th, 2019
+	///
+	/// REVISIONS:  April 6th, 2019 -- Ian Lo
+	///             - implemented function action.
+	///
+	/// DESIGNER:	Rhys Snaydon, Ian Lo
+	///
+	/// PROGRAMMER:	Ian Lo
+	///
+	/// INTERFACE: 	void UpdateAbilityAssignment(int actorId, int abilityId)
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		Assigns the abilityId provided from the server to the
+	///             corresponding actorId in the game.
+	/// ----------------------------------------------
+    public void UpdateAbilityAssignment(int actorId, int abilityId)
+    {
+		Debug.Log ("skill added: "+ abilityId);
+		objectController.GameActors[actorId].GetComponent<PlayerAbilityController>().addAbility(abilityId);
     }
 
 	public void UpdateActorExperience(int actorId, int newExp) {
