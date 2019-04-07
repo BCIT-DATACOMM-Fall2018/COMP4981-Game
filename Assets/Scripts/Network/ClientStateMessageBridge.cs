@@ -127,6 +127,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// NOTES:		A function to instruct an actor to use an ability on another actor.
     /// ----------------------------------------------
 	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId, int collisionId){
+        Debug.Log("Use targeted ability: " + abilityId);
         objectController.GameActors[actorId].GetComponent<AbilityController>().UseTargetedAbility(abilityId, objectController.GameActors[targetId], collisionId);
 	}
 
@@ -220,6 +221,7 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	///				and target position. Behaviour differs if the actor is the player character.
     /// ----------------------------------------------
 	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
+        //Debug.Log("Moving actor: " + actorId);
         GameObject actor = objectController.GameActors[actorId];
         bool enableAgent = false;
         if(x == -10 && z == -10 && targetX == -10 && targetZ == -10){
@@ -227,6 +229,9 @@ public class ClientStateMessageBridge : IStateMessageBridge
             actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         } else {
             enableAgent = true;
+        }
+        if(actor.GetComponent<Actor>().banished){
+            actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         }
 		if(actorId == ConnectionManager.Instance.ClientId){
 			try {
@@ -240,20 +245,27 @@ public class ClientStateMessageBridge : IStateMessageBridge
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
 			}
+            if(actor.GetComponent<Actor>().banished){
+                actor.GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+            }
 		} else {
 			try {
 				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
-                Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
-                actor.transform.position = targetPosition;
+                    Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
+                    actor.transform.position = targetPosition;
                 }
                 if(enableAgent){
-                actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                    actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
                 }
                 actor.GetComponent<ActorMovement>().SetTargetPosition(new Vector3(x, 0, z));
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
 			}
 		}
+        if(actor.GetComponent<Actor>().banished){
+            actor.GetComponent<Actor>().banished = false;
+            //actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+        }
 
 	}
 
@@ -317,12 +329,27 @@ public class ClientStateMessageBridge : IStateMessageBridge
         ConnectionManager.Instance.GameOver = true;
     }
 
+    public void UpdateActorSpeed(int ActorId, int Speed)
+    {
+
+    }
+
+    public void UpdateAbilityAssignment(int whatever, int fuckit)
+    {
+
+    }
+
 	public void UpdateActorExperience(int actorId, int newExp) {
 
 	}
 
-    public void UpdateActorSpeed(int actorId, int speed){
-        
+    public void UpdateLifeCount (List<RemainingLivesElement.LivesInfo> livesInfo){
+        Debug.Log("Updating Life Count");
+        if(livesInfo.Count != 2){
+            return;
+        }
+        var lifeCounter = GameObject.Find("GameMapPrefab/Canvas/GlobalLifeCounter");
+        var text = lifeCounter.GetComponent<Text>();
+        text.text = livesInfo[0].Lives + " | " + livesInfo[1].Lives;
     }
-
 }

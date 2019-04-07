@@ -36,6 +36,11 @@ public class AbilityController : MonoBehaviour
     private GameObject fireball;
     private GameObject weebOut;
     private GameObject whale;
+    private GameObject towerShot;
+    private GameObject gungnir;
+    private GameObject slash;
+
+
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
@@ -45,9 +50,9 @@ public class AbilityController : MonoBehaviour
     /// REVISIONS:	March 24th, 2019 - JK - added Wall ability Object
     ///
     /// DESIGNER:	Cameron Roberts
-    /// 
+    ///
     /// PROGRAMMER:	Cameron Roberts, Simon Wu
-    /// 
+    ///
     /// INTERFACE: 	void Start()
     ///
     /// RETURNS: 	void
@@ -67,6 +72,10 @@ public class AbilityController : MonoBehaviour
         fireball = Resources.Load<GameObject>("Ability/Fireball");
         weebOut = Resources.Load<GameObject>("Ability/WeebOut");
         whale = Resources.Load<GameObject>("Ability/Whale");
+        towerShot = Resources.Load<GameObject>("Ability/TowerShot");
+        gungnir = Resources.Load<GameObject>("Ability/Gungnir");
+        slash = Resources.Load<GameObject>("Ability/Slash");
+
     }
 
 
@@ -118,9 +127,15 @@ public class AbilityController : MonoBehaviour
             case AbilityType.Whale:
                 AbilityWhale(x, z, collisionId);
                 break;
-			case AbilityType.Blink:
-				AbilityBlink (x, z);
-				break;
+            case AbilityType.Blink:
+                AbilityBlink(x, z);
+                break;
+            case AbilityType.Gungnir:
+                AbilityGungnir(x, z, collisionId);
+                break;
+            case AbilityType.Slash:
+                AbilitySlash(x, z, collisionId);
+                break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
                 break;
@@ -147,8 +162,12 @@ public class AbilityController : MonoBehaviour
     /// NOTES:		Contains logic to use various abilities based on the abilityId passed to
     ///             the function.
     /// ----------------------------------------------
-    public virtual void UseTargetedAbility(AbilityType abilityId, GameObject target, int collisionId){
-        if(target.transform.position.x != -10){
+    public virtual void UseTargetedAbility(AbilityType abilityId, GameObject target, int collisionId)
+    {
+        Debug.Log("Use ability: " + abilityId);
+
+        if (target.transform.position.x != -10)
+        {
             transform.LookAt(target.transform.position);
         }
         switch (abilityId)
@@ -177,6 +196,15 @@ public class AbilityController : MonoBehaviour
             case AbilityType.UwuImScared:
                 AbilityUwuImScared();
                 break;
+            case AbilityType.PewPew:
+                AbilityTestTargeted(target, collisionId);
+                break;
+            case AbilityType.Sploosh:
+                AbilityTestTargeted(target, collisionId);
+                break;
+            case AbilityType.TowerAttack:
+                AbilityTowerAttack(target, collisionId);
+                break;
             default:
                 Debug.Log("Attempted to use unrecognized ability: " + abilityId);
                 break;
@@ -202,7 +230,8 @@ public class AbilityController : MonoBehaviour
     ///
     /// NOTES:		Homing Bullet Attack
     /// ----------------------------------------------
-    private void BulletAbility(GameObject target, int collisionId){
+    private void BulletAbility(GameObject target, int collisionId)
+    {
         // Instantiate projectile
         var projectile = Instantiate(bulletAbility, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
 
@@ -236,7 +265,8 @@ public class AbilityController : MonoBehaviour
     ///
     /// NOTES:		Melee Attack
     /// ----------------------------------------------
-    private void PorkChop(GameObject target, int collisionId){
+    private void PorkChop(GameObject target, int collisionId)
+    {
         // TODO Play some sort of animation. No collsion is needed as the
         // abilities effect is instantly applied by the server
         GetComponent<Animator>().SetTrigger("attack3");
@@ -265,7 +295,8 @@ public class AbilityController : MonoBehaviour
     ///
     /// NOTES:		Range Damage over Time Skill
     /// ----------------------------------------------
-    private void Dart(float x, float z, int collisionId){
+    private void Dart(float x, float z, int collisionId)
+    {
         // Instantiate projectile
         var projectile = Instantiate(dart, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
 
@@ -300,7 +331,8 @@ public class AbilityController : MonoBehaviour
     ///
     /// NOTES:		Healing Skill
     /// ----------------------------------------------
-    private void Purification(GameObject target, int collisionId){
+    private void Purification(GameObject target, int collisionId)
+    {
         // TODO Play some sort of animation. No collsion is needed as the
         // abilities effect is instantly applied by the server
         GetComponent<Animator>().SetTrigger("attack3");
@@ -311,7 +343,8 @@ public class AbilityController : MonoBehaviour
 
 
 
-    private void AbilityTestProjectile(float x, float z, int collisionId){
+    private void AbilityTestProjectile(float x, float z, int collisionId)
+    {
         // Instantiate projectile
         var projectile = Instantiate(testProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
 
@@ -328,19 +361,21 @@ public class AbilityController : MonoBehaviour
 
     }
 
-    private void AbilityTestAreaOfEffect(float x, float z, int collisionId){
+    private void AbilityTestAreaOfEffect(float x, float z, int collisionId)
+    {
         // Instantiate projectile
         var area = Instantiate(testAreaOfEffect, new Vector3(x, 0.01f, z), Quaternion.identity);
 
         // Set its creator id and ability type which will be used later for collisions
-        area.GetComponent<Ability>().creator = gameObject;;
+        area.GetComponent<Ability>().creator = gameObject; ;
         area.GetComponent<Ability>().abilityId = AbilityType.TestAreaOfEffect;
         area.GetComponent<Ability>().collisionId = collisionId;
         GetComponent<Animator>().SetTrigger("attack2");
 
     }
 
-    private void AbilityFireball(float x, float z, int collisionId){
+    private void AbilityFireball(float x, float z, int collisionId)
+    {
         // Instantiate projectile
         var area = Instantiate(fireball, new Vector3(x, 0.01f, z), Quaternion.identity);
 
@@ -376,7 +411,8 @@ public class AbilityController : MonoBehaviour
 
     }
 
-    private void AbilityTestTargeted(GameObject target, int collisionId){
+    private void AbilityTestTargeted(GameObject target, int collisionId)
+    {
         // TODO Play some sort of animation. No collsion is needed as the
         // abilities effect is instantly applied by the server
         GetComponent<Animator>().SetTrigger("attack3");
@@ -385,7 +421,8 @@ public class AbilityController : MonoBehaviour
         StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.TestTargeted, targetId, casterId, collisionId), 0.5f));
     }
 
-    private void AbilityTestTargetedHoming(GameObject target, int collisionId){
+    private void AbilityTestTargetedHoming(GameObject target, int collisionId)
+    {
         // Instantiate projectile
         var projectile = Instantiate(testHomingProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
 
@@ -400,12 +437,14 @@ public class AbilityController : MonoBehaviour
 
     }
 
-    private void AbilityUwuImScared(){
+    private void AbilityUwuImScared()
+    {
         // not sure what else to do here
         // play some sort of animation?
     }
 
-    private void AbilityAutoAttack(GameObject target, int collisionId){
+    private void AbilityAutoAttack(GameObject target, int collisionId)
+    {
         // TODO Play some sort of animation. No collsion is needed as the
         // abilities effect is instantly applied by the server
         GetComponent<Animator>().SetTrigger("attack1");
@@ -415,7 +454,8 @@ public class AbilityController : MonoBehaviour
         Debug.Log("Play autoattack animation");
     }
 
-    private void AbilityWall(float x, float z) {
+    private void AbilityWall(float x, float z)
+    {
         // Instantiate Wall ability object
         var area = Instantiate(wallAbilityObject, new Vector3(x, 0.01f, z), gameObject.transform.rotation);
 
@@ -425,20 +465,97 @@ public class AbilityController : MonoBehaviour
         GetComponent<Animator>().SetTrigger("attack2");
     }
 
-    private void AbilityBanish(GameObject target) {
-        int targetId = target.GetComponent<Actor>().ActorId;
-        int casterId = gameObject.GetComponent<Actor>().ActorId;
+    private void AbilityBanish(GameObject target)
+    {
+        GetComponent<Actor>().banished = true;
+        GetComponent<PlayerAbilityController>().CancelMoveToTarget();
 
-        GetComponent<Animator>().SetTrigger("attack2");
     }
 
-    IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)  {
+
+    private void AbilityPewPew(GameObject target, int collisionId)
+    {
+        // Instantiate projectile
+        var projectile = Instantiate(testHomingProjectile, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
+
+        // Set the projectiles target
+        projectile.GetComponent<TestTargetedHomingAbility>().target = target;
+
+        // Set its creator id and ability type which will be used later for collisions
+        projectile.GetComponent<Ability>().GetComponent<Ability>().creator = gameObject;
+        projectile.GetComponent<Ability>().abilityId = AbilityType.PewPew;
+        projectile.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack4");
+    }
+
+    private void AbilitySploosh(GameObject target, int collisionId)
+    {
+        // TODO Play some sort of animation. No collsion is needed as the
+        // abilities effect is instantly applied by the server
+        GetComponent<Animator>().SetTrigger("attack1");
+        int targetId = target.GetComponent<Actor>().ActorId;
+        int casterId = gameObject.GetComponent<Actor>().ActorId;
+        StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.Sploosh, targetId, casterId, collisionId), 0.25f));
+        Debug.Log("Play autoattack animation");
+
+
+    }
+
+    IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)
+    {
         yield return new WaitForSeconds(delayTime);
         ConnectionManager.Instance.QueueReliableElement(collisionElement);
-    } 
 
-	private void AbilityBlink(float x, float z) {
-		GetComponent<PlayerMovement>().ForceTargetPosition(new Vector3(x, 0, z));
-		GetComponent<PlayerAbilityController>().CancelMoveToTarget();
-	}
+    }
+
+    private void AbilityBlink(float x, float z)
+    {
+        GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+        GetComponent<PlayerMovement>().ForceTargetPosition(new Vector3(x, 0, z));
+        GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+        GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+    }
+
+    private void AbilityTowerAttack(GameObject target, int collisionId)
+    {
+        // Instantiate projectile
+        var projectile = Instantiate(towerShot, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
+
+        // Set the projectiles target
+        projectile.GetComponent<TowerShotAbility>().target = target;
+
+        // Set its creator id and ability type which will be used later for collisions
+        projectile.GetComponent<Ability>().GetComponent<Ability>().creator = gameObject;
+        projectile.GetComponent<Ability>().abilityId = AbilityType.TowerAttack;
+        projectile.GetComponent<Ability>().collisionId = collisionId;
+    }
+
+    private void AbilityGungnir(float x, float z, int collisionId)
+    {
+        // Instantiate projectile
+        var projectile = Instantiate(gungnir, transform.position + new Vector3(0, 5, 0), Quaternion.identity);
+
+        // Set the projectiles velocity the direction of the target location
+        Vector3 targetLocation = new Vector3(x, 0, z);
+        projectile.GetComponent<Rigidbody>().velocity = (targetLocation - transform.position).normalized;
+
+        // Set its creator id and ability type which will be used later for collisions
+        projectile.GetComponent<Ability>().creator = gameObject;
+        projectile.GetComponent<Ability>().abilityId = AbilityType.Gungnir;
+        projectile.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack4");
+    }
+
+    private void AbilitySlash(float x, float z, int collisionId)
+    {
+        // Instantiate projectile
+        var area = Instantiate(whale, new Vector3(x, 0.01f, z), Quaternion.identity);
+
+        // Set its creator id and ability type which will be used later for collisions
+        area.GetComponent<Ability>().creator = gameObject; ;
+        area.GetComponent<Ability>().abilityId = AbilityType.Slash;
+        area.GetComponent<Ability>().collisionId = collisionId;
+        GetComponent<Animator>().SetTrigger("attack2");
+
+    }
 }

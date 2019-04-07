@@ -66,7 +66,7 @@ public class PlayerAbilityController : AbilityController
     {
         base.Start();
 
-        abilities = new AbilityType[] {AbilityType.TestProjectile, AbilityType.Blink, AbilityType.TestTargetedHoming, AbilityType.TestAreaOfEffect};
+        abilities = new AbilityType[] {AbilityType.Gungnir, AbilityType.Slash, AbilityType.Banish, AbilityType.TestAreaOfEffect};
         buttonNames = new String[] {"Ability1", "Ability2", "Ability3", "Ability4"};
         Cooldowns = new float[4];
         MaxCooldowns = new float[4];
@@ -111,6 +111,7 @@ public class PlayerAbilityController : AbilityController
         for (int i = 0; i < buttonNames.Length; i++)
         {
             if(Input.GetButtonDown(buttonNames[i])) {
+                Debug.Log("Hit button " + i);
                 if(Cooldowns[i] != 0){
                     Debug.Log("Ability on cooldown");
                     return;
