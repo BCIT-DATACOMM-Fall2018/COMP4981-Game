@@ -135,6 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5731847283828554867}
+  - component: {fileID: 3567534453549066355}
   m_Layer: 10
   m_Name: Mesh
   m_TagString: Untagged
@@ -163,6 +164,18 @@ Transform:
   m_Father: {fileID: 2500727972512630651}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!122 &3567534453549066355
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679775109989984739}
+  m_Enabled: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4283611872
+  m_Size: 15
 --- !u!1 &785817862511968297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,6 +1901,7 @@ GameObject:
   - component: {fileID: 7858714773299330238}
   - component: {fileID: 2931078475444313150}
   - component: {fileID: 4878765269603972911}
+  - component: {fileID: 5295408903511911899}
   m_Layer: 10
   m_Name: PlayerOrcWarriorA
   m_TagString: Ally
@@ -1979,6 +1993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80f7c1e1b31ea653886188cdcc1fe60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  banished: 0
   deathObject: {fileID: 0}
 --- !u!114 &2025747938330181056
 MonoBehaviour:
@@ -2042,6 +2057,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLockCamera: {fileID: 0}
   isometricCamera: {fileID: 0}
+--- !u!122 &5295408903511911899
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427056599955238356}
+  m_Enabled: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4283611872
+  m_Size: 15
 --- !u!1 &4451128509294826329
 GameObject:
   m_ObjectHideFlags: 0

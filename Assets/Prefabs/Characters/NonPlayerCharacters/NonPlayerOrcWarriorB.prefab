@@ -2360,6 +2360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80f7c1e1b31ea653886188cdcc1fe60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  banished: 0
   deathObject: {fileID: 0}
 --- !u!114 &2068057714710181985
 MonoBehaviour:
@@ -2530,6 +2531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1447363266554046581}
+  - component: {fileID: 4645176609874495087}
   m_Layer: 10
   m_Name: Mesh
   m_TagString: Untagged
@@ -2558,6 +2560,18 @@ Transform:
   m_Father: {fileID: 2816058850260595154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!122 &4645176609874495087
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877233478593740446}
+  m_Enabled: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4283611872
+  m_Size: 15
 --- !u!1 &5999727212602335781
 GameObject:
   m_ObjectHideFlags: 0

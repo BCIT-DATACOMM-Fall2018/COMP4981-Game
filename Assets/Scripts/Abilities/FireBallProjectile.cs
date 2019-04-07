@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	TestAreaOfEffectAbility - A script to provide the logic for an area of effect
+/// Class: 	FireBallProjectile
 /// 
 /// PROGRAM: NetworkLibrary
 ///
@@ -11,7 +11,7 @@ using UnityEngine;
 ///				void Update()
 ///             void OnCollisionEnter()
 ///
-/// DATE: 		March 14th, 2019
+/// DATE: 		April 5th, 2019
 ///
 /// REVISIONS: 
 ///
@@ -21,16 +21,19 @@ using UnityEngine;
 ///
 /// NOTES:		
 /// ----------------------------------------------
-public class Fireball : Ability
+public class FireBallProjectile : Ability
 {
 
-    private float timer;
-    private const float MAX_TIME = 0.2f;
+    public float speed = 60f;
+    [HideInInspector]
+    public Vector3 target;
+
+    public GameObject aoe;
 
     /// ----------------------------------------------
     /// FUNCTION:	Start
     /// 
-    /// DATE:		March 14th, 2019
+    /// DATE:		April 5th, 2019
     /// 
     /// REVISIONS:	
     /// 
@@ -53,7 +56,7 @@ public class Fireball : Ability
     /// ----------------------------------------------
     /// FUNCTION:	Update
     /// 
-    /// DATE:		March 14th, 2019
+    /// DATE:		April 5th, 2019
     /// 
     /// REVISIONS:	
     /// 
@@ -70,37 +73,19 @@ public class Fireball : Ability
     ///             starting point and delete it if it has gone too far.
     /// ----------------------------------------------
     void Update(){
-        timer += Time.deltaTime;
-        if(timer > MAX_TIME){
+        if(target!= null){
+            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        } else{
+            Destroy(gameObject);
+        }
+        if(transform.position == target){
+            var effect = Instantiate(aoe, new Vector3(transform.position.x, 0.01f, transform.position.z), Quaternion.identity);
+
+            effect.GetComponent<Ability>().creator = GetComponent<Ability>().creator;
+            effect.GetComponent<Ability>().abilityId = GetComponent<Ability>().abilityId;
+            effect.GetComponent<Ability>().collisionId = GetComponent<Ability>().collisionId;
             Destroy(gameObject);
         }
     }
 
-    /// ----------------------------------------------
-    /// FUNCTION:	OnCollisionEnter
-    /// 
-    /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
-    /// DESIGNER:	Cameron Roberts
-    /// 
-    /// PROGRAMMER:	Cameron Roberts
-    /// 
-    /// INTERFACE: 	void OnCollisionEnter(Collision col)
-    /// 
-    /// RETURNS: 	void 
-    /// 
-    /// NOTES:		
-    /// ----------------------------------------------
-    void OnTriggerEnter (Collider col)
-    {
-        Debug.Log("Collision with area of effect");
-        if(col.gameObject.tag == creator.tag){
-            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
-        } else{
-            SendCollision(col.gameObject.GetComponent<Actor>().ActorId);
-            Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
-        }
-    }
 }
