@@ -72,6 +72,7 @@ public class LobbyStateMessageBridge : IStateMessageBridge
 
     public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo)
     {
+        ConnectionManager.Instance.playerInfo = playerInfo;
         ConnectedPlayers.Clear();
         foreach (var item in playerInfo)
         {
@@ -83,21 +84,25 @@ public class LobbyStateMessageBridge : IStateMessageBridge
     //throw exception
     public void EndGame(int winningTeam)
     {
-        
+
     }
 
     public void UpdateActorExperience(int ActorId, int Experience)
     {
-        
+
     }
 
     public void UpdateActorSpeed(int ActorId, int Speed)
     {
-        
+
     }
 
     public void UpdateAbilityAssignment(int whatever, int fuckit)
     {
-        
+
+    }
+
+    public void UpdateLifeCount (List<RemainingLivesElement.LivesInfo> livesInfo){
+
     }
 }

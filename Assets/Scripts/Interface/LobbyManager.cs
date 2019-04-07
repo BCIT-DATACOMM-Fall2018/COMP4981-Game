@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using NetworkLibrary;
 using NetworkLibrary.MessageElements;
+using UnityEngine.SceneManagement;
 
 //remove
 using UnityEngine.SceneManagement;
@@ -153,4 +154,8 @@ public class LobbyManager : MonoBehaviour
         IdleText.text = "";
     }
 
+    public void LogOut()
+    {
+        ConnectionManager.Instance.ExitLobbyToLogin();
+    }
 }

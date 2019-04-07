@@ -7,6 +7,7 @@ using System.Threading;
 using UnityEngine;
 using NetworkLibrary;
 using NetworkLibrary.MessageElements;
+using UnityEngine.SceneManagement;
 
 /// ----------------------------------------------
 /// Interface: 	ConnectionManager - A singleton class to manage a connection
@@ -35,9 +36,11 @@ public class ConnectionManager
     private ReliableUDPConnection connection;
     public ConcurrentQueue<UpdateElement> MessageQueue {get; private set;}
     private ConcurrentQueue<UpdateElement> ReliableElementQueue {get; set;}
+    public List<LobbyStatusElement.PlayerInfo> playerInfo;
 
     private Boolean connected;
     private Boolean inLobby;
+    private Boolean goToLogin;
     public Boolean gameStarted;
     private ElementId[] unreliableElementIds;
     public int ClientId {get;private set;} = -1;
@@ -46,7 +49,7 @@ public class ConnectionManager
 
     private int playerNum;
     public int PlayerNum {get{return playerNum;} set {
-        unreliableElementIds = new ElementId[value*2 + 1];
+        unreliableElementIds = new ElementId[value*2+2];
         for (int i = 0; i < value*2; i++)
         {
             if(i % 2 == 0){
@@ -55,6 +58,7 @@ public class ConnectionManager
                 unreliableElementIds[i] = ElementId.MovementElement;
             }
         }
+        unreliableElementIds[unreliableElementIds.Length-2] = ElementId.RemainingLivesElement;
         unreliableElementIds[unreliableElementIds.Length-1] = ElementId.TowerHealthElement;
         playerNum = value;
     }}
@@ -157,7 +161,7 @@ public class ConnectionManager
     /// ----------------------------------------------
     private void CreateSocketUDP()
     {
-        socket = new UDPSocket(15);
+        socket = new UDPSocket(3);
         socket.Bind();
     }
 
@@ -255,8 +259,15 @@ public class ConnectionManager
     /// ----------------------------------------------
     public void SendLobbyHeartbeat(List<UpdateElement> readyList)
     {
-        Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
-        socket.Send(readyPacket, destination);
+        if(inLobby) {
+            Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
+            socket.Send(readyPacket, destination);
+        }
+        if(goToLogin){
+            Debug.Log("goToLogin" + goToLogin);
+            goToLogin = false;
+            SceneManager.LoadScene("login");
+        }
     }
 
     /// ----------------------------------------------
@@ -277,6 +288,7 @@ public class ConnectionManager
     /// ----------------------------------------------
     public void StartLobbyNetworking(LobbyStateMessageBridge StateBridge, ConcurrentQueue<UpdateElement> ElementQueue)
     {
+        goToLogin = false;
         inLobby = true;
         Thread backgroundReceive = new Thread(() => LobbyNetworking(StateBridge, ElementQueue));
         backgroundReceive.Start();
@@ -302,13 +314,18 @@ public class ConnectionManager
     {
         while (inLobby)
         {
-            Debug.Log("Receiving in Lobby Networking");
-            Packet ServerPacket = socket.Receive();
-            Debug.Log("Unpacking packet in Lobby Networking");
-            UnpackedPacket UnpacketLobbyStatus = connection.ProcessPacket(ServerPacket, new ElementId[] {ElementId.LobbyStatusElement});
-            Debug.Log("Queueing elements in Lobby Networking");
-            UnpacketLobbyStatus.UnreliableElements.ForEach(ElementQueue.Enqueue);
-            UnpacketLobbyStatus.ReliableElements.ForEach(ElementQueue.Enqueue);
+            try{
+                Packet ServerPacket = socket.Receive();
+                UnpackedPacket UnpacketLobbyStatus = connection.ProcessPacket(ServerPacket, new ElementId[] {ElementId.LobbyStatusElement});
+                UnpacketLobbyStatus.UnreliableElements.ForEach(ElementQueue.Enqueue);
+                UnpacketLobbyStatus.ReliableElements.ForEach(ElementQueue.Enqueue);
+            } catch (Exception e) {
+                Debug.Log(e);
+                goToLogin = true;
+                inLobby = false;
+                Debug.Log("Setting go to login");
+                return;
+            }
         }
     }
 
@@ -335,32 +352,43 @@ public class ConnectionManager
         StartBackgroundNetworking();
     }
 
+    public void ExitLobbyToLogin()
+    {
+        inLobby = false;
+        Reset();
+        SceneManager.LoadScene("login");
+    }
+
+
+
 
     /// ----------------------------------------------
     /// FUNCTION:	Reset
-    /// 
+    ///
     /// DATE:		March 23rd, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
+    ///
+    /// REVISIONS:
+    ///
     /// DESIGNER:	Simon Shoban
-    /// 
+    ///
     /// PROGRAMMER:	Simon Shoban
-    /// 
+    ///
     /// INTERFACE: 	public void Reset()
-    /// 
+    ///
     /// NOTES:		Resets all the values in the ConnectionManager
     /// ----------------------------------------------
 	public void Reset()
 	{
 		destination = new Destination();
-		socket = null;
+        socket.Close();
+		socket = new UDPSocket(3);
 		connection = null;
 
 		ClientId = -1;
 		PlayerNum = 1;
 		connected = false;
 		inLobby = false;
+        goToLogin = false;
 		gameStarted = false;
 		GameOver = false;
 
@@ -394,6 +422,8 @@ public class ConnectionManager
             }
             Packet packet = connection.CreatePacket(gameState, reliableElements);
             socket.Send(packet, destination);
+        } else {
+            SceneManager.LoadScene("login");
         }
     }
 
@@ -522,24 +552,20 @@ public class ConnectionManager
                 continue;
             }
             try{
-                //Debug.Log("Waiting for packet");
 
                 Packet packet = socket.Receive();
 
                 if(ReliableUDPConnection.GetPacketType(packet) != PacketType.GameplayPacket){
-                    Debug.Log("This is breaking everything");
                     continue;
                 }
 
-                //Debug.Log("ReceivedPacket");
                 UnpackedPacket unpacked = connection.ProcessPacket(packet, unreliableElementIds);
 
-                unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);  
+                unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
                 unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
             } catch(Exception e){
-                Debug.Log(e.StackTrace);
-                Debug.Log(e.Message);
                 connected = false;
+                Reset();
                 return;
             }
         }
