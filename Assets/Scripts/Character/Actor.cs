@@ -33,6 +33,7 @@ public class Actor : MonoBehaviour
     public int ActorId {get;set;}
 
     protected bool alive;
+    public bool banished;
 
     [HideInInspector]
     public GameObject deathObject;

@@ -455,10 +455,8 @@ public class AbilityController : MonoBehaviour
 
     private void AbilityBanish(GameObject target)
     {
-        int targetId = target.GetComponent<Actor>().ActorId;
-        int casterId = gameObject.GetComponent<Actor>().ActorId;
-
-        GetComponent<Animator>().SetTrigger("attack2");
+        GetComponent<Actor>().banished = true;
+        GetComponent<PlayerAbilityController>().CancelMoveToTarget();
 
     }
 
@@ -500,8 +498,10 @@ public class AbilityController : MonoBehaviour
 
     private void AbilityBlink(float x, float z)
     {
+        GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         GetComponent<PlayerMovement>().ForceTargetPosition(new Vector3(x, 0, z));
         GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+        GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
     }
 
     private void AbilityTowerAttack(GameObject target, int collisionId)

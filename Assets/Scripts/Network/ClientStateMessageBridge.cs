@@ -230,6 +230,9 @@ public class ClientStateMessageBridge : IStateMessageBridge
         } else {
             enableAgent = true;
         }
+        if(actor.GetComponent<Actor>().banished){
+            actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+        }
 		if(actorId == ConnectionManager.Instance.ClientId){
 			try {
 				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
@@ -242,20 +245,27 @@ public class ClientStateMessageBridge : IStateMessageBridge
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
 			}
+            if(actor.GetComponent<Actor>().banished){
+                actor.GetComponent<PlayerAbilityController>().CancelMoveToTarget();
+            }
 		} else {
 			try {
 				if(Math.Abs(actor.transform.position.x - x) > POSITION_TOLERANCE || Math.Abs(actor.transform.position.z - z) > POSITION_TOLERANCE){
-                Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
-                actor.transform.position = targetPosition;
+                    Vector3 targetPosition = new Vector3(x,actor.transform.position.y,z);
+                    actor.transform.position = targetPosition;
                 }
                 if(enableAgent){
-                actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                    actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
                 }
                 actor.GetComponent<ActorMovement>().SetTargetPosition(new Vector3(x, 0, z));
 			} catch	(KeyNotFoundException e){
 				//TODO Error handling
 			}
 		}
+        if(actor.GetComponent<Actor>().banished){
+            actor.GetComponent<Actor>().banished = false;
+            //actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+        }
 
 	}
 
