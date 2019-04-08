@@ -18,8 +18,10 @@ public class GameStateController : MonoBehaviour
     /// 
     /// DATE:		March 14th, 2019
     /// 
-    /// REVISIONS:	
-    /// 
+    /// REVISIONS:	March 18th, 2019 - Cameron Roberts
+    ///                 - Added functionality to go back to the lobby
+    ///                   after the game has ended
+    ///
     /// DESIGNER:	Cameron Roberts
     /// 
     /// PROGRAMMER:	Cameron Roberts
@@ -43,7 +45,9 @@ public class GameStateController : MonoBehaviour
     /// 
     /// DATE:		March 14th, 2019
     /// 
-    /// REVISIONS:	
+    /// REVISIONS:	March 18th, 2019 - Cameron Roberts
+    ///                 - Added functionality to go back to the lobby
+    ///                   after the game has ended
     /// 
     /// DESIGNER:	Cameron Roberts
     /// 
@@ -68,7 +72,24 @@ public class GameStateController : MonoBehaviour
         }
     }
 
-        private void GoToLobby (){
+    /// ----------------------------------------------
+    /// FUNCTION:	GoToLobby
+    /// 
+    /// DATE:		March 19th, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Cameron Roberts
+    /// 
+    /// PROGRAMMER:	Cameron Roberts
+    /// 
+    /// INTERFACE: 	void GoToLobby()
+    /// 
+    /// RETURNS: 	void
+    /// 
+    /// NOTES:		Loads the lobby scene.
+    /// ----------------------------------------------
+    private void GoToLobby (){
         SceneManager.LoadScene("Login", LoadSceneMode.Single);
     }
 

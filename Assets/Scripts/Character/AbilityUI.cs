@@ -3,7 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using NetworkLibrary;
-
+/// ----------------------------------------------
+/// Class: 	AbilityUI - A script to provide the logic for the 
+///						ability bar and associated UI elements
+///
+/// PROGRAM: SKOM
+///
+/// FUNCTIONS:	void Start()
+///				private void init()
+///				private void makeCooldownSliders()
+///				private void makeAbilityIcons()
+///    			void Update()
+///				public void setAbilityIcon(int slot, AbilityType id)
+///
+///
+/// DATE: 		March 16th, 2019
+///
+/// REVISIONS:
+///
+/// DESIGNER: 	Cameron Roberts, Ian Lo, Jacky Lee
+///
+/// PROGRAMMER: Cameron Roberts, Ian Lo, Jacky Lee
+///
+/// NOTES:
+/// ----------------------------------------------
 public class AbilityUI : MonoBehaviour
 {
     GameObject AbilityBar;
@@ -14,14 +37,14 @@ public class AbilityUI : MonoBehaviour
 	/// ----------------------------------------------
 	/// FUNCTION:	Start()
 	///
-	/// DATE:		April 6th, 2019
+	/// DATE:		April 16th, 2019
 	///
 	/// REVISIONS:  April 6th, 2019 -- Ian Lo
 	///             -Externalized initialization.
 	///
-	/// DESIGNER:	?????
+	/// DESIGNER:	Cameron Roberts
 	///
-	/// PROGRAMMER:	????? , Ian Lo
+	/// PROGRAMMER:	Cameron Roberts , Ian Lo
 	///
 	/// INTERFACE: 	void Start()
 	///
@@ -140,15 +163,15 @@ public class AbilityUI : MonoBehaviour
 	/// REVISIONS:  April 6th, 2019 -- Ian Lo
 	///             -performs init, cooldowns, abilities creation.
 	///
-	/// DESIGNER:	?????
+	/// DESIGNER:	Jacky Lee
 	///
-	/// PROGRAMMER:	????? , Ian Lo
+	/// PROGRAMMER:	Jacky Lee , Ian Lo
 	///
 	/// INTERFACE: 	void setAbilityIcon(int slot, AbilityType id)
 	///
 	/// RETURNS: 	void
 	///
-	/// NOTES:		??????????????????????????????????
+	/// NOTES:		Used to set the icons ob the ability bar
 	/// ----------------------------------------------
     public void setAbilityIcon(int slot, AbilityType id) {
 		init ();

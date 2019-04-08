@@ -54,7 +54,6 @@ public abstract class Ability : MonoBehaviour
     ///             notifying them of a collision
     /// ----------------------------------------------
     protected void SendCollision(int actorId){
-        Debug.Log("Sending collision to the server. Info: AbilityId=" + abilityId + ", actorId=" + actorId + ", creatorId=" + creator.GetComponent<Actor>().ActorId + ", collisionId=" + collisionId);
         ConnectionManager.Instance.QueueReliableElement(new CollisionElement(abilityId, actorId, creator.GetComponent<Actor>().ActorId, collisionId));
     }
 }

@@ -191,24 +191,6 @@ public class ConnectionManager
     }
 
 
-    //
-    //
-    //
-    //  T E M P   H E L P E R
-    //
-    //
-    //
-    public void InitConnection(String Ipaddress)
-    {
-        IPAddress address = IPAddress.Parse(Ipaddress);
-        destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
-        socket.Send(ReliableUDPConnection.CreateRequestPacket("Alice"), destination);
-        Packet confirmationPacket = socket.Receive();
-        ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
-        ConnectionManager.Instance.ConnectReliableUDP();
-        connected = true;
-    }
-
     /// ----------------------------------------------
     /// FUNCTION:	RequestConnection
     ///
@@ -233,8 +215,14 @@ public class ConnectionManager
         IPAddress address = IPAddress.Parse(stringIp);
         destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
         socket.Send(ReliableUDPConnection.CreateRequestPacket(clientName), destination);
-        // TODO: Receive call just blocks, introduce client or server timeout
-        Packet confirmationPacket = socket.Receive();
+
+        Packet confirmationPacket;
+
+        try{
+            confirmationPacket = socket.Receive();
+        } catch (TimeoutException e){
+            return false;
+        }
 
         // Check if received packet is a confirmation packet
         if (ReliableUDPConnection.GetPacketType(confirmationPacket) != PacketType.ConfirmationPacket)
@@ -269,7 +257,6 @@ public class ConnectionManager
             socket.Send(readyPacket, destination);
         }
         if(goToLogin){
-            Debug.Log("goToLogin" + goToLogin);
             goToLogin = false;
             SceneManager.LoadScene("login");
         }
@@ -325,10 +312,8 @@ public class ConnectionManager
                 UnpacketLobbyStatus.UnreliableElements.ForEach(ElementQueue.Enqueue);
                 UnpacketLobbyStatus.ReliableElements.ForEach(ElementQueue.Enqueue);
             } catch (Exception e) {
-                Debug.Log(e);
                 goToLogin = true;
                 inLobby = false;
-                Debug.Log("Setting go to login");
                 return;
             }
         }
@@ -357,14 +342,28 @@ public class ConnectionManager
         StartBackgroundNetworking();
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	LobbyNetworking
+    ///
+    /// DATE:		April 6th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER: Cameron Roberts
+    ///
+    /// INTERFACE: 	public void ExitLobbyToLogin()
+    ///
+    /// NOTES:		Exits the lobby state and goes to the login screen.
+    ///             Resets the ConnectionManager
+    /// ----------------------------------------------
     public void ExitLobbyToLogin()
     {
         inLobby = false;
         Reset();
         SceneManager.LoadScene("login");
     }
-
-
 
 
     /// ----------------------------------------------
@@ -433,62 +432,6 @@ public class ConnectionManager
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:	Login
-    ///
-    /// DATE:		March 31th, 2019
-    ///
-    /// REVISIONS:
-    ///
-    /// DESIGNER:	Cameron Roberts
-    ///
-    /// PROGRAMMER:	Viktor Alvar
-    ///
-    /// INTERFACE: 	public void Login(String stringIp)
-    ///
-    /// NOTES:      Sends initial connect packet to the server and
-    ///             loads the lobby scene if connection was successfull.
-    /// ----------------------------------------------
-    // private void Login(String stringIp){
-    //     // TODO: Get User's Name
-
-    //     // Create and Send Request Packet
-    //     IPAddress address = IPAddress.Parse(stringIp);
-    //     destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
-    //     socket.Send(ReliableUDPConnection.CreateRequestPacket(), destination);
-
-    //     // TODO: Load Lobby Scene
-    //     // TODO: Pass ClientId to Lobby Scene
-    //     // Receive Confirmation Packet and Establish Connection
-    //     Packet confirmationPacket = socket.Receive();
-    //     ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
-    //     ConnectReliableUDP();
-
-    //     connected = true;
-    //     Debug.Log("Connected");
-
-    //     // Create ReadyElement for current client
-    //     List<UpdateElement> readyList = new List<UpdateElement>();
-    //     readyList.Add(new ReadyElement(true, ClientId, 0));
-
-    //     // TODO: Keep Sending Heartbeat Packets until Game Start (maybe for Lobby Scene)
-    //     // TODO: Client send ready or not read packets to server in (maybe for Lobby Scene)
-    //     // Send Heartbeat Packet to let Server add current client to PlayerConnection array
-    //     // The packet lets the server know the client is ready to start the game
-    //     Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
-    //     socket.Send(readyPacket, destination);
-
-    //     // Receive the start packet
-    //     // Start Packet contains Unreliable Elements which contians number of connections to server
-    //     // Start Packet contains Reliable Elements which contains each client's properties
-    //     Packet startPacket = socket.Receive();
-    //     UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] { });
-    //     unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
-    //     unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
-
-    //     // TODO: Pass start packet elements to Lobby Scene to display each client
-    // }
-
-    /// ----------------------------------------------
     /// FUNCTION:	StarBackgroundNetworking
     ///
     /// DATE:		March 14th, 2019
@@ -526,36 +469,7 @@ public class ConnectionManager
     ///             from the received packets.
     /// ----------------------------------------------
     private void BackgroundNetworking() {
-        // IPAddress address = IPAddress.Parse(stringIp);
-        // destination = new Destination((uint)BitConverter.ToInt32(address.GetAddressBytes(), 0), (ushort)System.Net.IPAddress.HostToNetworkOrder((short)8000));
-        // socket.Send(ReliableUDPConnection.CreateRequestPacket("Alice"), destination);
-        // Packet confirmationPacket = socket.Receive();
-        // ClientId = ReliableUDPConnection.GetClientIdFromConfirmationPacket(confirmationPacket);
-        // ConnectReliableUDP();
-
-        // connected = true;
-        // Debug.Log("Connected");
-
-        // List<UpdateElement> readyList = new List<UpdateElement>();
-        // readyList.Add(new ReadyElement(true, ClientId, Team));
-        // Packet readyPacket = connection.CreatePacket(readyList, null, PacketType.HeartbeatPacket);
-        // socket.Send(readyPacket, destination);
-
-        // while(!gameStarted){
-        //     Packet startPacket = socket.Receive();
-        //     UnpackedPacket unpackedStartPacket = connection.ProcessPacket(startPacket, new ElementId[] {ElementId.LobbyStatusElement});
-        //     unpackedStartPacket.UnreliableElements.ForEach(MessageQueue.Enqueue);
-        //     unpackedStartPacket.ReliableElements.ForEach(MessageQueue.Enqueue);
-        // }
-
-        //Game State
         while(true){
-            // THIS LINE EXISTS TO PREVENT A RACE CONDITION CAUSED BY PROCESSING A PACKET BEFORE THE START GAME
-            // BRIDGE FUNCTION IS CALLED. THE IMPLEMENTATION OF A PROPER LOBBY STATE SHOULD FIX THE ISSUE AFTER
-            // WHICH THIS CHECK CAN BE REMOVED.
-            if(!gameStarted){
-                continue;
-            }
             try{
 
                 Packet packet = socket.Receive();

@@ -6,6 +6,41 @@ using System.Collections.Generic;
 using NetworkLibrary;
 using NetworkLibrary.MessageElements;
 
+/// ----------------------------------------------
+/// Class:  	LobbyStateMessageBridge - An class to allow message elements
+/// 								  	   to update the lobby state.
+///
+/// PROGRAM: SKOM
+///
+/// CONSTRUCTORS:	public ClientStateMessageBridge (GameObjectController objectController)
+///
+/// FUNCTIONS:	public void UpdateActorPosition (int actorId, float x, float z)
+///             public void UpdateActorHealth (int actorId, int newHealth)
+///             public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId, int collisionId)
+///         	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z, int collisionId){
+///         	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId, int collisionId){
+///         	public void SpawnActor(ActorType actorType, int actorId, int team, float x, float z){
+///         	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
+///         	public void SetReady(int clientId, bool ready, int team){
+///         	public void StartGame(int playerNum){
+///             public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo){
+///             public void UpdateActorSpeed(int ActorId, int Speed)
+///             public void UpdateAbilityAssignment(int actorId, int abilityId)
+///         	public void UpdateActorExperience(int actorId, int newExp) {
+///             public void UpdateLifeCount (List<RemainingLivesElement.LivesInfo> livesInfo){
+///
+///
+/// DATE: 		April 1st, 2019
+///
+/// REVISIONS:  
+///
+/// DESIGNER: 	Rhys Snaydon
+///
+/// PROGRAMMER: Rhys Snaydon
+///
+/// NOTES:		The purpose of this class is to provide an interface through
+///				which the server can alter the game state.
+/// ----------------------------------------------
 public class LobbyStateMessageBridge : IStateMessageBridge
 {
     private List<LobbyStatusElement.PlayerInfo> ConnectedPlayers;
@@ -63,13 +98,43 @@ public class LobbyStateMessageBridge : IStateMessageBridge
 
     }
 
-    //throw exception
+	/// ----------------------------------------------
+    /// FUNCTION:	SetActorMovement
+    ///
+    /// DATE:		March 14th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Rhys Snaydon
+    ///
+    /// PROGRAMMER:	Rhys Snaydon
+    ///
+    /// INTERFACE: 	public void StartGame(int playerNum)
+    ///
+    /// NOTES:		Sets the number of players in the game and
+    ///             goes to the Game scene
+    /// ----------------------------------------------
 	public void StartGame(int playerNum)
     {
         ConnectionManager.Instance.ExitLobbyState(ConnectedPlayers.Count);
         SceneManager.LoadScene("Game");
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	SetActorMovement
+    ///
+    /// DATE:		April 1st, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Rhys Snaydon
+    ///
+    /// PROGRAMMER:	Rhys Snaydon
+    ///
+    /// INTERFACE: 	public void StartGame(int playerNum)
+    ///
+    /// NOTES:		Sets the player info for use in the lobby.
+    /// ----------------------------------------------
     public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo)
     {
         ConnectionManager.Instance.playerInfo = playerInfo;

@@ -13,6 +13,8 @@ using UnityEngine.AI;
 ///				void Awake()
 ///             public void SetTargetPosition(Vector3 target)
 ///             void Move()
+///             public void Stop()
+///             public void ForceTargetPosition (Vector3 target)
 ///
 /// DATE: 		March 14th, 2019
 ///
@@ -151,14 +153,46 @@ public class ActorMovement : MonoBehaviour
         }
     }
 
-
+    /// ----------------------------------------------
+    /// FUNCTION:	Move
+    /// 
+    /// DATE:		March 20th, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Cameron Roberts
+    /// 
+    /// PROGRAMMER:	Cameron Roberts
+    /// 
+    /// INTERFACE: 	void Move
+    /// 
+    /// RETURNS: 	void
+    /// 
+    /// NOTES:		Stops the navmesh agent
+    /// ----------------------------------------------
     public void Stop(){
         moving = false;
         agent.SetDestination(transform.position);
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	Move
+    /// 
+    /// DATE:		March 31st, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Jeff Choy
+    /// 
+    /// PROGRAMMER:	Jeff Choy
+    /// 
+    /// INTERFACE: 	void Move
+    /// 
+    /// RETURNS: 	void
+    /// 
+    /// NOTES:		Sets the navmesh agents destination
+    /// ----------------------------------------------
 	public void ForceTargetPosition (Vector3 target) {
-		//moving = true;
 		agent.SetDestination(target);
 	}
 }

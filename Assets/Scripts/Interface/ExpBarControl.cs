@@ -3,6 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// ---------------------------------------------- 
+/// Class:        ExpBarControl - Class to manage the experience 
+///                               display UI element
+///
+/// PROGRAM:      SKOM
+///
+/// FUNCTIONS:    public void Start()
+///               public void Update()
+///               void levelUp()
+///               public static int currentLevel(int exp)
+/// 
+/// DATE:         April 3rd, 2019
+///
+/// REVISIONS:    April 7th, 2019
+///                 - Modified to work with exp values sent from server
+///
+/// DESIGNER:     Simon Chen
+///
+/// PROGRAMMER:   Simon Chen, Cameron Roberts
+///
+/// NOTES:
+/// ---------------------------------------------- 
 public class ExpBarControl : MonoBehaviour
 {
 
@@ -17,14 +39,49 @@ public class ExpBarControl : MonoBehaviour
 
     public Slider expBar;
     public Text lvlLabel;
-    // Start is called before the first frame update
+
+    /// ----------------------------------------------
+	/// FUNCTION:	Start()
+	///
+	/// DATE:		April 3rd, 2019
+	///
+	/// REVISIONS:  April 7th, 2019
+    ///                 - Modified to work with exp values sent from server
+    ///
+	/// DESIGNER:	Simon Chen
+	///
+	/// PROGRAMMER:	Simon Chen
+	///
+	/// INTERFACE: 	void Start()
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		Start is called before the first frame update
+	/// ----------------------------------------------    
     void Start()
     {
         level = 1;
         exp = 0;
     }
 
-    // Update is called once per frame
+    /// ----------------------------------------------
+	/// FUNCTION:	Update()
+	///
+	/// DATE:		April 3rd, 2019
+	///
+	/// REVISIONS:  April 7th, 2019
+    ///                 - Modified to work with exp values sent from server
+    ///
+	/// DESIGNER:	Simon Chen
+	///
+	/// PROGRAMMER:	Simon Chen
+	///
+	/// INTERFACE: 	void Update()
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		Update is called once per frame
+	/// ----------------------------------------------  
     void Update()
     {
         if(currentLevel(exp) > level){
@@ -46,19 +103,54 @@ public class ExpBarControl : MonoBehaviour
         }
     }
 
+    /// ----------------------------------------------
+	/// FUNCTION:	levelUp()
+	///
+	/// DATE:		April 3rd, 2019
+	///
+	/// REVISIONS:  April 7th, 2019
+    ///                 - Modified to work with exp values sent from server
+    ///
+	/// DESIGNER:	Simon Chen
+	///
+	/// PROGRAMMER:	Simon Chen
+	///
+	/// INTERFACE: 	void levelUp()
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		
+	/// ---------------------------------------------- 
     void levelUp()
     {
         level++;
         lvlLabel.text = "Level " + level.ToString();
     }
 
-    public static int currentLevel(int exp) {
-            if (exp < LEVEL1_EXP)
-                return 1;
-            if (exp < LEVEL2_EXP)
-                return 2;
-            if (exp < LEVEL3_EXP)
-                return 3;
-            return 4;
-        }
+    /// ----------------------------------------------
+	/// FUNCTION:	currentLevel()
+	///
+	/// DATE:		April 3rd, 2019
+	///
+	/// REVISIONS:  
+    ///
+	/// DESIGNER:	Cameron Roberts
+	///
+	/// PROGRAMMER:	Cameron Roberts
+	///
+	/// INTERFACE: 	static int currentLevel(int exp)
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		
+	/// ---------------------------------------------- 
+    static int currentLevel(int exp) {
+        if (exp < LEVEL1_EXP)
+            return 1;
+        if (exp < LEVEL2_EXP)
+            return 2;
+        if (exp < LEVEL3_EXP)
+            return 3;
+        return 4;
+    }
 }

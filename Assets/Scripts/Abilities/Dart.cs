@@ -17,7 +17,7 @@ using UnityEngine;
 ///
 /// DESIGNER: 	Cameron Roberts
 ///
-/// PROGRAMMER: Phat Le
+/// PROGRAMMER: keishi Asai
 ///
 /// NOTES:
 /// ----------------------------------------------
@@ -36,7 +36,7 @@ public class Dart : Ability
     ///
     /// DESIGNER:	Cameron Roberts
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	keishi Asai
     ///
     /// INTERFACE: 	void Start()
     ///
@@ -61,7 +61,7 @@ public class Dart : Ability
     ///
     /// DESIGNER:	Cameron Roberts
     ///
-    /// PROGRAMMER:	Phat Le
+    /// PROGRAMMER:	keishi Asai
     ///
     /// INTERFACE: 	void Update()
     ///
@@ -86,7 +86,7 @@ public class Dart : Ability
     ///
     /// DESIGNER:	Cameron Roberts
     ///
-    /// PROGRAMMER:	Phat Le
+    /// PROGRAMMER:	keishi Asai
     ///
     /// INTERFACE: 	void OnTriggerEnter(Collider col)
     ///

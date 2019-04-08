@@ -70,7 +70,6 @@ public class Slash : Ability
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
-        Debug.Log("Collision with area of effect");
         if(col.gameObject.tag == creator.tag){
             Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
         } else{

@@ -14,6 +14,26 @@ using UnityEngine.SceneManagement;
 //remove
 using UnityEngine.SceneManagement;
 
+/// ----------------------------------------------
+/// Class:  	    LobbyManager - A class that manages the
+///                                Lobby Scene
+///
+/// PROGRAM:        SKOM
+///
+/// CONSTRUCTORS:   N/A
+///
+/// FUNCTIONS:  	
+///
+/// DATE: 	    	April 1st, 2019
+///
+/// REVISIONS:
+///
+/// DESIGNER:   	Rhys Snaydon
+///
+/// PROGRAMMER:     Rhys Snaydon
+///
+/// NOTES:
+/// ----------------------------------------------
 public class LobbyManager : MonoBehaviour
 {
     private ConcurrentQueue<UpdateElement> ElementQueue {get; set;}
@@ -31,7 +51,7 @@ public class LobbyManager : MonoBehaviour
     public Text ReadyText;
 
     /// ----------------------------------------------
-    /// FUNCTION:	LobbyNetworking
+    /// FUNCTION:	Start
     /// 
     /// DATE:		April 1, 2019
     /// 
@@ -60,7 +80,21 @@ public class LobbyManager : MonoBehaviour
         ConnectionManager.Instance.StartLobbyNetworking(StateBridge, ElementQueue);
     }
 
-    // Update is called once per frame
+    /// ----------------------------------------------
+    /// FUNCTION:	Update
+    /// 
+    /// DATE:		April 1, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Rhys Snaydon
+    /// 
+    /// PROGRAMMER: Rhys Snaydon
+    /// 
+    /// INTERFACE: 	void Update()
+    /// 
+    /// NOTES:		Monobehaviour update method. Called once per frame.
+    /// ----------------------------------------------
     void Update()
     {
         Timer += Time.deltaTime;
@@ -82,6 +116,22 @@ public class LobbyManager : MonoBehaviour
         UpdateTexts();
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	Select
+    /// 
+    /// DATE:		April 1, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Rhys Snaydon
+    /// 
+    /// PROGRAMMER: Rhys Snaydon
+    /// 
+    /// INTERFACE: 	public void Select(GameObject TeamPanel)
+    /// 
+    /// NOTES:		Called when the user clicks on a panel
+    ///             to change their team.
+    /// ----------------------------------------------
     public void Select(GameObject TeamPanel)
     {
         Debug.Log("Team Selected" + TeamPanel.name);
@@ -106,11 +156,42 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	ToggleReady
+    /// 
+    /// DATE:		April 1, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Rhys Snaydon
+    /// 
+    /// PROGRAMMER: Rhys Snaydon
+    /// 
+    /// INTERFACE: 	public void ToggleReady()
+    /// 
+    /// NOTES:		Toggles the players ready status
+    /// ----------------------------------------------
     public void ToggleReady()
     {
         ReadyState = !ReadyState;
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	UpdateTexts
+    /// 
+    /// DATE:		April 1, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Rhys Snaydon
+    /// 
+    /// PROGRAMMER: Rhys Snaydon
+    /// 
+    /// INTERFACE: 	private void UpdateTexts()
+    /// 
+    /// NOTES:		Updates the lobby text based on ready status
+    ///             and information from server
+    /// ----------------------------------------------
     private void UpdateTexts()
     {
         ClearTexts();
@@ -147,6 +228,21 @@ public class LobbyManager : MonoBehaviour
 
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	ClearTexts
+    /// 
+    /// DATE:		April 1, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Rhys Snaydon
+    /// 
+    /// PROGRAMMER: Rhys Snaydon
+    /// 
+    /// INTERFACE: 	private void UpdateTexts()
+    /// 
+    /// NOTES:		Clears the lobby texts
+    /// ----------------------------------------------
     private void ClearTexts()
     {
         TeamAText.text = "";
@@ -154,6 +250,21 @@ public class LobbyManager : MonoBehaviour
         IdleText.text = "";
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	Logout
+    /// 
+    /// DATE:		April 1, 2019
+    /// 
+    /// REVISIONS:	
+    /// 
+    /// DESIGNER:	Cameron Roberts
+    /// 
+    /// PROGRAMMER: Cameron Roberts
+    /// 
+    /// INTERFACE: 	public void LogOut()
+    /// 
+    /// NOTES:		Exits the lobby and returns to the login scene
+    /// ----------------------------------------------
     public void LogOut()
     {
         ConnectionManager.Instance.ExitLobbyToLogin();

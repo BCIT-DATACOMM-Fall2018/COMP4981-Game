@@ -10,7 +10,7 @@ using NetworkLibrary;
 ///
 /// FUNCTIONS:	void Start()
 ///				void Update()
-///             public void InstantiateObject(ActorType type, Vector3 location, int actorId)
+///             public void InstantiateObject(ActorType type, Vector3 location, int actorId, int team)
 /// 
 /// DATE: 		March 14th, 2019
 ///
@@ -110,7 +110,7 @@ public class GameObjectController : MonoBehaviour
                     GameActors[actorId].GetComponent<CameraSelector>().SetIsometricToPlayer();
                     
                     GameActors[actorId].GetComponent<Actor>().deathObject = DummyPlayers[(int) type];
-                // Check if the actor is an ally
+                
                 } else {
                     GameActors.Add(actorId, Instantiate(NonPlayers[(int) type], location, Quaternion.identity));
                 }
@@ -122,12 +122,9 @@ public class GameObjectController : MonoBehaviour
                 GameActors.Add(actorId, Instantiate(Tower, location, Quaternion.identity));
             }
         }
-        Debug.Log("Actor dictionary length: " + GameActors.Count);
         if(team == ConnectionManager.Instance.Team){
-            Debug.Log("Ally actor: " + actorId);
             GameActors[actorId].tag = "Ally";
         } else {
-            Debug.Log("Enemy actor: " + actorId);
             GameActors[actorId].tag = "Enemy";
         }
         GameActors[actorId].GetComponent<Actor>().ActorId = actorId;
