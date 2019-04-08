@@ -119,7 +119,7 @@ public class GameObjectController : MonoBehaviour
         else
         {
             if(type == ActorType.TowerA){
-                GameActors.Add(actorId, Instantiate(Tower, location, Quaternion.identity));
+                GameActors.Add(actorId, Instantiate(Tower, location, Tower.transform.rotation));
             }
         }
         if(team == ConnectionManager.Instance.Team){

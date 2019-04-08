@@ -53,6 +53,7 @@ using NetworkLibrary.MessageElements;
 public class AbilityController : MonoBehaviour
 {
 
+    public bool preventTurning;
     private GameObject testProjectile;
     private GameObject testHomingProjectile;
     private GameObject testAreaOfEffect;
@@ -131,7 +132,7 @@ public class AbilityController : MonoBehaviour
     /// ----------------------------------------------
     public virtual void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
     {
-        if(AbilityInfo.InfoArray[(int)abilityId].Range != 0){
+        if(AbilityInfo.InfoArray[(int)abilityId].Range != 0 && !preventTurning){
             transform.LookAt(new Vector3(x, 0, z));
         }
 
@@ -199,7 +200,7 @@ public class AbilityController : MonoBehaviour
     {
         Debug.Log("Use ability: " + abilityId);
 
-        if (target.transform.position.x != -10)
+        if (target.transform.position.x != -10 && !preventTurning)
         {
             transform.LookAt(target.transform.position);
         }

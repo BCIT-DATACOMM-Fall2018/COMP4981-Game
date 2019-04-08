@@ -211,6 +211,18 @@ public class AbilityUI : MonoBehaviour
             case AbilityType.Blink:
                 AbilityIcons[slot].sprite = Resources.Load<Sprite>("AbilityIcons/Normal/blink");
                 break;
+			case AbilityType.Gungnir:
+                AbilityIcons[slot].sprite = Resources.Load<Sprite>("AbilityIcons/Ultimate/gungnir");
+                break;
+			case AbilityType.Sploosh:
+                AbilityIcons[slot].sprite = Resources.Load<Sprite>("AbilityIcons/Basic/sploosh");
+                break;
+			case AbilityType.PewPew:
+                AbilityIcons[slot].sprite = Resources.Load<Sprite>("AbilityIcons/Basic/pewpew");
+                break;
+			case AbilityType.Slash:
+                AbilityIcons[slot].sprite = Resources.Load<Sprite>("AbilityIcons/Basic/slash");
+                break;
         }
     }
 }
