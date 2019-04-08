@@ -68,7 +68,7 @@ public class Fireball : Ability
     /// 
     /// RETURNS: 	void 
     /// 
-    /// NOTES:      Send collision when a non Ally gameObject enters the trigger area.!--
+    /// NOTES:      Send collision when a non Ally gameObject enters the trigger area.
     ///             Prevent triggering on the same object twice.
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)

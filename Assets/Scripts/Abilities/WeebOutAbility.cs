@@ -9,7 +9,7 @@ using UnityEngine;
 ///
 /// FUNCTIONS:  void Start()
 ///             void Update()
-///             void OnCollisionEnter()
+///             void OnTriggerEnter()
 ///
 /// DATE:       March 23rd, 2019
 ///
