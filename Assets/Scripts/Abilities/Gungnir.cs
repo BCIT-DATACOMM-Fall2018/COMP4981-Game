@@ -2,6 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// ----------------------------------------------
+/// Class: 	Gungnir - A script to provide the logic for the Gungnir ability
+///
+/// PROGRAM: SKOM
+///
+/// FUNCTIONS:	void Start()
+///             void Update()
+///             void OnTriggerEnter()
+///
+/// DATE: 		March April 3rd, 2019
+///
+/// REVISIONS:  
+///
+/// DESIGNER: 	Ben Zhang
+///
+/// PROGRAMMER: Ben Zhang
+///
+/// NOTES:
+/// ----------------------------------------------
 public class Gungnir : Ability
 {
 
@@ -11,13 +30,13 @@ public class Gungnir : Ability
     /// ----------------------------------------------
     /// FUNCTION:	Start
     ///
-    /// DATE:		March 14th, 2019
+    /// DATE:		April 3rd, 2019
     ///
     /// REVISIONS:
     ///
-    /// DESIGNER:	Cameron Roberts
+    /// DESIGNER:	Ben Zhang
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Ben Zhang
     ///
     /// INTERFACE: 	void Start()
     ///
@@ -25,6 +44,7 @@ public class Gungnir : Ability
     ///
     /// NOTES:		MonoBehaviour function.
     ///             Called before the first Update().
+    ///             Set the projectile moving forward.
     /// ----------------------------------------------
     void Start ()
     {
@@ -35,13 +55,13 @@ public class Gungnir : Ability
     /// ----------------------------------------------
     /// FUNCTION:	Update
     ///
-    /// DATE:		March 14th, 2019
+    /// DATE:		April 3rd, 2019
     ///
     /// REVISIONS:
     ///
-    /// DESIGNER:	Cameron Roberts
+    /// DESIGNER:	Ben Zhang
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Ben Zhang
     ///
     /// INTERFACE: 	void Update()
     ///
@@ -60,19 +80,20 @@ public class Gungnir : Ability
     /// ----------------------------------------------
     /// FUNCTION:	OnTriggerEnter
     ///
-    /// DATE:		March 14th, 2019
+    /// DATE:		April 3rd, 2019
     ///
     /// REVISIONS:
     ///
-    /// DESIGNER:	Cameron Roberts
+    /// DESIGNER:	Ben Zhang
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Ben Zhang
     ///
-    /// INTERFACE: 	void OnCollisionEnter(Collider col)
+    /// INTERFACE: 	void OnTriggerEnter(Collider col)
     ///
     /// RETURNS: 	void
     ///
-    /// NOTES:
+    /// NOTES:      When a gameobject from another team collides with this
+    ///             GameObject send a collision event to the server. 
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {

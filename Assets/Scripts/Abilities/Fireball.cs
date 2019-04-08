@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	TestAreaOfEffectAbility - A script to provide the logic for an area of effect
-/// 
-/// PROGRAM: NetworkLibrary
+/// Class: 	Fireball - A script to provide the logic for the Fireball AOE ability
 ///
-/// FUNCTIONS:	void Start()
-///				void Update()
-///             void OnCollisionEnter()
+/// PROGRAM: SKOM
 ///
-/// DATE: 		March 14th, 2019
+/// FUNCTIONS:	void Update()
+///             void OnTriggerEnter()
 ///
-/// REVISIONS: 
+/// DATE: 		March 30th, 2019
 ///
-/// DESIGNER: 	Cameron Roberts
+/// REVISIONS:  April 7th,2019
+///                 - Change MAX_TIME of Fireball
 ///
-/// PROGRAMMER: Cameron Roberts
+/// DESIGNER: 	Dasha Strigoun
 ///
-/// NOTES:		
+/// PROGRAMMER: Dasha Strigoun
+///
+/// NOTES:
 /// ----------------------------------------------
 public class Fireball : Ability
 {
@@ -27,47 +27,24 @@ public class Fireball : Ability
     private float timer;
     private const float MAX_TIME = 0.2f;
 
-    /// ----------------------------------------------
-    /// FUNCTION:	Start
-    /// 
-    /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
-    /// DESIGNER:	Cameron Roberts
-    /// 
-    /// PROGRAMMER:	Cameron Roberts
-    /// 
-    /// INTERFACE: 	void Start()
-    /// 
-    /// RETURNS: 	void
-    /// 
-    /// NOTES:		MonoBehaviour function.
-    ///             Called before the first Update().
-    /// ----------------------------------------------
-    void Start ()
-    {
-
-    }
 
     /// ----------------------------------------------
     /// FUNCTION:	Update
     /// 
-    /// DATE:		March 14th, 2019
+    /// DATE:		March 30th, 2019
     /// 
     /// REVISIONS:	
     /// 
-    /// DESIGNER:	Cameron Roberts
+    /// DESIGNER:	Dasha Strigoun
     /// 
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Dasha Strigoun
     /// 
     /// INTERFACE: 	void Update()
     /// 
     /// RETURNS: 	void
     /// 
     /// NOTES:		MonoBehaviour function. Called at a fixed interval.
-    ///             Check how far the GameObject has moved from its
-    ///             starting point and delete it if it has gone too far.
+    ///             Destroy the GameObject if it has lived past MAX_TIME.
     /// ----------------------------------------------
     void Update(){
         timer += Time.deltaTime;
@@ -77,25 +54,25 @@ public class Fireball : Ability
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:	OnCollisionEnter
+    /// FUNCTION:	OnTriggerEnter
     /// 
-    /// DATE:		March 14th, 2019
+    /// DATE:		March 30th, 2019
     /// 
     /// REVISIONS:	
     /// 
-    /// DESIGNER:	Cameron Roberts
+    /// DESIGNER:	Dasha Strigoun
     /// 
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Dasha Strigoun
     /// 
-    /// INTERFACE: 	void OnCollisionEnter(Collision col)
+    /// INTERFACE: 	void OnTriggerEnter(Collider col)
     /// 
     /// RETURNS: 	void 
     /// 
-    /// NOTES:		
+    /// NOTES:      Send collision when a non Ally gameObject enters the trigger area.
+    ///             Prevent triggering on the same object twice.
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
-        Debug.Log("Collision with area of effect");
         if(col.gameObject.tag == creator.tag){
             Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
         } else{

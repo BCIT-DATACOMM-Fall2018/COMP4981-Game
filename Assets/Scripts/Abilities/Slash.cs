@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	TestAreaOfEffectAbility - A script to provide the logic for an area of effect
+/// Class: 	Slash - A script to provide the logic for the Slash ability
 ///
-/// PROGRAM: NetworkLibrary
+/// PROGRAM: SKOM
 ///
-/// FUNCTIONS:	void Start()
-///				void Update()
-///             void OnCollisionEnter()
+/// FUNCTIONS:	void Update()
+///             void OnTriggerEnter()
 ///
-/// DATE: 		March 14th, 2019
+/// DATE: 		March April 3rd, 2019
 ///
-/// REVISIONS:
+/// REVISIONS:  
 ///
-/// DESIGNER: 	Cameron Roberts
+/// DESIGNER: 	Ben Zhang
 ///
-/// PROGRAMMER: Cameron Roberts
+/// PROGRAMMER: Ben Zhang
 ///
 /// NOTES:
 /// ----------------------------------------------
@@ -28,46 +27,22 @@ public class Slash : Ability
     private const float MAX_TIME = 1f;
 
     /// ----------------------------------------------
-    /// FUNCTION:	Start
-    ///
-    /// DATE:		March 14th, 2019
-    ///
-    /// REVISIONS:
-    ///
-    /// DESIGNER:	Cameron Roberts
-    ///
-    /// PROGRAMMER:	Cameron Roberts
-    ///
-    /// INTERFACE: 	void Start()
-    ///
-    /// RETURNS: 	void
-    ///
-    /// NOTES:		MonoBehaviour function.
-    ///             Called before the first Update().
-    /// ----------------------------------------------
-    void Start ()
-    {
-
-    }
-
-    /// ----------------------------------------------
     /// FUNCTION:	Update
     ///
-    /// DATE:		March 14th, 2019
+    /// DATE:		April 3rd, 2019
     ///
     /// REVISIONS:
     ///
-    /// DESIGNER:	Cameron Roberts
+    /// DESIGNER:	Ben Zhang
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Ben Zhang
     ///
     /// INTERFACE: 	void Update()
     ///
     /// RETURNS: 	void
     ///
     /// NOTES:		MonoBehaviour function. Called at a fixed interval.
-    ///             Check how far the GameObject has moved from its
-    ///             starting point and delete it if it has gone too far.
+    ///             Destroy the GameObject if it has lived past MAX_TIME.
     /// ----------------------------------------------
     void Update(){
         timer += Time.deltaTime;
@@ -77,17 +52,17 @@ public class Slash : Ability
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:	OnCollisionEnter
+    /// FUNCTION:	OnTriggerEnter
     ///
-    /// DATE:		March 14th, 2019
+    /// DATE:		April 3rd, 2019
     ///
     /// REVISIONS:
     ///
-    /// DESIGNER:	Cameron Roberts
+    /// DESIGNER:	Ben Zhang
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Ben Zhang
     ///
-    /// INTERFACE: 	void OnCollisionEnter(Collision col)
+    /// INTERFACE: 	void OnTriggerEnter(Collider col)
     ///
     /// RETURNS: 	void
     ///
@@ -95,7 +70,6 @@ public class Slash : Ability
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
-        Debug.Log("Collision with area of effect");
         if(col.gameObject.tag == creator.tag){
             Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
         } else{

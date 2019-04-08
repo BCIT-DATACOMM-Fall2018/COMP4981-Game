@@ -54,10 +54,6 @@ public class ActorUI : MonoBehaviour
         hpBarSlowDrain = gameObject.transform.Find("HPBarObject/Canvas/HPBarSlowDrain").GetComponent<Slider>();
         nameTag = gameObject.transform.Find("HPBarObject/Canvas/Name").GetComponent<Text>();
         
-        if (nameTag == null)
-        {
-            Debug.Log("nametag is null");
-        }
 
         foreach (var player in ConnectionManager.Instance.playerInfo)
         {
@@ -79,7 +75,21 @@ public class ActorUI : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    /// ----------------------------------------------
+    /// FUNCTION:	Update
+    ///
+    /// DATE:		February 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Keishi Asai
+    ///
+    /// PROGRAMMER: Keishi Asai
+    ///
+    /// INTERFACE: 	void Start()
+    ///
+    /// NOTES:	    Update the slow fill and drain bars each frame
+    /// ----------------------------------------------
     void Update()
     {
         if(hpBarSlowFill.value < hpBar.value){
@@ -93,6 +103,21 @@ public class ActorUI : MonoBehaviour
         }
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	UpdateCharacterUI
+    ///
+    /// DATE:		February 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Keishi Asai
+    ///
+    /// PROGRAMMER: Keishi Asai
+    ///
+    /// INTERFACE: 	public void UpdateCharacterUI(Status status)
+    ///
+    /// NOTES:	    Update the hpBar based on the given health value
+    /// ----------------------------------------------
     public void UpdateCharacterUI(Status status)
     {
 

@@ -11,8 +11,34 @@ using NetworkLibrary.MessageElements;
 /// PROGRAM: SKOM
 ///
 /// FUNCTIONS:	void Start()
-///				void Awake()
-///             public void UseAbility(AbilityType abilityId, float x, float z)
+///             public virtual void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
+///             public virtual void UseTargetedAbility(AbilityType abilityId, GameObject target, int collisionId)
+///             private void BulletAbility(GameObject target, int collisionId)
+///             private void PorkChop(GameObject target, int collisionId)
+///             private void Dart(float x, float z, int collisionId)
+///             private void Purification(GameObject target, int collisionId)
+///             private IEnumerator PurificationCoroutine(GameObject target ,int collisionId, float waitTime)
+///             private IEnumerator RemoveObject(GameObject target, float waitTime)
+///             private void AbilityTestProjectile(float x, float z, int collisionId)
+///             private void AbilityTestAreaOfEffect(float x, float z, int collisionId)
+///             private void AbilityFireball(float x, float z, int collisionId)
+///             private void AbilityWeebOut(float x, float z, int collisionId)
+///             private void AbilityWhale(float x, float z, int collisionId)
+///             private void AbilityTestTargeted(GameObject target, int collisionId)
+///             private void AbilityTestTargetedHoming(GameObject target, int collisionId)
+///             private void AbilityUwuImScared(GameObject target)
+///             private IEnumerator RemoveInvincibilityCoroutine(Component halo, float waitTime)
+///             private void AbilityAutoAttack(GameObject target, int collisionId)
+///             private void AbilityWall(float x, float z)
+///             private void AbilityBanish(GameObject target)
+///             private void AbilityPewPew(GameObject target, int collisionId)
+///             private void AbilitySploosh(GameObject target, int collisionId)
+///             IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)
+///             private void AbilityBlink(float x, float z)
+///             private void AbilityTowerAttack(GameObject target, int collisionId)
+///             private void AbilityGungnir(float x, float z, int collisionId)
+///             private void AbilitySlash(float x, float z, int collisionId)
+///
 ///
 /// DATE: 		March 14th, 2019
 ///
@@ -27,6 +53,7 @@ using NetworkLibrary.MessageElements;
 public class AbilityController : MonoBehaviour
 {
 
+    public bool preventTurning;
     private GameObject testProjectile;
     private GameObject testHomingProjectile;
     private GameObject testAreaOfEffect;
@@ -42,8 +69,6 @@ public class AbilityController : MonoBehaviour
     private GameObject healEffect;
     private GameObject pewPew;
 
-
-
     /// ----------------------------------------------
     /// FUNCTION:	Start
     ///
@@ -55,7 +80,7 @@ public class AbilityController : MonoBehaviour
     ///
     /// PROGRAMMER:	Cameron Roberts, Simon Wu
     ///
-    /// INTERFACE: 	void Start()
+    /// INTERFACE: 	void virtual void Start()
     ///
     /// RETURNS: 	void
     ///
@@ -94,10 +119,11 @@ public class AbilityController : MonoBehaviour
     ///
     /// PROGRAMMER:	Simon Wu, Cameron Roberts
     ///
-    /// INTERFACE: 	public void UseAbility(AbilityType abilityId, float x, float z)
+    /// INTERFACE: 	public virtual void UseAbility(AbilityType abilityId, float x, float z)
     ///                 AbilityType abilityId: The ability to be used
     ///                 float x: The x coordinate to use for the ability's location
     ///                 float z: The z coordinate to use for the ability's location
+    ///                 int collisionId: The collision id to use for collisions
     ///
     /// RETURNS: 	void
     ///
@@ -106,7 +132,7 @@ public class AbilityController : MonoBehaviour
     /// ----------------------------------------------
     public virtual void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
     {
-        if(AbilityInfo.InfoArray[(int)abilityId].Range != 0){
+        if(AbilityInfo.InfoArray[(int)abilityId].Range != 0 && !preventTurning){
             transform.LookAt(new Vector3(x, 0, z));
         }
 
@@ -159,9 +185,11 @@ public class AbilityController : MonoBehaviour
     ///
     /// PROGRAMMER:	Simon Wu, Cameron Roberts
     ///
-    /// INTERFACE: 	public void UseTargetedAbility(AbilityType abilityId, int targetId)
+    /// INTERFACE: 	public virtual void UseTargetedAbility(AbilityType abilityId, int targetId)
     ///                 AbilityType abilityId: The ability to be used
-    ///                 int targetId: The actor id of the target GameObject
+    ///                 GameObject target: The target GameObject
+    ///                 int collisionId: The collision id to use for collisions
+    ///                 
     ///
     /// RETURNS: 	void
     ///
@@ -172,7 +200,7 @@ public class AbilityController : MonoBehaviour
     {
         Debug.Log("Use ability: " + abilityId);
 
-        if (target.transform.position.x != -10)
+        if (target.transform.position.x != -10 && !preventTurning)
         {
             transform.LookAt(target.transform.position);
         }
@@ -228,9 +256,9 @@ public class AbilityController : MonoBehaviour
     ///
     /// PROGRAMMER:	Phat Le
     ///
-    /// INTERFACE: 	public void BulletAbility(AbilityType abilityId, int targetId)
-    ///                 GameObject target: Target
-    ///                 int collisionId: Collision Id of the target
+    /// INTERFACE: 	private void BulletAbility(GameObject target, int collisionId)
+    ///                 GameObject target: Target GameObject
+    ///                 int collisionId: Collision id to use
     ///
     /// RETURNS: 	void
     ///
@@ -263,9 +291,9 @@ public class AbilityController : MonoBehaviour
     ///
     /// PROGRAMMER:	Phat Le
     ///
-    /// INTERFACE: 	public void PorkChop(AbilityType abilityId, int targetId)
-    ///                 GameObject target: Target
-    ///                 int collisionId: Collision Id of the target
+    /// INTERFACE: 	private void PorkChop(GameObject target, int collisionId)
+    ///                 GameObject target: Target GameObject
+    ///                 int collisionId: Collision id to use
     ///
     /// RETURNS: 	void
     ///
@@ -273,8 +301,6 @@ public class AbilityController : MonoBehaviour
     /// ----------------------------------------------
     private void PorkChop(GameObject target, int collisionId)
     {
-        // TODO Play some sort of animation. No collsion is needed as the
-        // abilities effect is instantly applied by the server
         GetComponent<Animator>().SetTrigger("attack3");
         int targetId = target.GetComponent<Actor>().ActorId;
         int casterId = gameObject.GetComponent<Actor>().ActorId;
@@ -293,13 +319,14 @@ public class AbilityController : MonoBehaviour
     ///
     /// PROGRAMMER:	keishi Asai
     ///
-    /// INTERFACE: 	public void Dart(AbilityType abilityId, int targetId)
-    ///                 GameObject target: Target
-    ///                 int collisionId: Collision Id of the target
+    /// INTERFACE: 	private void Dart(float x, float z, int collisionId)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///                 int collisionId: Collision id to use
     ///
     /// RETURNS: 	void
     ///
-    /// NOTES:		Range Damage over Time Skill
+    /// NOTES:		Ranged damage over Time Skill
     /// ----------------------------------------------
     private void Dart(float x, float z, int collisionId)
     {
@@ -329,9 +356,9 @@ public class AbilityController : MonoBehaviour
     ///
     /// PROGRAMMER:	keishi Asai
     ///
-    /// INTERFACE: 	public void Purification(AbilityType abilityId, int targetId)
-    ///                 GameObject target: Target
-    ///                 int collisionId: Collision Id of the target
+    /// INTERFACE: 	private void Purification(GameObject target, int collisionId)
+    ///                 GameObject target: Target GameObject
+    ///                 int collisionId: Collision id to use
     ///
     /// RETURNS: 	void
     ///
@@ -339,12 +366,30 @@ public class AbilityController : MonoBehaviour
     /// ----------------------------------------------
     private void Purification(GameObject target, int collisionId)
     {
-        // TODO Play some sort of animation. No collsion is needed as the
-        // abilities effect is instantly applied by the server
         GetComponent<Animator>().SetTrigger("attack5");
         StartCoroutine(PurificationCoroutine(target, collisionId ,0.5f));
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:   PurificationCoroutine
+    ///
+    /// DATE:		April 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private IEnumerator PurificationCoroutine(GameObject target , int collisionId, float waitTime)
+    ///                 GameObject target: Target
+    ///                 int collisionId: Collision Id of the target
+    ///                 float waitTime: The time to wait before starting the cooroutine
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Used to delay the effects of the purification skill to match the animation
+    /// ----------------------------------------------
     private IEnumerator PurificationCoroutine(GameObject target ,int collisionId, float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
@@ -354,6 +399,25 @@ public class AbilityController : MonoBehaviour
         StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.Purification, targetId, casterId, collisionId), 0f));
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:   RemoveObject
+    ///
+    /// DATE:		April 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private IEnumerator RemoveObject(GameObject target, float waitTime)
+    ///                 GameObject target: The GameObject to remove
+    ///                 float waitTime: The time to wait before starting the cooroutine
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Used to remove a GameObject after a delay
+    /// ----------------------------------------------
     private IEnumerator RemoveObject(GameObject target, float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
@@ -362,7 +426,26 @@ public class AbilityController : MonoBehaviour
 
 
 
-
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilityTestProjectile
+    ///
+    /// DATE:		March 14th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private void AbilityTestProjectile(float x, float z, int collisionId)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Test projectile ability
+    /// ----------------------------------------------
     private void AbilityTestProjectile(float x, float z, int collisionId)
     {
         // Instantiate projectile
@@ -380,7 +463,27 @@ public class AbilityController : MonoBehaviour
 
 
     }
-
+    
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilityTestAreaOfEffect
+    ///
+    /// DATE:		March 14th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private void AbilityTestAreaOfEffect(float x, float z, int collisionId)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Test area of effect ability
+    /// ----------------------------------------------
     private void AbilityTestAreaOfEffect(float x, float z, int collisionId)
     {
         // Instantiate projectile
@@ -394,6 +497,26 @@ public class AbilityController : MonoBehaviour
 
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilityFireball
+    ///
+    /// DATE:		March 30th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Dasha Strigoun
+    ///
+    /// PROGRAMMER:	Dasha Strigoun
+    ///
+    /// INTERFACE: 	private void AbilityFireball(float x, float z, int collisionId)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Fireball ability 
+    /// ----------------------------------------------
     private void AbilityFireball(float x, float z, int collisionId)
     {
         // Instantiate projectile
@@ -407,6 +530,26 @@ public class AbilityController : MonoBehaviour
         projectile.GetComponent<Ability>().collisionId = collisionId;
         GetComponent<Animator>().SetTrigger("attack5");
     }
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilityWeebOut
+    ///
+    /// DATE:		March 26th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Simon Wu
+    ///
+    /// PROGRAMMER:	Simon Wu
+    ///
+    /// INTERFACE: 	private void AbilityWeebOut(float x, float z, int collisionId)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Weeb out ability 
+    /// ----------------------------------------------
     private void AbilityWeebOut(float x, float z, int collisionId)
     {
         // Instantiate projectile
@@ -421,6 +564,26 @@ public class AbilityController : MonoBehaviour
     }
     
 
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilityWhale
+    ///
+    /// DATE:		March 26th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Simon Wu
+    ///
+    /// PROGRAMMER:	Simon Wu
+    ///
+    /// INTERFACE: 	private void AbilityWhale(float x, float z, int collisionId)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Whale ability. AOE Heal. 
+    /// ----------------------------------------------
     private void AbilityWhale(float x, float z, int collisionId)
     {
         // Instantiate projectile
@@ -434,6 +597,25 @@ public class AbilityController : MonoBehaviour
 
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:   AbilityTestTargeted
+    ///
+    /// DATE:		March 14th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private void AbilityTestTargeted(GameObject target, int collisionId)
+    ///                 GameObject target: Target GameObject
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Test targeted ability
+    /// ----------------------------------------------
     private void AbilityTestTargeted(GameObject target, int collisionId)
     {
         // TODO Play some sort of animation. No collsion is needed as the
@@ -444,6 +626,25 @@ public class AbilityController : MonoBehaviour
         StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.TestTargeted, targetId, casterId, collisionId), 0.5f));
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:   AbilityTestTargetedHoming
+    ///
+    /// DATE:		March 14th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private void AbilityTestTargetedHoming(GameObject target, int collisionId)
+    ///                 GameObject target: Target GameObject
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Test targeted homing ability
+    /// ----------------------------------------------
     private void AbilityTestTargetedHoming(GameObject target, int collisionId)
     {
         // Instantiate projectile
@@ -460,6 +661,24 @@ public class AbilityController : MonoBehaviour
 
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:   AbilityUwuImScared
+    ///
+    /// DATE:		March 30th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Dasha Strigoun
+    ///
+    /// PROGRAMMER:	Dasha Strigoun
+    ///
+    /// INTERFACE: 	private void AbilityUwuImScared(GameObject target)
+    ///                 GameObject target: Target GameObject
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		UwuImScared ability
+    /// ----------------------------------------------
     private void AbilityUwuImScared(GameObject target)
     {
         GetComponent<Animator>().SetTrigger("attack5");
@@ -471,23 +690,78 @@ public class AbilityController : MonoBehaviour
         StartCoroutine(RemoveInvincibilityCoroutine(halo, 3f));
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:   RemoveInvincibilityCoroutine
+    ///
+    /// DATE:		April 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private IEnumerator RemoveInvincibilityCoroutine(Component halo, float waitTime)
+    ///                 Component halo: Halo Component object
+    ///                 float waitTime: The time to wait
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Removes the invincibility visual granted by UwuImScared after the specified
+    ///             amount of time.
+    /// ----------------------------------------------
     private IEnumerator RemoveInvincibilityCoroutine(Component halo, float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         halo.GetType().GetProperty("enabled").SetValue(halo, false, null);     
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:   AbilityAutoAttack
+    ///
+    /// DATE:		March 14th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private void AbilityAutoAttack(GameObject target, int collisionId)
+    ///                 GameObject target: Target GameObject
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Aability to use for auto attacks
+    /// ----------------------------------------------
     private void AbilityAutoAttack(GameObject target, int collisionId)
     {
-        // TODO Play some sort of animation. No collsion is needed as the
-        // abilities effect is instantly applied by the server
         GetComponent<Animator>().SetTrigger("attack1");
         int targetId = target.GetComponent<Actor>().ActorId;
         int casterId = gameObject.GetComponent<Actor>().ActorId;
         StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.AutoAttack, targetId, casterId, collisionId), 0.25f));
-        Debug.Log("Play autoattack animation");
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilityWall
+    ///
+    /// DATE:		March 25th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Jason Kim
+    ///
+    /// PROGRAMMER:	Jason Kim
+    ///
+    /// INTERFACE: 	private void AbilityWall(float x, float z)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Create an impassable wall at the target location
+    /// ----------------------------------------------
     private void AbilityWall(float x, float z)
     {
         // Instantiate Wall ability object
@@ -499,6 +773,24 @@ public class AbilityController : MonoBehaviour
         GetComponent<Animator>().SetTrigger("attack2");
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilityBanish
+    ///
+    /// DATE:		March 25th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Jason Kim
+    ///
+    /// PROGRAMMER:	Jason Kim
+    ///
+    /// INTERFACE: 	private void AbilityBanish(GameObject target)
+    ///                 GameObject target: The target to be banished
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Sets that the GameObject was banished and cancels their movement.
+    /// ----------------------------------------------
     private void AbilityBanish(GameObject target)
     {
         GetComponent<Actor>().banished = true;
@@ -506,7 +798,25 @@ public class AbilityController : MonoBehaviour
 
     }
 
-
+    /// ----------------------------------------------
+    /// FUNCTION:   AbilityPewPew
+    ///
+    /// DATE:		March 27th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Jenny Ly
+    ///
+    /// PROGRAMMER:	Jenny Ly
+    ///
+    /// INTERFACE: 	private void Purification(GameObject target, int collisionId)
+    ///                 GameObject target: Target GameObject
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Basic projectile skill
+    /// ----------------------------------------------
     private void AbilityPewPew(GameObject target, int collisionId)
     {
         // Instantiate projectile
@@ -522,26 +832,79 @@ public class AbilityController : MonoBehaviour
         GetComponent<Animator>().SetTrigger("attack4");
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:   AbilitySploosh
+    ///
+    /// DATE:		March 27th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Jenny Ly
+    ///
+    /// PROGRAMMER:	Jenny Ly
+    ///
+    /// INTERFACE: 	private void Purification(GameObject target, int collisionId)
+    ///                 GameObject target: Target GameObject
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Basic targeted melee skill
+    /// ----------------------------------------------
     private void AbilitySploosh(GameObject target, int collisionId)
     {
-        // TODO Play some sort of animation. No collsion is needed as the
-        // abilities effect is instantly applied by the server
         GetComponent<Animator>().SetTrigger("attack1");
         int targetId = target.GetComponent<Actor>().ActorId;
         int casterId = gameObject.GetComponent<Actor>().ActorId;
         StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.Sploosh, targetId, casterId, collisionId), 0.25f));
         Debug.Log("Play autoattack animation");
-
-
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:   AbilitySploosh
+    ///
+    /// DATE:		March 20th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)
+    ///                 CollisionElement collisionElement: The collision element to send
+    ///                 float delayTime: The time delay to put on sending the collision element
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Coroutine used to dalay sending of collisions to the server for a specified amount of time
+    /// ----------------------------------------------
     IEnumerator SendCollisionElement(CollisionElement collisionElement, float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
         ConnectionManager.Instance.QueueReliableElement(collisionElement);
-
     }
 
+
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilityBlink
+    ///
+    /// DATE:		March 31st, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Jeff Choy
+    ///
+    /// PROGRAMMER:	Jeff Choy
+    ///
+    /// INTERFACE: 	private void AbilityBlink(float x, float z)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Move the user to the target location instantly
+    /// ----------------------------------------------
     private void AbilityBlink(float x, float z)
     {
         GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
@@ -550,6 +913,25 @@ public class AbilityController : MonoBehaviour
         GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilityTowerAttack
+    ///
+    /// DATE:		April 5th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private void AbilityTowerAttack(GameObject target, int collisionId)
+    ///                 GameObject target: Target GameObject
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Tower attack
+    /// ----------------------------------------------
     private void AbilityTowerAttack(GameObject target, int collisionId)
     {
         // Instantiate projectile
@@ -564,6 +946,26 @@ public class AbilityController : MonoBehaviour
         projectile.GetComponent<Ability>().collisionId = collisionId;
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilitySlash
+    ///
+    /// DATE:		April 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private void AbilityGungnir(float x, float z, int collisionId)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Gungnir ability
+    /// ----------------------------------------------
     private void AbilityGungnir(float x, float z, int collisionId)
     {
         // Instantiate projectile
@@ -579,6 +981,26 @@ public class AbilityController : MonoBehaviour
         GetComponent<Animator>().SetTrigger("attack4");
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	AbilitySlash
+    ///
+    /// DATE:		April 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	private void AbilitySlash(float x, float z, int collisionId)
+    ///                 float x: Target location x coordinate
+    ///                 float z: Target location z coordinate
+    ///                 int collisionId: Collision id to use
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Gungnir ability
+    /// ----------------------------------------------
     private void AbilitySlash(float x, float z, int collisionId)
     {
         // Instantiate projectile

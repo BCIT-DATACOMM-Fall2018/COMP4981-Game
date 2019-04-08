@@ -82,12 +82,9 @@ public class GameStateReporter : MonoBehaviour
             Vector3 playerTargetPosition = player.GetComponent<UnityEngine.AI.NavMeshAgent>().steeringTarget;
             gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, playerTargetPosition.x, playerTargetPosition.z));
             ConnectionManager.Instance.SendStatePacket(gameState);
-            //Debug.Log("Sent packet to server");
-
         } catch(Exception e){
             gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, 0, 0));
             ConnectionManager.Instance.SendStatePacket(gameState);
-            //Debug.Log("Sent  emptypacket to server");
         }
     }
 }

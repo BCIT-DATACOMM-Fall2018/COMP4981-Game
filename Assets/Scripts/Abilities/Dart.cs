@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	TestProjectileAbility - A script to provide the logic to move
-///                a projectile shot by the player.
+/// Class: 	Bullet - A script to provide the logic for the Dart ability
 ///
-/// PROGRAM: NetworkLibrary
+/// PROGRAM: SKOM
 ///
 /// FUNCTIONS:	void Start()
-///				void Update()
-///             void OnCollisionEnter()
+///             void Update()
+///             void OnTriggerEnter()
 ///
 /// DATE: 		March 27th, 2019
 ///
@@ -18,7 +17,7 @@ using UnityEngine;
 ///
 /// DESIGNER: 	Cameron Roberts
 ///
-/// PROGRAMMER: Keishi Asai
+/// PROGRAMMER: keishi Asai
 ///
 /// NOTES:
 /// ----------------------------------------------
@@ -37,7 +36,7 @@ public class Dart : Ability
     ///
     /// DESIGNER:	Cameron Roberts
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	keishi Asai
     ///
     /// INTERFACE: 	void Start()
     ///
@@ -45,6 +44,7 @@ public class Dart : Ability
     ///
     /// NOTES:		MonoBehaviour function.
     ///             Called before the first Update().
+    ///             Set the projectile moving forward.
     /// ----------------------------------------------
     void Start ()
     {
@@ -55,21 +55,20 @@ public class Dart : Ability
     /// ----------------------------------------------
     /// FUNCTION:	Update
     ///
-    /// DATE:		March 14th, 2019
+    /// DATE:		March 27th, 2019
     ///
     /// REVISIONS:
     ///
     /// DESIGNER:	Cameron Roberts
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	keishi Asai
     ///
     /// INTERFACE: 	void Update()
     ///
     /// RETURNS: 	void
     ///
     /// NOTES:		MonoBehaviour function. Called at a fixed interval.
-    ///             Check how far the GameObject has moved from its
-    ///             starting point and delete it if it has gone too far.
+    ///             Destroy the object once its gone a certain distance.
     /// ----------------------------------------------
     void Update(){
         if(Vector3.Distance(start, transform.position) > 50){
@@ -77,22 +76,23 @@ public class Dart : Ability
         }
     }
 
+
     /// ----------------------------------------------
     /// FUNCTION:	OnTriggerEnter
     ///
-    /// DATE:		March 14th, 2019
+    /// DATE:		March 27th, 2019
     ///
     /// REVISIONS:
     ///
     /// DESIGNER:	Cameron Roberts
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	keishi Asai
     ///
-    /// INTERFACE: 	void OnCollisionEnter(Collider col)
+    /// INTERFACE: 	void OnTriggerEnter(Collider col)
     ///
     /// RETURNS: 	void
     ///
-    /// NOTES:
+    /// NOTES: Send a collision when the dart hits and destroy the dart.
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {

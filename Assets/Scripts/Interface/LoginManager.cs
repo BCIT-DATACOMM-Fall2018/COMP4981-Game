@@ -12,7 +12,7 @@ using NetworkLibrary.MessageElements;
 using UnityEngine.SceneManagement;
 
 /// ----------------------------------------------
-/// Interface:  	LoginManager - A class that manages the
+/// Class:  	    LoginManager - A class that manages the
 ///                                Login Scene
 ///
 /// PROGRAM:        SKOM

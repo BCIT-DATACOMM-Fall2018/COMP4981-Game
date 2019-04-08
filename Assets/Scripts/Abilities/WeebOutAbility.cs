@@ -9,11 +9,12 @@ using UnityEngine;
 ///
 /// FUNCTIONS:  void Start()
 ///             void Update()
-///             void OnCollisionEnter()
+///             void OnTriggerEnter()
 ///
 /// DATE:       March 23rd, 2019
 ///
-/// REVISIONS: 
+/// REVISIONS:  April 7th, 2019
+///                 - Reduce MAX_TIME
 ///
 /// DESIGNER:   Simon Wu
 ///
@@ -27,28 +28,6 @@ public class WeebOutAbility : Ability
     private float timer;
     private const float MAX_TIME =0.2f;
 
-    /// ----------------------------------------------
-    /// FUNCTION:   Start
-    /// 
-    /// DATE:       March 23rd, 2019
-    /// 
-    /// REVISIONS:  
-    /// 
-    /// DESIGNER:   Simon Wu
-    /// 
-    /// PROGRAMMER: Simon Wu
-    /// 
-    /// INTERFACE:  void Start()
-    /// 
-    /// RETURNS:    void
-    /// 
-    /// NOTES:      MonoBehaviour function.
-    ///             Called before the first Update().
-    /// ----------------------------------------------
-    void Start ()
-    {
-
-    }
 
     /// ----------------------------------------------
     /// FUNCTION:   Update
@@ -66,8 +45,7 @@ public class WeebOutAbility : Ability
     /// RETURNS:    void
     /// 
     /// NOTES:      MonoBehaviour function. Called at a fixed interval.
-    ///             Check how far the GameObject has moved from its
-    ///             starting point and delete it if it has gone too far.
+    ///             Destroy the gameObject after MAX_TIME has passed.
     /// ----------------------------------------------
     void Update(){
         timer += Time.deltaTime;
@@ -77,7 +55,7 @@ public class WeebOutAbility : Ability
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:   OnCollisionEnter
+    /// FUNCTION:   OnTriggerEnter
     /// 
     /// DATE:       March 14th, 2019
     /// 
@@ -87,15 +65,15 @@ public class WeebOutAbility : Ability
     /// 
     /// PROGRAMMER: Simon Wu
     /// 
-    /// INTERFACE:  void OnCollisionEnter(Collision col)
+    /// INTERFACE:  void OnTriggerEnter(Collider col)
     /// 
     /// RETURNS:    void 
     /// 
-    /// NOTES:      
+    /// NOTES:      Send collision when a non Ally gameObject enters the trigger area.
+    ///             Prevent triggering on the same object twice.
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
-        Debug.Log("Collision with area of effect");
         if(col.gameObject.tag == creator.tag){
             Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
         } else{

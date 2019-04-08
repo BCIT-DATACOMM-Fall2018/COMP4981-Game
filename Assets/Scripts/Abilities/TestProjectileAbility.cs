@@ -10,7 +10,7 @@ using UnityEngine;
 ///
 /// FUNCTIONS:	void Start()
 ///				void Update()
-///             void OnCollisionEnter()
+///             void OnTriggerEnter()
 ///
 /// DATE: 		March 14th, 2019
 ///
@@ -88,7 +88,7 @@ public class TestProjectileAbility : Ability
     /// 
     /// PROGRAMMER:	Cameron Roberts
     /// 
-    /// INTERFACE: 	void OnCollisionEnter(Collider col)
+    /// INTERFACE: 	void OnTriggerEnter(Collider col)
     /// 
     /// RETURNS: 	void
     /// 
@@ -96,7 +96,6 @@ public class TestProjectileAbility : Ability
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
-		Debug.Log("TEST PROJECTILE ABILITY HIT SMTH");
         if(col.gameObject.tag == creator.tag){
             Physics.IgnoreCollision(col, GetComponent<Collider>());
 
