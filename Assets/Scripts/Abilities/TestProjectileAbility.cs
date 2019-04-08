@@ -10,7 +10,7 @@ using UnityEngine;
 ///
 /// FUNCTIONS:	void Start()
 ///				void Update()
-///             void OnCollisionEnter()
+///             void OnTriggerEnter()
 ///
 /// DATE: 		March 14th, 2019
 ///
@@ -88,7 +88,7 @@ public class TestProjectileAbility : Ability
     /// 
     /// PROGRAMMER:	Cameron Roberts
     /// 
-    /// INTERFACE: 	void OnCollisionEnter(Collider col)
+    /// INTERFACE: 	void OnTriggerEnter(Collider col)
     /// 
     /// RETURNS: 	void
     /// 

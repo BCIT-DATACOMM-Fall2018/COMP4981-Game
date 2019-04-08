@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	TestTargetedHomingAbility - A script to provide the logic to move
-///                a projectile shot by the player the homes in on a target.
+/// Class: 	Bullet - A script to provide the logic for the Bullet ability
 ///
-/// PROGRAM: NetworkLibrary
+/// PROGRAM: SKOM
 ///
-/// FUNCTIONS:	void Start()
-///				void Update()
-///             void OnCollisionEnter()
+/// FUNCTIONS:	void Update()
+///             void OnTriggerEnter()
 ///
-/// DATE: 		March 14th, 2019
+/// DATE: 		March 27th, 2019
 ///
 /// REVISIONS:
 ///
 /// DESIGNER: 	Cameron Roberts
 ///
-/// PROGRAMMER: Cameron Roberts
+/// PROGRAMMER: Phat Le
 ///
 /// NOTES:
 /// ----------------------------------------------
@@ -29,47 +27,24 @@ public class BulletAbility : Ability
     [HideInInspector]
     public GameObject target;
 
-    /// ----------------------------------------------
-    /// FUNCTION:	Start
-    ///
-    /// DATE:		March 14th, 2019
-    ///
-    /// REVISIONS:
-    ///
-    /// DESIGNER:	Cameron Roberts
-    ///
-    /// PROGRAMMER:	Cameron Roberts
-    ///
-    /// INTERFACE: 	void Start()
-    ///
-    /// RETURNS: 	void
-    ///
-    /// NOTES:		MonoBehaviour function.
-    ///             Called before the first Update().
-    /// ----------------------------------------------
-    void Start ()
-    {
-
-    }
 
     /// ----------------------------------------------
     /// FUNCTION:	Update
     ///
-    /// DATE:		March 14th, 2019
+    /// DATE:		March 27th, 2019
     ///
     /// REVISIONS:
     ///
     /// DESIGNER:	Cameron Roberts
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Phat Le
     ///
     /// INTERFACE: 	void Update()
     ///
     /// RETURNS: 	void
     ///
     /// NOTES:		MonoBehaviour function. Called at a fixed interval.
-    ///             Check how far the GameObject has moved from its
-    ///             starting point and delete it if it has gone too far.
+    ///             Move towards the target at a fixed speed.
     /// ----------------------------------------------
     void Update(){
         if(target!= null){
@@ -83,19 +58,19 @@ public class BulletAbility : Ability
     /// ----------------------------------------------
     /// FUNCTION:	OnTriggerEnter
     ///
-    /// DATE:		March 14th, 2019
+    /// DATE:		March 27th, 2019
     ///
     /// REVISIONS:
     ///
     /// DESIGNER:	Cameron Roberts
     ///
-    /// PROGRAMMER:	Cameron Roberts
+    /// PROGRAMMER:	Phat Le
     ///
-    /// INTERFACE: 	void OnCollisionEnter(Collider col)
+    /// INTERFACE: 	void OnTriggerEnter(Collider col)
     ///
     /// RETURNS: 	void
     ///
-    /// NOTES:
+    /// NOTES: Send a collision when the bullet hits and destroy the bullet.
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	FireBallProjectile
+/// Class: 	FireBallProjectile - A script to provide log fore the Fireball
+///                              abilities projectile
 /// 
 /// PROGRAM: NetworkLibrary
 ///
-/// FUNCTIONS:	void Start()
-///				void Update()
-///             void OnCollisionEnter()
+/// FUNCTIONS:	void Update()
+///             void OnTriggerEnter()
 ///
 /// DATE: 		April 5th, 2019
 ///
@@ -31,29 +31,6 @@ public class FireBallProjectile : Ability
     public GameObject aoe;
 
     /// ----------------------------------------------
-    /// FUNCTION:	Start
-    /// 
-    /// DATE:		April 5th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
-    /// DESIGNER:	Cameron Roberts
-    /// 
-    /// PROGRAMMER:	Cameron Roberts
-    /// 
-    /// INTERFACE: 	void Start()
-    /// 
-    /// RETURNS: 	void
-    /// 
-    /// NOTES:		MonoBehaviour function.
-    ///             Called before the first Update().
-    /// ----------------------------------------------
-    void Start ()
-    {
-
-    }
-
-    /// ----------------------------------------------
     /// FUNCTION:	Update
     /// 
     /// DATE:		April 5th, 2019
@@ -69,8 +46,9 @@ public class FireBallProjectile : Ability
     /// RETURNS: 	void
     /// 
     /// NOTES:		MonoBehaviour function. Called at a fixed interval.
-    ///             Check how far the GameObject has moved from its
-    ///             starting point and delete it if it has gone too far.
+    ///             Move gameObject to wards target location. Once it has
+    ///             reached the target location destroy itself and create an
+    ///             area of effect at the target position.
     /// ----------------------------------------------
     void Update(){
         if(target!= null){

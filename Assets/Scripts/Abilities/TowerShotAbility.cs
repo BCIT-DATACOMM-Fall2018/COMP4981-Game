@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// ----------------------------------------------
-/// Class: 	TowerShotAbility - A script to provide the logic to move
-///                a projectile shot by the player the homes in on a target.
+/// Class: 	TowerShotAbility - A script to provide the logic for
+///                            the TowerShot ability.
 /// 
 /// PROGRAM: NetworkLibrary
 ///
@@ -95,7 +95,8 @@ public class TowerShotAbility : Ability
     /// 
     /// RETURNS: 	void
     /// 
-    /// NOTES:		
+    /// NOTES:		When the GameObject collides with the target send
+    ///             a collision to the server.
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
