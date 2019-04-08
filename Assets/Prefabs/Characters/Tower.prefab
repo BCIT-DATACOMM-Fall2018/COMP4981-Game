@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2103696095648393062}
   - component: {fileID: 3865468601526502294}
   m_Layer: 10
-  m_Name: tower_round
+  m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.025, y: 0.025, z: 0.075}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0.05}
   m_TimeToStationary: 0.5
@@ -278,6 +278,31 @@ PrefabInstance:
     - target: {fileID: 1326593493957280514, guid: 8cd0bdff0f0414ca9b03705a6ff336fe,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101793329955505296, guid: 8cd0bdff0f0414ca9b03705a6ff336fe,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101793329955505296, guid: 8cd0bdff0f0414ca9b03705a6ff336fe,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886614873177788737, guid: 8cd0bdff0f0414ca9b03705a6ff336fe,
+        type: 3}
+      propertyPath: m_EffectDistance.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886614873177788737, guid: 8cd0bdff0f0414ca9b03705a6ff336fe,
+        type: 3}
+      propertyPath: m_EffectDistance.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886614873177788737, guid: 8cd0bdff0f0414ca9b03705a6ff336fe,
+        type: 3}
+      propertyPath: m_UseGraphicAlpha
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

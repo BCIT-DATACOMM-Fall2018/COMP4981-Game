@@ -52,6 +52,7 @@ public class ActorUI : MonoBehaviour
         hpBar = gameObject.transform.Find("HPBarObject/Canvas/HPBar").GetComponent<Slider>();
         hpBarSlowFill = gameObject.transform.Find("HPBarObject/Canvas/HPBarSlowFill").GetComponent<Slider>();
         hpBarSlowDrain = gameObject.transform.Find("HPBarObject/Canvas/HPBarSlowDrain").GetComponent<Slider>();
+        nameTag = gameObject.transform.Find("HPBarObject/Canvas/Name").GetComponent<Text>();
         
 
         foreach (var player in ConnectionManager.Instance.playerInfo)
