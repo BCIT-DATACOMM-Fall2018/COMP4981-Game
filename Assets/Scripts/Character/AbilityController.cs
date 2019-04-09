@@ -857,7 +857,6 @@ public class AbilityController : MonoBehaviour
         int targetId = target.GetComponent<Actor>().ActorId;
         int casterId = gameObject.GetComponent<Actor>().ActorId;
         StartCoroutine(SendCollisionElement(new CollisionElement(AbilityType.Sploosh, targetId, casterId, collisionId), 0.25f));
-        Debug.Log("Play autoattack animation");
     }
 
     /// ----------------------------------------------

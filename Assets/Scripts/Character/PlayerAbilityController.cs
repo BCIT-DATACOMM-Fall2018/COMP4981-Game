@@ -148,6 +148,9 @@ public class PlayerAbilityController : AbilityController
         }
         // Logic to auto attack
         if(autoAttacking){
+            if(transform.position.x == -10){
+                CancelMoveToTarget();
+            }
             followRecalculateTimer += Time.deltaTime;
             if(followRecalculateTimer > 1){
                 followRecalculateTimer -= 0.25f;

@@ -6,6 +6,7 @@ public class PlayerLockCamera : MonoBehaviour
 {
 
     public GameObject player;
+    private Vector3 lastPosition;
     public Camera linkedCamera;
     public float yZoom;
     public float zZoom;
@@ -26,12 +27,16 @@ public class PlayerLockCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = player.transform.position + offset;
+        if(player.transform.position.x == -10){
+            transform.position = lastPosition + offset;
+
+        } else {
+            transform.position = player.transform.position + offset;
+            lastPosition = player.transform.position;
+        }
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         linkedCamera.fieldOfView -= scroll * scrollSpeed;
         linkedCamera.fieldOfView = Mathf.Clamp(linkedCamera.fieldOfView, fovMin, fovMax);
-
-
     }
 }

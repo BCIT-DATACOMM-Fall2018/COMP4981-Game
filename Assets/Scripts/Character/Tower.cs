@@ -64,7 +64,6 @@ public class Tower : Actor
 	/// ----------------------------------------------    
     protected override void  Update()
     {
-        Debug.Log(Status.HP + " " + alive);
         if(Status.HP == 0 && alive){
             Die();
         }

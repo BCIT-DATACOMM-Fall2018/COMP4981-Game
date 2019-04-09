@@ -71,7 +71,7 @@ public class Dart : Ability
     ///             Destroy the object once its gone a certain distance.
     /// ----------------------------------------------
     void Update(){
-        if(Vector3.Distance(start, transform.position) > 50){
+        if(Vector3.Distance(start, transform.position) > 45){
             Destroy(gameObject);
         }
     }

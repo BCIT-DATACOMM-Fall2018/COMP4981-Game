@@ -33,9 +33,9 @@ public class ExpBarControl : MonoBehaviour
     const int LEVEL3_EXP = 512;
 
     
-    private int level {get; set;}
-    public int exp {get;set;}
-    private int expToLvlUp {get;set;}
+    private int level;
+    public int exp;
+    private int expToLvlUp;
 
     public Slider expBar;
     public Text lvlLabel;
@@ -95,7 +95,7 @@ public class ExpBarControl : MonoBehaviour
                 expBar.value = (float)((float)exp - (float)LEVEL1_EXP)/(float)LEVEL2_EXP;
                 break;
             case 3:
-                expBar.value = (float)((float)exp - (float)LEVEL1_EXP - (float)LEVEL2_EXP)/(float)LEVEL3_EXP;
+                expBar.value = (float)((float)exp - (float)LEVEL2_EXP)/((float)LEVEL3_EXP - (float)LEVEL2_EXP);
                 break;
             case 4:
                 expBar.value = 1;
