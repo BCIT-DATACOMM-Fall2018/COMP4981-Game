@@ -109,12 +109,11 @@ public class GameObjectController : MonoBehaviour
                     GameObject.Find("PlayerLockCamera").GetComponent<PlayerLockCamera>().SetCameraLock();
                     GameActors[actorId].GetComponent<CameraSelector>().SetIsometricToPlayer();
                     
-                    GameActors[actorId].GetComponent<Actor>().deathObject = DummyPlayers[(int) type];
                 
                 } else {
                     GameActors.Add(actorId, Instantiate(NonPlayers[(int) type], location, Quaternion.identity));
                 }
-
+            GameActors[actorId].GetComponent<Actor>().deathObject = DummyPlayers[(int) type];
         }
         else
         {
