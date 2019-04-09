@@ -483,7 +483,6 @@ public class ConnectionManager
                 unpacked.UnreliableElements.ForEach(MessageQueue.Enqueue);
                 unpacked.ReliableElements.ForEach(MessageQueue.Enqueue);
             } catch(Exception e){
-                Debug.Log(e);
                 connected = false;
                 Reset();
                 return;

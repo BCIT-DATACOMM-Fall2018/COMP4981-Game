@@ -1067,6 +1067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fd7a9b3c62a424d9b6d36c7526181c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exp: 0
   expBar: {fileID: 1857337633}
   lvlLabel: {fileID: 1219356599}
 --- !u!114 &1857337633
