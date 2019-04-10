@@ -1,5 +1,22 @@
 ﻿using UnityEngine;
 
+/// ----------------------------------------------
+/// Interface: 	IsometricCamera- A camera positioned isometrically that allows for edgepan.
+///
+/// PROGRAM: SKOM
+///
+/// FUNCTIONS:	TBD
+///
+/// DATE: 		March 24th, 2019
+///
+/// REVISIONS:
+///
+/// DESIGNER: 	Jeffrey Choy
+///
+/// PROGRAMMER: Jeffrey Choy
+///
+/// NOTES:
+/// ----------------------------------------------
 public class IsometricCamera : MonoBehaviour
 {
 
@@ -15,14 +32,44 @@ public class IsometricCamera : MonoBehaviour
     private Vector3 dragOrigin;
     private bool isDragging;
 
+
+    //
+    /// ----------------------------------------------
+    /// CONSTRUCTOR: Start
+    ///
+    /// DATE: 		March 24th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Jeffrey Choy
+    ///
+    /// PROGRAMMER:	Jeffrey Choy
+    ///
+    /// INTERFACE: 	Update()
+    ///
+    /// NOTES: Start is called before the first frame update - initializes values
+    /// ----------------------------------------------
     private void Start()
     {
         linkedCamera = GetComponent<Camera>();
     }
 
-    
 
-    // Update is called once per frame
+    /// ----------------------------------------------
+    /// CONSTRUCTOR: LateUpdate
+    ///
+    /// DATE: 		March 24th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Jeffrey Choy
+    ///
+    /// PROGRAMMER:	Jeffrey Choy
+    ///
+    /// INTERFACE: 	LateUpdate()
+    ///
+    /// NOTES: Called once per tick after all update calls. Checks for user input/mouse position and moves the camera accordingly
+    /// ----------------------------------------------
     void LateUpdate()
     {
 
@@ -63,7 +110,7 @@ public class IsometricCamera : MonoBehaviour
             transform.position = pos;
         }
 
-        
+
 
     }
 }

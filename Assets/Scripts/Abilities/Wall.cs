@@ -7,9 +7,7 @@ using UnityEngine;
 /// 
 /// PROGRAM:    Some Kind of MOBA
 ///
-/// FUNCTIONS:	void Start()
-///				void Update()
-///             void OnCollisionEnter()
+/// FUNCTIONS:	void Update()
 ///
 /// DATE: 		March 25th, 2019
 ///
@@ -25,29 +23,6 @@ public class Wall : Ability
 {
     private float timer;
     private const float MAX_TIME = 10f;
-
-    /// ----------------------------------------------
-    /// FUNCTION:	Start
-    /// 
-    /// DATE:		March 25th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
-    /// DESIGNER:	Jason Kim
-    /// 
-    /// PROGRAMMER:	Jason Kim
-    /// 
-    /// INTERFACE: 	void Start()
-    /// 
-    /// RETURNS: 	void
-    /// 
-    /// NOTES:		MonoBehaviour function.
-    ///             Called before the first Update().
-    /// ----------------------------------------------
-    void Start()
-    {
-
-    }
 
     /// ----------------------------------------------
     /// FUNCTION:	Update

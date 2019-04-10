@@ -78,7 +78,6 @@ public class PlayerMovement : ActorMovement
     {
         if (Input.GetButtonDown("AttackMove")){
             attackMove = true;
-            Debug.Log("prepare attack move");
         }
         if (Input.GetMouseButtonDown(0)){
             if(attackMove){
@@ -122,7 +121,6 @@ public class PlayerMovement : ActorMovement
             {
                 GameObject hitTarget = hit.transform.gameObject;
                 if(hitTarget.tag != gameObject.tag){
-                    Debug.Log("time to auto");
                     GetComponent<PlayerAbilityController>().CancelMoveToTarget();
                     GetComponent<PlayerAbilityController>().AutoAttack(hitTarget);
                 }

@@ -70,13 +70,11 @@ public class PlayerAbilityController : AbilityController
     protected override void Start()
     {
         base.Start();
-		Debug.Log ("AMSTARTED");
 		if (abilities == null)
 		{
 			abilities = new AbilityType[MAX_NUMBER_OF_ABILILITES];
 		} 
         buttonNames = new String[] {"Ability1", "Ability2", "Ability3", "Ability4"};
-		Debug.Log (abilityCount);
 		makeCooldown ();
     }
 
@@ -102,7 +100,7 @@ public class PlayerAbilityController : AbilityController
     /// ----------------------------------------------
     void Update()
     {
-
+        // Reduce cooldowns
         autoCooldown -= Time.deltaTime;
         for (int i = 0; i < Cooldowns.Length; i++)
         {
@@ -112,29 +110,26 @@ public class PlayerAbilityController : AbilityController
             }
 
         }
+
+        // Check for keypresses and use the associated ability
 		for (int i = 0; i < abilityCount; i++)
         {
             if(Input.GetButtonDown(buttonNames[i])) {
-                Debug.Log("Hit button " + i);
                 if(Cooldowns[i] != 0){
-                    Debug.Log("Ability on cooldown");
                     return;
                 }
                 if(InitiateAbilityUse(abilities[i])){
-
-                    Debug.Log("Used ability");
-                } else {
-                    Debug.Log("Invalid ability use");
                 }
             }
         }
+        // Logic to move to an area and use an ability
         if(moveToAreaTarget){
-            Debug.Log("yay dood");
             if(InitiateAreaAbilityUse(storedAbility, storedTargetLocation)){
                 GetComponent<PlayerMovement>().Stop();
                 CancelMoveToTarget();
             }
         }
+        // Logic to move to target and use an ability
         if(moveToActorTarget){
             followRecalculateTimer += Time.deltaTime;
             if(followRecalculateTimer > 1){
@@ -147,11 +142,15 @@ public class PlayerAbilityController : AbilityController
                 followRecalculateTimer = 0;
             }
         }
+        // Cancel autoattack if the target is dead
         if(autoAttacking && autoAttackTarget.transform.position.x == -10){
             autoAttacking = false;
         }
+        // Logic to auto attack
         if(autoAttacking){
-
+            if(transform.position.x == -10){
+                CancelMoveToTarget();
+            }
             followRecalculateTimer += Time.deltaTime;
             if(followRecalculateTimer > 1){
                 followRecalculateTimer -= 0.25f;
@@ -168,30 +167,107 @@ public class PlayerAbilityController : AbilityController
         }
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	CancelMoveToTarget
+    ///
+    /// DATE:		March 20th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	public void CancelMoveToTarget()
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Cancels the players move to target
+    /// ----------------------------------------------
     public void CancelMoveToTarget(){
         moveToAreaTarget = false;
         moveToActorTarget = false;
         autoAttacking = false;
     }
 
-
+    /// ----------------------------------------------
+    /// FUNCTION:	UseAreaAbility
+    ///
+    /// DATE:		March 14th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	public virtual void UseAbility(AbilityType abilityId, float x, float z)
+    ///                 AbilityType abilityId: The ability to be used
+    ///                 float x: The x coordinate to use for the ability's location
+    ///                 float z: The z coordinate to use for the ability's location
+    ///                 int collisionId: The collision id to use for collisions
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Contains logic to use various abilities based on the abilityId passed to
+    ///             the function. Puts the used ability on cooldown
+    /// ----------------------------------------------
     public override void UseAreaAbility(AbilityType abilityId, float x, float z, int collisionId)
     {
         base.UseAreaAbility(abilityId, x, z, collisionId);
         PutAbilityOnCooldown(abilityId);
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	UserTargetedAbility
+    ///
+    /// DATE:		March 15th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	public virtual void UseTargetedAbility(AbilityType abilityId, int targetId)
+    ///                 AbilityType abilityId: The ability to be used
+    ///                 GameObject target: The target GameObject
+    ///                 int collisionId: The collision id to use for collisions
+    ///                 
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Contains logic to use various abilities based on the abilityId passed to
+    ///             the function. Puts the used ability on cooldown.
+    /// ----------------------------------------------
     public override void UseTargetedAbility(AbilityType abilityId, GameObject target, int collisionId){
         base.UseTargetedAbility(abilityId, target, collisionId);
         PutAbilityOnCooldown(abilityId);
     }
 
 
-
+    /// ----------------------------------------------
+    /// FUNCTION:	PutAbilityOnCooldown
+    ///
+    /// DATE:		March 16th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	bool PutAbilityOnCooldown(AbilityType abilityId)
+    ///                 AbilityType abilityId: The ability to be put on cooldown
+    ///                 
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Puts the passed ability on cooldown
+    /// ----------------------------------------------
     bool PutAbilityOnCooldown(AbilityType abilityId){
         if(abilityId == AbilityType.AutoAttack){
             autoCooldown = maxAutoCooldown;
-            Debug.Log("Auto put on cooldown");
             return true;
         }
         int index = Array.IndexOf(abilities, abilityId);
@@ -202,6 +278,26 @@ public class PlayerAbilityController : AbilityController
         return false;
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	InitiateAbilityUse
+    ///
+    /// DATE:		March 16th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	bool InitiateAbilityUse(AbilityType abilityId)
+    ///                 AbilityType abilityId: The ability to be used
+    ///                 
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Contains logic to choose a target for the used ability and send
+    ///             the ability use to the server
+    /// ----------------------------------------------
     bool InitiateAbilityUse(AbilityType abilityId){
         AbilityInfo abilityInfo = AbilityInfo.InfoArray[(int)abilityId];
         if(abilityInfo.IsArea){
@@ -228,13 +324,34 @@ public class PlayerAbilityController : AbilityController
         return false;
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	InitiateAreaAbilityUse
+    ///
+    /// DATE:		March 16th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	bool InitiateAreaAbilityUse(AbilityType abilityId, Vector3 target)
+    ///                 AbilityType abilityId: The ability to be used
+    ///                 Vector3 target: The location to use the ability
+    ///                 
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Contains logic validate an ability use. If the use is valid
+    ///             it will be sent to the server. Otherwise the player will move to
+    ///             a location they can use the ability from.
+    /// ----------------------------------------------
     bool InitiateAreaAbilityUse(AbilityType abilityId, Vector3 target){
         int actorId = gameObject.GetComponent<Actor>().ActorId;
 
         AbilityInfo abilityInfo = AbilityInfo.InfoArray[(int)abilityId];
         
         if(Vector3.Distance(transform.position, target)>abilityInfo.Range && abilityInfo.Range != 0){
-            Debug.Log("Distance " + Vector3.Distance(transform.position, target) + " > Range " + abilityInfo.Range);
             if(!moveToAreaTarget){
                 moveToAreaTarget = true;
                 storedTargetLocation = target;
@@ -248,6 +365,28 @@ public class PlayerAbilityController : AbilityController
         return true;
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	InitiateTargetedAbilityUse
+    ///
+    /// DATE:		March 16th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	bool InitiateTargetedAbilityUse(AbilityType abilityId, GameObject target)
+    ///                 AbilityType abilityId: The ability to be used
+    ///                 GameObject target: The target to use the ability on
+    ///                 
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Contains logic validate an ability use. If the use is valid
+    ///             it will be sent to the server. Otherwise the player will move to
+    ///             a location they can use the ability from.
+    /// ----------------------------------------------
     bool InitiateTargetedAbilityUse(AbilityType abilityId, GameObject target){
         int actorId = gameObject.GetComponent<Actor>().ActorId;
 
@@ -274,6 +413,25 @@ public class PlayerAbilityController : AbilityController
         return true;
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	InitiateSelfAbilityUse
+    ///
+    /// DATE:		March 16th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	bool InitiateSelfAbilityUse(AbilityType abilityId)
+    ///                 AbilityType abilityId: The ability to be used
+    ///                 
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Sends a self targeted ability use to the server
+    /// ----------------------------------------------
     bool InitiateSelfAbilityUse(AbilityType abilityId){
         int actorId = gameObject.GetComponent<Actor>().ActorId;
 
@@ -281,6 +439,25 @@ public class PlayerAbilityController : AbilityController
         return true;
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	AutoAttack
+    ///
+    /// DATE:		March 21st, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	public void AutoAttack(GameObject target)
+    ///                 GameObject target: The actor to target for autoattacking
+    ///                 
+    ///
+    /// RETURNS: 	void
+    ///
+    /// NOTES:		Starts the actor autoattacking the given target
+    /// ----------------------------------------------
     public void AutoAttack(GameObject target){
         autoAttacking = true;
         autoAttackTarget = target;
@@ -323,7 +500,6 @@ public class PlayerAbilityController : AbilityController
 
 
 			GetComponent<AbilityUI>().setAbilityIcon(abilityCount, (AbilityType)ability);
-			Debug.Log ("successfully set ability");
 
 			++abilityCount;
 		}

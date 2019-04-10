@@ -7,9 +7,8 @@ using UnityEngine;
 /// 
 /// PROGRAM: NetworkLibrary
 ///
-/// FUNCTIONS:	void Start()
-///				void Update()
-///             void OnCollisionEnter()
+/// FUNCTIONS:	void Update()
+///             void OnTriggerEnter()
 ///
 /// DATE: 		March 14th, 2019
 ///
@@ -26,29 +25,6 @@ public class TestAreaOfEffectAbility : Ability
 
     private float timer;
     private const float MAX_TIME = 5f;
-
-    /// ----------------------------------------------
-    /// FUNCTION:	Start
-    /// 
-    /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
-    /// DESIGNER:	Cameron Roberts
-    /// 
-    /// PROGRAMMER:	Cameron Roberts
-    /// 
-    /// INTERFACE: 	void Start()
-    /// 
-    /// RETURNS: 	void
-    /// 
-    /// NOTES:		MonoBehaviour function.
-    ///             Called before the first Update().
-    /// ----------------------------------------------
-    void Start ()
-    {
-
-    }
 
     /// ----------------------------------------------
     /// FUNCTION:	Update
@@ -77,7 +53,7 @@ public class TestAreaOfEffectAbility : Ability
     }
 
     /// ----------------------------------------------
-    /// FUNCTION:	OnCollisionEnter
+    /// FUNCTION:	OnTriggerEnter
     /// 
     /// DATE:		March 14th, 2019
     /// 
@@ -87,7 +63,7 @@ public class TestAreaOfEffectAbility : Ability
     /// 
     /// PROGRAMMER:	Cameron Roberts
     /// 
-    /// INTERFACE: 	void OnCollisionEnter(Collision col)
+    /// INTERFACE: 	void OnTriggerEnter(Collider col)
     /// 
     /// RETURNS: 	void 
     /// 
@@ -95,7 +71,6 @@ public class TestAreaOfEffectAbility : Ability
     /// ----------------------------------------------
     void OnTriggerEnter (Collider col)
     {
-        Debug.Log("Collision with area of effect");
         if(col.gameObject.tag == creator.tag){
             Physics.IgnoreCollision(GetComponent<Collider>(), col.gameObject.GetComponent<Collider>());
         } else{

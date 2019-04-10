@@ -7,14 +7,28 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 /// ----------------------------------------------
-/// Interface: 	ClientStateMessageBridge - An class to allow message elements
+/// Class:  	ClientStateMessageBridge - An class to allow message elements
 /// 								  	   to update the game state.
 ///
 /// PROGRAM: SKOM
 ///
 /// CONSTRUCTORS:	public ClientStateMessageBridge (GameObjectController objectController)
 ///
-/// FUNCTIONS:	TBD
+/// FUNCTIONS:	public void UpdateActorPosition (int actorId, float x, float z)
+///             public void UpdateActorHealth (int actorId, int newHealth)
+///             public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId, int collisionId)
+///         	public void UseAreaAbility (int actorId, AbilityType abilityId, float x, float z, int collisionId){
+///         	public void ProcessCollision(AbilityType abilityId, int actorHitId, int actorCastId, int collisionId){
+///         	public void SpawnActor(ActorType actorType, int actorId, int team, float x, float z){
+///         	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
+///         	public void SetReady(int clientId, bool ready, int team){
+///         	public void StartGame(int playerNum){
+///             public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo){
+///             public void UpdateActorSpeed(int ActorId, int Speed)
+///             public void UpdateAbilityAssignment(int actorId, int abilityId)
+///         	public void UpdateActorExperience(int actorId, int newExp) {
+///             public void UpdateLifeCount (List<RemainingLivesElement.LivesInfo> livesInfo){
+///
 ///
 /// DATE: 		March 14th, 2019
 ///
@@ -22,6 +36,8 @@ using System.Collections.Generic;
 ///             - defined prototypes for abilities.
 ///             April 6th, 2019 -- Ian Lo
 ///             - added ability function implementation
+///             April 7th, 2019 -- Cameron Roberts
+///             - added experience and team display funcionality
 ///
 /// DESIGNER: 	Cameron Roberts
 ///
@@ -130,7 +146,6 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// NOTES:		A function to instruct an actor to use an ability on another actor.
     /// ----------------------------------------------
 	public void UseTargetedAbility (int actorId, AbilityType abilityId, int targetId, int collisionId){
-        Debug.Log("Use targeted ability: " + abilityId);
         objectController.GameActors[actorId].GetComponent<AbilityController>().UseTargetedAbility(abilityId, objectController.GameActors[targetId], collisionId);
 	}
 
@@ -224,7 +239,6 @@ public class ClientStateMessageBridge : IStateMessageBridge
 	///				and target position. Behaviour differs if the actor is the player character.
     /// ----------------------------------------------
 	public void SetActorMovement(int actorId, float x, float z, float targetX, float targetZ){
-        //Debug.Log("Moving actor: " + actorId);
         GameObject actor = objectController.GameActors[actorId];
         bool enableAgent = false;
         if(x == -10 && z == -10 && targetX == -10 && targetZ == -10){
@@ -246,7 +260,6 @@ public class ClientStateMessageBridge : IStateMessageBridge
                     actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
                 }
 			} catch	(KeyNotFoundException e){
-				//TODO Error handling
 			}
             if(actor.GetComponent<Actor>().banished){
                 actor.GetComponent<PlayerAbilityController>().CancelMoveToTarget();
@@ -262,12 +275,11 @@ public class ClientStateMessageBridge : IStateMessageBridge
                 }
                 actor.GetComponent<ActorMovement>().SetTargetPosition(new Vector3(x, 0, z));
 			} catch	(KeyNotFoundException e){
-				//TODO Error handling
 			}
 		}
         if(actor.GetComponent<Actor>().banished){
             actor.GetComponent<Actor>().banished = false;
-            //actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+            actor.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
         }
 
 	}
@@ -303,27 +315,32 @@ public class ClientStateMessageBridge : IStateMessageBridge
     /// PROGRAMMER:	Cameron Roberts
     ///
     /// INTERFACE: 	public void StartGame(int playerNum)
-
     ///
-    /// NOTES:		Starts the game and sets the number of players in the game
-	///				Full implementation waiting on completed lobby state
+    /// NOTES:		Unused
     /// ----------------------------------------------
 	public void StartGame(int playerNum){
-		Debug.Log("StartGame");
-		ConnectionManager.Instance.PlayerNum = playerNum;
-		ConnectionManager.Instance.gameStarted = true;
 	}
 
+    /// ----------------------------------------------
+    /// FUNCTION:	SetLobbyStatus
+    ///
+    /// DATE:		April 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo)
+    ///
+    /// NOTES:		Unused
+    /// ----------------------------------------------
     public void SetLobbyStatus(List<LobbyStatusElement.PlayerInfo> playerInfo){
-		Debug.Log("Lobby Status");
-        foreach (var item in playerInfo)
-        {
-            Debug.Log("Id " + item.Id + ", Name " + item.Name + ", Team " + item.Team + ", Ready " + item.ReadyStatus);
-        }
+        
     }
 
     public void EndGame(int winningTeam){
-        Debug.Log("Game End");
         if(ConnectionManager.Instance.Team == winningTeam){
             GameObject.Find("EndText").GetComponent<Text>().text = "You Win";
         } else {
@@ -332,6 +349,21 @@ public class ClientStateMessageBridge : IStateMessageBridge
         ConnectionManager.Instance.GameOver = true;
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	UpdateActorSpeed
+    ///
+    /// DATE:		April 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	public void UpdateActorSpeed(int ActorId, int Speed)
+    ///
+    /// NOTES:		Unused
+    /// ----------------------------------------------
     public void UpdateActorSpeed(int ActorId, int Speed)
     {
 
@@ -363,12 +395,44 @@ public class ClientStateMessageBridge : IStateMessageBridge
 		objectController.GameActors[actorId].GetComponent<PlayerAbilityController>().addAbility(abilityId);
     }
 
+    /// ----------------------------------------------
+    /// FUNCTION:	UpdateActorExperience
+    ///
+    /// DATE:		April 7th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	public void UpdateActorExperience(int actorId, int newExp)
+    ///
+    /// NOTES:		Sets the experience display UI element based on the supplied value
+    ///             Only sets display for clients experience and ignores all other clients exp.
+    /// ----------------------------------------------
 	public void UpdateActorExperience(int actorId, int newExp) {
-
+        if(actorId == ConnectionManager.Instance.ClientId){
+            GameObject.Find("AbilityBar/Canvas/ExpBar").GetComponent<ExpBarControl>().exp = newExp;
+        }
 	}
 
+    /// ----------------------------------------------
+    /// FUNCTION:	UpdateLifeCount
+    ///
+    /// DATE:		April 6th, 2019
+    ///
+    /// REVISIONS:
+    ///
+    /// DESIGNER:	Cameron Roberts
+    ///
+    /// PROGRAMMER:	Cameron Roberts
+    ///
+    /// INTERFACE: 	public void UpdateLifeCount (List<RemainingLivesElement.LivesInfo> livesInfo)
+    ///
+    /// NOTES:		Updates the life counter UI element.
+    /// ----------------------------------------------
     public void UpdateLifeCount (List<RemainingLivesElement.LivesInfo> livesInfo){
-        Debug.Log("Updating Life Count");
         if(livesInfo.Count != 2){
             return;
         }

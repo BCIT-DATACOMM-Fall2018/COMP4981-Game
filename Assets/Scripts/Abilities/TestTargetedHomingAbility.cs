@@ -8,9 +8,8 @@ using UnityEngine;
 /// 
 /// PROGRAM: NetworkLibrary
 ///
-/// FUNCTIONS:	void Start()
-///				void Update()
-///             void OnCollisionEnter()
+/// FUNCTIONS:	void Update()
+///             void OnTriggerEnter()
 ///
 /// DATE: 		March 14th, 2019
 ///
@@ -29,28 +28,6 @@ public class TestTargetedHomingAbility : Ability
     [HideInInspector]
     public GameObject target;
 
-    /// ----------------------------------------------
-    /// FUNCTION:	Start
-    /// 
-    /// DATE:		March 14th, 2019
-    /// 
-    /// REVISIONS:	
-    /// 
-    /// DESIGNER:	Cameron Roberts
-    /// 
-    /// PROGRAMMER:	Cameron Roberts
-    /// 
-    /// INTERFACE: 	void Start()
-    /// 
-    /// RETURNS: 	void
-    /// 
-    /// NOTES:		MonoBehaviour function.
-    ///             Called before the first Update().
-    /// ----------------------------------------------
-    void Start ()
-    {
-
-    }
 
     /// ----------------------------------------------
     /// FUNCTION:	Update
@@ -91,7 +68,7 @@ public class TestTargetedHomingAbility : Ability
     /// 
     /// PROGRAMMER:	Cameron Roberts
     /// 
-    /// INTERFACE: 	void OnCollisionEnter(Collider col)
+    /// INTERFACE: 	void OnTriggerEnter(Collider col)
     /// 
     /// RETURNS: 	void
     /// 

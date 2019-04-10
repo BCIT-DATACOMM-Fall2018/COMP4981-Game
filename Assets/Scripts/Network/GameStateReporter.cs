@@ -76,18 +76,17 @@ public class GameStateReporter : MonoBehaviour
     /// ----------------------------------------------
     void FixedUpdate()
     {
-        List<UpdateElement> gameState = new List<UpdateElement>();
-        try{
-            GameObject player = objectController.GameActors[ConnectionManager.Instance.ClientId];
-            Vector3 playerTargetPosition = player.GetComponent<UnityEngine.AI.NavMeshAgent>().steeringTarget;
-            gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, playerTargetPosition.x, playerTargetPosition.z));
-            ConnectionManager.Instance.SendStatePacket(gameState);
-            //Debug.Log("Sent packet to server");
-
-        } catch(Exception e){
-            gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, 0, 0));
-            ConnectionManager.Instance.SendStatePacket(gameState);
-            //Debug.Log("Sent  emptypacket to server");
+        if(!ConnectionManager.Instance.GameOver){
+            List<UpdateElement> gameState = new List<UpdateElement>();
+            try{
+                GameObject player = objectController.GameActors[ConnectionManager.Instance.ClientId];
+                Vector3 playerTargetPosition = player.GetComponent<UnityEngine.AI.NavMeshAgent>().steeringTarget;
+                gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, playerTargetPosition.x, playerTargetPosition.z));
+                ConnectionManager.Instance.SendStatePacket(gameState);
+            } catch(Exception e){
+                gameState.Add(new PositionElement(ConnectionManager.Instance.ClientId, 0, 0));
+                ConnectionManager.Instance.SendStatePacket(gameState);
+            }
         }
     }
 }

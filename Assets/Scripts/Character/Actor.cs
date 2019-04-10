@@ -14,6 +14,7 @@ public struct Status
 ///
 /// FUNCTIONS:    public void Start()
 ///               public void Update()
+///               public virtual void Die()
 /// 
 /// DATE:         February 7th, 2019
 ///
@@ -21,7 +22,7 @@ public struct Status
 ///
 /// DESIGNER:     Keishi Asai
 ///
-/// PROGRAMMER:   Keishi Asai
+/// PROGRAMMER:   Keishi Asai, Cameron Roberts
 ///
 /// NOTES:
 /// Character class.
@@ -38,14 +39,46 @@ public class Actor : MonoBehaviour
     [HideInInspector]
     public GameObject deathObject;
 
-    // Start is called before the first frame update
+    /// ----------------------------------------------
+	/// FUNCTION:	Start()
+	///
+	/// DATE:		February 7th, 2019
+	///
+	/// REVISIONS:  
+	///
+	/// DESIGNER:	Keishi Asai
+	///
+	/// PROGRAMMER:	Keishi Asai
+	///
+	/// INTERFACE: 	void Start()
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		Start is called before the first frame update
+	/// ----------------------------------------------    
     protected virtual void Start()
     {
         Status.HP = 1000;
         cUI = GetComponent<ActorUI>();
     }
 
-    // Update is called once per frame
+    /// ----------------------------------------------
+	/// FUNCTION:	Update()
+	///
+	/// DATE:		February 7th, 2019
+	///
+	/// REVISIONS:  
+	///
+	/// DESIGNER:	Keishi Asai
+	///
+	/// PROGRAMMER:	Keishi Asai
+	///
+	/// INTERFACE: 	void Update()
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		Called once per frame update
+	/// ----------------------------------------------      
     protected virtual void Update()
     {
         if(transform.position.x != -10){
@@ -54,6 +87,24 @@ public class Actor : MonoBehaviour
         cUI.UpdateCharacterUI(Status);
     }
 
+    /// ----------------------------------------------
+	/// FUNCTION:	Die()
+	///
+	/// DATE:		February 7th, 2019
+	///
+	/// REVISIONS:  
+	///
+	/// DESIGNER:	Cameron Roberts
+	///
+	/// PROGRAMMER:	Cameron Roberts
+	///
+	/// INTERFACE: 	void Update()
+	///
+	/// RETURNS: 	void
+	///
+	/// NOTES:		Spawns the actors death object and makes it play the death animation.
+    ///             Death object is destroyed after 3 seconds.
+	/// ----------------------------------------------    
     public virtual void Die(){
         if(alive){
             GameObject clone = Instantiate(deathObject, transform.position, transform.rotation);
