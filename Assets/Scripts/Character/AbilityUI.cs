@@ -142,7 +142,7 @@ public class AbilityUI : MonoBehaviour
 	///
 	/// DESIGNER:	?????
 	///
-	/// PROGRAMMER:	????? , Ian Lo
+	/// PROGRAMMER:	?????, Simon Wu, Ian Lo
 	///
 	/// INTERFACE: 	void setAbilityIcon(int slot, AbilityType id)
 	///
