@@ -21,9 +21,9 @@ using NetworkLibrary;
 ///
 /// REVISIONS:
 ///
-/// DESIGNER: 	Cameron Roberts, Ian Lo, Jacky Lee
+/// DESIGNER: 	Cameron Roberts, Ian Lo, Jacky Li , Simon Wu
 ///
-/// PROGRAMMER: Cameron Roberts, Ian Lo, Jacky Lee
+/// PROGRAMMER: Cameron Roberts, Ian Lo, Jacky Li , Simon Wu
 ///
 /// NOTES:
 /// ----------------------------------------------
@@ -163,9 +163,9 @@ public class AbilityUI : MonoBehaviour
 	/// REVISIONS:  April 6th, 2019 -- Ian Lo
 	///             -performs init, cooldowns, abilities creation.
 	///
-	/// DESIGNER:	Jacky Lee
+	/// DESIGNER:	Jacky Li
 	///
-	/// PROGRAMMER:	Jacky Lee , Ian Lo
+	/// PROGRAMMER:	Jacky Li , Ian Lo , Simon Wu
 	///
 	/// INTERFACE: 	void setAbilityIcon(int slot, AbilityType id)
 	///
