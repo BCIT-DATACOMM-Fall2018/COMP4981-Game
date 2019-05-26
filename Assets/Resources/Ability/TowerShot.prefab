@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8710494664857520650}
   - component: {fileID: 2619274567392263366}
   - component: {fileID: 1727378668920237351}
+  - component: {fileID: 2560017797090237209}
   m_Layer: 11
   m_Name: TowerShot
   m_TagString: Untagged
@@ -126,3 +127,15 @@ MonoBehaviour:
   collisionId: 0
   speed: 60
   target: {fileID: 0}
+--- !u!122 &2560017797090237209
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380713595877139288}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278203647
+  m_Size: 8
